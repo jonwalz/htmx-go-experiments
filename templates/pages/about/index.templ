@@ -1,0 +1,18 @@
+package AboutPage
+
+templ MetaTags(keywords, description string) {
+	<meta name="keywords" content={ keywords }/>
+	<meta name="description" content={ description }/>
+}
+
+templ RenderContent(firstName string) {
+	<div class="card bg-primary text-primary-content w-96">
+		<div class="card-body">
+			<h2 class="card-title">About me!</h2>
+			<p>My name is: { firstName }</p>
+			<div class="card-actions justify-end">
+				<button class="btn">Button to be clicked</button>
+			</div>
+		</div>
+	</div>
+}

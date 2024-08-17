@@ -1,0 +1,10 @@
+package layout
+
+import "github.com/user/project/templates/components/navbar"
+
+templ RenderLayout() {
+	<div>
+		@navbar.Render()
+		{ children... }
+	</div>
+}
