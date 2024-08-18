@@ -7,6 +7,10 @@ templ MetaTags(keywords, description string) {
 	<meta name="description" content={ description }/>
 }
 
+templ ScriptTags() {
+	<script src="/static/about_page_scripts.js"></script>
+}
+
 templ RenderContent(firstName string) {
 	@layout.RenderLayout() {
 		<div class="card bg-primary text-primary-content w-96">

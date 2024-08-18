@@ -20,6 +20,8 @@ func indexViewHandler(w http.ResponseWriter, r *http.Request) {
 		"Welcome to example! You're here because it worked out.", // define meta description
 	)
 
+	scriptTags := pages.ScriptTags()
+
 	// Define template body content.
 	bodyContent := pages.BodyContent(
 		"Welcome to example!",                // define h1 text
@@ -31,6 +33,7 @@ func indexViewHandler(w http.ResponseWriter, r *http.Request) {
 		"Welcome to example!", // define title text
 		metaTags,              // define meta tags
 		bodyContent,           // define body content
+		scriptTags,
 	)
 
 	// Render index page template.
@@ -53,6 +56,8 @@ func aboutViewHandler(w http.ResponseWriter, r *http.Request) {
 		"Welcome to example! You're here because it worked out.", // define meta description
 	)
 
+	scriptTags := AboutPage.ScriptTags()
+
 	// Define template body content.
 	bodyContent := AboutPage.RenderContent("Sara")
 
@@ -61,6 +66,7 @@ func aboutViewHandler(w http.ResponseWriter, r *http.Request) {
 		"About page", // define title text
 		metaTags,     // define meta tags
 		bodyContent,  // define body content
+		scriptTags,          // pass null for the missing argument
 	)
 
 	// Render index page template.

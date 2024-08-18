@@ -2,7 +2,7 @@ package templates
 
 import "github.com/user/project/templates/pages"
 
-templ Layout(title string, metaTags, bodyContent templ.Component) {
+templ Layout(title string, metaTags, bodyContent templ.Component, additionalScriptTags templ.Component) {
 	<!DOCTYPE html>
 	<html lang="en" data-theme="lofi">
 		<head>
@@ -28,6 +28,7 @@ templ Layout(title string, metaTags, bodyContent templ.Component) {
 		<body onload={ pages.BodyScripts() }>
 			@bodyContent
 			<script src="/static/scripts.js"></script>
+			@additionalScriptTags
 		</body>
 	</html>
 }
