@@ -1,3 +1,5 @@
+### [NOTE]: This project is an attempt to learn GO and HTMX.
+
 # Your awesome project
 
 Welcome to the yet another awesome project generated with the Gowebly CLI! 🎉
