@@ -23531,13 +23531,13 @@ var jsx_dev_runtime = __toESM(require_jsx_dev_runtime(), 1);
 function ChildComponent() {
   const [state, setState] = import_react.default.useState(0);
   return /* @__PURE__ */ jsx_dev_runtime.jsxDEV("div", {
-    className: "card bg-primary text-primary-content w-96 mt-4",
+    className: "card bg-primary text-primary-content w-96",
     children: /* @__PURE__ */ jsx_dev_runtime.jsxDEV("div", {
       className: "card-body",
       children: [
         /* @__PURE__ */ jsx_dev_runtime.jsxDEV("h2", {
           className: "card-title",
-          children: "HTMX"
+          children: "React Component"
         }, undefined, false, undefined, this),
         /* @__PURE__ */ jsx_dev_runtime.jsxDEV("div", {
           children: [
