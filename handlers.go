@@ -56,6 +56,7 @@ func aboutViewHandler(w http.ResponseWriter, r *http.Request) {
 		"Welcome to example! You're here because it worked out.", // define meta description
 	)
 
+	AboutPage.GenerateAboutPageScripts()
 	scriptTags := AboutPage.ScriptTags()
 
 	// Define template body content.
@@ -69,7 +70,7 @@ func aboutViewHandler(w http.ResponseWriter, r *http.Request) {
 		scriptTags,          // pass null for the missing argument
 	)
 
-	// Render index page template.
+	// Render about page template.
 	if err := htmx.NewResponse().RenderTempl(r.Context(), w, aboutTemplate); err != nil {
 		// If not, return HTTP 400 error.
 		slog.Error("render template", "method", r.Method, "status", http.StatusInternalServerError, "path", r.URL.Path)

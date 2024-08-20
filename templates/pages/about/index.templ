@@ -1,6 +1,10 @@
 package AboutPage
 
-import "github.com/user/project/templates/components/layout"
+import (
+	"github.com/user/project/templates/components/layout"
+	"os"
+	"path/filepath"
+)
 
 templ MetaTags(keywords, description string) {
 	<meta name="keywords" content={ keywords }/>
@@ -8,7 +12,23 @@ templ MetaTags(keywords, description string) {
 }
 
 templ ScriptTags() {
-	<script src="/static/about_page_scripts.js"></script>
+	<script src="/static/react/components/about_page.js"></script>
+}
+
+func GenerateAboutPageScripts() error {
+	content := `console.log("GENERATED JS CONTENT LOADED!")`
+
+	scriptDir := "static"
+	if err := os.MkdirAll(scriptDir, os.ModePerm); err != nil {
+		return err
+	}
+
+	filePath := filepath.Join(scriptDir, "about_page.js")
+	err := os.WriteFile(filePath, []byte(content), 0644)
+	if err != nil {
+		return err
+	}
+	return nil
 }
 
 templ RenderContent(firstName string) {
@@ -22,5 +42,6 @@ templ RenderContent(firstName string) {
 				</div>
 			</div>
 		</div>
+		<div id="about"></div>
 	}
 }

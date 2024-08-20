@@ -1,3 +1,3 @@
 function Test() {
-  return <div>This is a react component test</div>
+  return <div className="text-blue-400">This is a react component test</div>
 }

@@ -8,7 +8,7 @@ tmp_dir = "tmp"
 # pre_cmd = ["bun run build"]
 cmd = "go run github.com/a-h/templ/cmd/templ@latest generate && go build -o ./tmp/gowebly_default ."
 bin = "tmp/gowebly_default"
-include_ext = ["go", "templ", "html", "json", "js", "ts", "css", "scss"]
+include_ext = ["go", "templ", "html", "json", "js", "ts", "css", "scss", "tsx"]
 exclude_dir = [
     ".parcel-cache",
     "bin",

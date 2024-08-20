@@ -8,17 +8,21 @@
     "fmt": "prettier --write .",
     "build": "PARCEL_WORKER_BACKEND=process parcel build --log-level=verbose ./assets/scripts.js ./assets/styles.scss --dist-dir ./static",
     "dev": "PARCEL_WORKER_BACKEND=process parcel build --log-level=verbose ./assets/scripts.js ./assets/styles.scss --dist-dir ./static --no-optimize",
-    "watch": "parcel watch ./assets/scripts.js ./assets/styles.scss --dist-dir ./static"
+    "watch": "parcel watch ./assets/scripts.js ./assets/styles.scss --dist-dir ./static",
+    "build:bun": "bun build ./assets/scripts.js ./assets/styles.scss --outdir ./tmp --minify",
+    "bun:watch": "bun build ./assets/scripts.js ./assets/styles.scss --outdir ./static --minify --watch",
+    "bundev": "bun run ./bun.js --watch"
   },
   "dependencies": {
     "@tailwindcss/forms": "latest",
     "@tailwindcss/typography": "latest",
-    "tailwindcss": "latest",
     "daisyui": "latest",
-    "htmx.org": "latest"
+    "htmx.org": "latest",
+    "tailwindcss": "latest"
   },
   "devDependencies": {
     "@parcel/transformer-sass": "latest",
+    "@types/bun": "^1.1.6",
     "autoprefixer": "latest",
     "parcel": "latest",
     "postcss": "latest",
