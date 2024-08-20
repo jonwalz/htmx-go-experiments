@@ -38,10 +38,10 @@ templ RenderContent(firstName string) {
 				<div class="container max-w-7xl mx-auto flex justify-between">
 					<div class="card bg-primary text-primary-content w-96 mb-8">
 						<div class="card-body">
-							<h2 class="card-title">About page</h2>
-							<p>My name is: { firstName }</p>
+							<h2 class="card-title">HTMX</h2>
+							<p>Server rendered name: { firstName }</p>
 							<div class="card-actions justify-end">
-								<button hx-post="/clicked" class="btn">Button to be clicked</button>
+								<button hx-post="/clicked" class="btn">HTMX button</button>
 							</div>
 						</div>
 					</div>

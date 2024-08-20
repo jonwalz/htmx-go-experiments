@@ -23537,7 +23537,7 @@ function ChildComponent() {
       children: [
         /* @__PURE__ */ jsx_dev_runtime.jsxDEV("div", {
           children: [
-            "Boop: ",
+            "React state: ",
             state
           ]
         }, undefined, true, undefined, this),
