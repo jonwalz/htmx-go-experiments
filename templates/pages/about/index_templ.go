@@ -151,7 +151,7 @@ func RenderContent(firstName string) templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</p><div class=\"card-actions justify-end\"><button hx-post=\"/clicked\" class=\"btn\">HTMX button</button></div></div></div><div id=\"about\"></div></div></div></div>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</p><div class=\"card-actions justify-end\"><button hx-post=\"/clicked\" class=\"btn\">HTMX button</button></div></div></div><div id=\"about\">Loading...</div></div></div></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
