@@ -1,9 +1,7 @@
 import { watch } from 'node:fs'
 
-const entrypoints = ['./assets/scripts.js', './react/components/about_page.tsx']
-
 const buildConfig = {
-  entrypoints: entrypoints,
+  entrypoints: ['./react/components/about_page.tsx', './assets/scripts.js'],
   outdir: './static',
   target: 'browser',
   format: 'esm',
@@ -13,7 +11,7 @@ const buildConfig = {
 
 const srcWatcher = watch(
   `${import.meta.dir}`,
-  { recursive: true },
+  { recursive: false },
   (event, filename) => {
     Bun.build(buildConfig)
 

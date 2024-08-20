@@ -102,3 +102,12 @@ func showContentAPIHandler(w http.ResponseWriter, r *http.Request) {
 	// Send log message.
 	slog.Info("request API", "method", r.Method, "status", http.StatusOK, "path", r.URL.Path)
 }
+
+func clickedHandler(w http.ResponseWriter, r *http.Request) {
+	// Write HTML content
+	w.Header().Set("Content-Type", "text/html")
+	w.Write([]byte("<p>clicked</p>"))
+
+	// Send log message
+	slog.Info("clicked handler", "method", r.Method, "status", http.StatusOK, "path", r.URL.Path)
+}

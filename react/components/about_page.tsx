@@ -4,9 +4,18 @@ import ReactDOM from 'react-dom/client'
 function ChildComponent() {
   const [state, setState] = React.useState(0)
   return (
-    <div>
-      <div>Child: {state}</div>
-      <button onClick={() => setState((prevState) => prevState + 1)}>+</button>
+    <div className="card bg-primary text-primary-content w-96 mt-4">
+      <div className="card-body">
+        <div>Number: {state}</div>
+        <div className="card-actions justify-end">
+          <button
+            className="btn"
+            onClick={() => setState((prevState) => prevState + 1)}
+          >
+            +
+          </button>
+        </div>
+      </div>
     </div>
   )
 }
@@ -14,13 +23,9 @@ function ChildComponent() {
 const root = document.getElementById('about')
 
 if (root) {
-  // @ts-ignore
   ReactDOM.createRoot(root).render(
     <React.StrictMode>
-      <div className="card bg-primary text-primary-content w-96 mt-4">
-        <div className="container mx-auto">React component</div>
-        <ChildComponent />
-      </div>
+      <ChildComponent />
     </React.StrictMode>
   )
 }

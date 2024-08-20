@@ -33,6 +33,8 @@ func runServer() error {
 	// Handle API endpoints.
 	http.HandleFunc("GET /api/hello-world", showContentAPIHandler)
 
+	http.HandleFunc("POST /clicked", clickedHandler)
+
 	// Create a new server instance with options from environment variables.
 	// For more information, see https://blog.cloudflare.com/the-complete-guide-to-golang-net-http-timeouts/
 	server := &http.Server{

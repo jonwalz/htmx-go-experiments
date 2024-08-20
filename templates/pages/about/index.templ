@@ -33,15 +33,21 @@ func GenerateAboutPageScripts() error {
 
 templ RenderContent(firstName string) {
 	@layout.RenderLayout() {
-		<div class="card bg-primary text-primary-content w-96">
-			<div class="card-body">
-				<h2 class="card-title">About me!</h2>
-				<p>My name is: { firstName }</p>
-				<div class="card-actions justify-end">
-					<button class="btn">Button to be clicked</button>
+		<div class="items-center px-8 py-12 mx-auto max-w-7xl lg:px-16 md:px-12 lg:py-24">
+			<div class="justify-center w-full lg:p-10 max-auto">
+				<div class="container max-w-7xl mx-auto flex justify-between">
+					<div class="card bg-primary text-primary-content w-96 mb-8">
+						<div class="card-body">
+							<h2 class="card-title">About page</h2>
+							<p>My name is: { firstName }</p>
+							<div class="card-actions justify-end">
+								<button hx-post="/clicked" class="btn">Button to be clicked</button>
+							</div>
+						</div>
+					</div>
+					<div id="about"></div>
 				</div>
 			</div>
 		</div>
-		<div id="about"></div>
 	}
 }

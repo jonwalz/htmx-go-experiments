@@ -138,20 +138,20 @@ func RenderContent(firstName string) templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"card bg-primary text-primary-content w-96\"><div class=\"card-body\"><h2 class=\"card-title\">About me!</h2><p>My name is: ")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"items-center px-8 py-12 mx-auto max-w-7xl lg:px-16 md:px-12 lg:py-24\"><div class=\"justify-center w-full lg:p-10 max-auto\"><div class=\"container max-w-7xl mx-auto flex justify-between\"><div class=\"card bg-primary text-primary-content w-96 mb-8\"><div class=\"card-body\"><h2 class=\"card-title\">About page</h2><p>My name is: ")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var7 string
 			templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.JoinStringErrs(firstName)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/pages/about/index.templ`, Line: 39, Col: 30}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/pages/about/index.templ`, Line: 42, Col: 33}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var7))
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</p><div class=\"card-actions justify-end\"><button class=\"btn\">Button to be clicked</button></div></div></div><div id=\"about\"></div>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</p><div class=\"card-actions justify-end\"><button hx-post=\"/clicked\" class=\"btn\">Button to be clicked</button></div></div></div><div id=\"about\"></div></div></div></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
