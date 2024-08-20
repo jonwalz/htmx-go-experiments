@@ -23535,6 +23535,10 @@ function ChildComponent() {
     children: /* @__PURE__ */ jsx_dev_runtime.jsxDEV("div", {
       className: "card-body",
       children: [
+        /* @__PURE__ */ jsx_dev_runtime.jsxDEV("h2", {
+          className: "card-title",
+          children: "HTMX"
+        }, undefined, false, undefined, this),
         /* @__PURE__ */ jsx_dev_runtime.jsxDEV("div", {
           children: [
             "React state: ",

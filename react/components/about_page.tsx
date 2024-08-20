@@ -6,6 +6,7 @@ function ChildComponent() {
   return (
     <div className="card bg-primary text-primary-content w-96 mt-4">
       <div className="card-body">
+        <h2 className="card-title">HTMX</h2>
         <div>React state: {state}</div>
         <div className="card-actions justify-end">
           <button
