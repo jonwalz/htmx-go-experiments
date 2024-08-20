@@ -60,7 +60,7 @@ func aboutViewHandler(w http.ResponseWriter, r *http.Request) {
 	scriptTags := AboutPage.ScriptTags()
 
 	// Define template body content.
-	bodyContent := AboutPage.RenderContent("Sara")
+	bodyContent := AboutPage.RenderContent("Jon")
 
 	// Define template layout for index page.
 	aboutTemplate := templates.Layout(
