@@ -28,8 +28,6 @@ func runServer() error {
 	// Handle index page view.
 	http.HandleFunc("GET /", indexViewHandler)
 
-	http.HandleFunc("GET /about", aboutViewHandler)
-
 	// Handle API endpoints.
 	http.HandleFunc("GET /api/hello-world", showContentAPIHandler)
 

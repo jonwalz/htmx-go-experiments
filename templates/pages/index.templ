@@ -3,6 +3,9 @@ package pages
 import (
 	"github.com/user/project/templates/components/hero"
 	"github.com/user/project/templates/components/layout"
+	"os"
+	"path/filepath"
+	"github.com/user/project/templates/components/experiment"
 )
 
 // MetaTags defines meta tags.
@@ -12,7 +15,23 @@ templ MetaTags(keywords, description string) {
 }
 
 templ ScriptTags() {
+	<script src="/static/react/components/about_page.js"></script>
+}
 
+func GeneratePageScripts() error {
+	content := `console.log("GENERATED JS CONTENT LOADED!")`
+
+	scriptDir := "static"
+	if err := os.MkdirAll(scriptDir, os.ModePerm); err != nil {
+		return err
+	}
+
+	filePath := filepath.Join(scriptDir, "about_page.js")
+	err := os.WriteFile(filePath, []byte(content), 0644)
+	if err != nil {
+		return err
+	}
+	return nil
 }
 
 css styledPage() {
@@ -22,6 +41,7 @@ css styledPage() {
 templ BodyContent(h1, text string) {
 	@layout.RenderLayout() {
 		@hero.Render()
+		@experiment.Render("Jon")
 	}
 }
 

@@ -9,8 +9,11 @@ import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
 import (
+	"github.com/user/project/templates/components/experiment"
 	"github.com/user/project/templates/components/hero"
 	"github.com/user/project/templates/components/layout"
+	"os"
+	"path/filepath"
 )
 
 // MetaTags defines meta tags.
@@ -39,7 +42,7 @@ func MetaTags(keywords, description string) templ.Component {
 		var templ_7745c5c3_Var2 string
 		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(keywords)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/pages/index.templ`, Line: 10, Col: 41}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/pages/index.templ`, Line: 13, Col: 41}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
 		if templ_7745c5c3_Err != nil {
@@ -52,7 +55,7 @@ func MetaTags(keywords, description string) templ.Component {
 		var templ_7745c5c3_Var3 string
 		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(description)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/pages/index.templ`, Line: 11, Col: 47}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/pages/index.templ`, Line: 14, Col: 47}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 		if templ_7745c5c3_Err != nil {
@@ -84,8 +87,28 @@ func ScriptTags() templ.Component {
 			templ_7745c5c3_Var4 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<script src=\"/static/react/components/about_page.js\"></script>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
 		return templ_7745c5c3_Err
 	})
+}
+
+func GeneratePageScripts() error {
+	content := `console.log("GENERATED JS CONTENT LOADED!")`
+
+	scriptDir := "static"
+	if err := os.MkdirAll(scriptDir, os.ModePerm); err != nil {
+		return err
+	}
+
+	filePath := filepath.Join(scriptDir, "about_page.js")
+	err := os.WriteFile(filePath, []byte(content), 0644)
+	if err != nil {
+		return err
+	}
+	return nil
 }
 
 func styledPage() templ.CSSClass {
@@ -129,6 +152,14 @@ func BodyContent(h1, text string) templ.Component {
 			}
 			ctx = templ.InitializeContext(ctx)
 			templ_7745c5c3_Err = hero.Render().Render(ctx, templ_7745c5c3_Buffer)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(" ")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = experiment.Render("Jon").Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

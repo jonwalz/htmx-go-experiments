@@ -8,7 +8,6 @@ import (
 
 	"github.com/user/project/templates"
 	"github.com/user/project/templates/pages"
-	AboutPage "github.com/user/project/templates/pages/about"
 )
 
 // indexViewHandler handles a view for the index page.
@@ -22,6 +21,7 @@ func indexViewHandler(w http.ResponseWriter, r *http.Request) {
 
 	scriptTags := pages.ScriptTags()
 
+	pages.GeneratePageScripts()
 	// Define template body content.
 	bodyContent := pages.BodyContent(
 		"Welcome to example!",                // define h1 text
@@ -48,39 +48,6 @@ func indexViewHandler(w http.ResponseWriter, r *http.Request) {
 	slog.Info("render page", "method", r.Method, "status", http.StatusOK, "path", r.URL.Path)
 }
 
-func aboutViewHandler(w http.ResponseWriter, r *http.Request) {
-
-	// Define template meta tags.
-	metaTags := AboutPage.MetaTags(
-		"gowebly, htmx example page, go with htmx",               // define meta keywords
-		"Welcome to example! You're here because it worked out.", // define meta description
-	)
-
-	AboutPage.GenerateAboutPageScripts()
-	scriptTags := AboutPage.ScriptTags()
-
-	// Define template body content.
-	bodyContent := AboutPage.RenderContent("Jon")
-
-	// Define template layout for index page.
-	aboutTemplate := templates.Layout(
-		"About page", // define title text
-		metaTags,     // define meta tags
-		bodyContent,  // define body content
-		scriptTags,          // pass null for the missing argument
-	)
-
-	// Render about page template.
-	if err := htmx.NewResponse().RenderTempl(r.Context(), w, aboutTemplate); err != nil {
-		// If not, return HTTP 400 error.
-		slog.Error("render template", "method", r.Method, "status", http.StatusInternalServerError, "path", r.URL.Path)
-		w.WriteHeader(http.StatusInternalServerError)
-		return
-	}
-
-	// Send log message.
-	slog.Info("render page", "method", r.Method, "status", http.StatusOK, "path", r.URL.Path)
-}
 
 // showContentAPIHandler handles an API endpoint to show content.
 func showContentAPIHandler(w http.ResponseWriter, r *http.Request) {

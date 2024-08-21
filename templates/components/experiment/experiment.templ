@@ -1,0 +1,22 @@
+package experiment
+
+templ Render(firstName string) {
+  <section>
+		<div class="items-center px-8 py-12 mx-auto max-w-7xl lg:px-16 md:px-12 lg:py-24">
+			<div class="justify-center w-full lg:p-10 max-auto">
+				<div class="container max-w-7xl mx-auto flex justify-between">
+					<div class="card bg-primary text-primary-content w-96 mb-8">
+						<div class="card-body">
+							<h2 class="card-title">HTMX</h2>
+							<p>Server rendered name: { firstName }</p>
+							<div class="card-actions justify-end">
+								<button hx-post="/clicked" class="btn">HTMX button</button>
+							</div>
+						</div>
+					</div>
+					<div id="about">Loading...</div>
+				</div>
+			</div>
+		</div>
+  </section>
+}
