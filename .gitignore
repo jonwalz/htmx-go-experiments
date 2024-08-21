@@ -58,3 +58,4 @@ lerna-debug.log*
 
 aidvenv
 .aider.chat.history.md
+.aider*

@@ -26,7 +26,7 @@ func Render() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section><div class=\"items-center px-8 py-12 mx-auto max-w-7xl lg:px-16 md:px-12 lg:py-24\"><div class=\"justify-center w-full text-center lg:p-10 max-auto\"><div class=\"justify-center w-full mx-auto\"><p class=\"mt-8 text-5xl font-medium tracking-tighter\">An experiment injecting React into server rendered HTMX with Go</p></div></div></div></section>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section><div class=\"items-center px-8 py-12 mx-auto max-w-7xl lg:px-16 md:px-12 lg:py-24\"><div class=\"justify-center w-full text-center lg:p-10 max-auto\"><div class=\"justify-center w-full mx-auto\"><p class=\"mt-8 text-5xl font-medium tracking-tighter\">An experiment using React in server rendered HTMX with Go</p></div></div></div></section>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
