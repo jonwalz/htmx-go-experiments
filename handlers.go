@@ -21,7 +21,6 @@ func indexViewHandler(w http.ResponseWriter, r *http.Request) {
 
 	scriptTags := pages.ScriptTags()
 
-	pages.GeneratePageScripts()
 	// Define template body content.
 	bodyContent := pages.BodyContent(
 		"Welcome to example!",                // define h1 text

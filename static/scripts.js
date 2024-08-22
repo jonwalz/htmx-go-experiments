@@ -1,1 +1,3419 @@
-var ti=Object.create;var{getPrototypeOf:ri,defineProperty:$n,getOwnPropertyNames:ni}=Object;var ii=Object.prototype.hasOwnProperty;var ai=(Qr,Jr,Zr)=>{Zr=Qr!=null?ti(ri(Qr)):{};const Wr=Jr||!Qr||!Qr.__esModule?$n(Zr,"default",{value:Qr,enumerable:!0}):Zr;for(let Gr of ni(Qr))if(!ii.call(Wr,Gr))$n(Wr,Gr,{get:()=>Qr[Gr],enumerable:!0});return Wr};var oi=(Qr,Jr)=>()=>(Jr||Qr((Jr={exports:{}}).exports,Jr),Jr.exports);var Wn=oi((jn,Nn)=>{(function(Qr,Jr){if(typeof define==="function"&&define.amd)define([],Jr);else if(typeof Nn==="object"&&Nn.exports)Nn.exports=Jr();else Qr.htmx=Qr.htmx||Jr()})(typeof self!=="undefined"?self:jn,function(){return function(){var Q={onLoad:F,process:zt,on:de,off:ge,trigger:ce,ajax:Nr,find:C,findAll:f,closest:v,values:function(Qr,Jr){var Zr=dr(Qr,Jr||"post");return Zr.values},remove:_,addClass:z,removeClass:n,toggleClass:$,takeClass:W,defineExtension:Ur,removeExtension:Br,logAll:V,logNone:j,logger:null,config:{historyEnabled:!0,historyCacheSize:10,refreshOnHistoryMiss:!1,defaultSwapStyle:"innerHTML",defaultSwapDelay:0,defaultSettleDelay:20,includeIndicatorStyles:!0,indicatorClass:"htmx-indicator",requestClass:"htmx-request",addedClass:"htmx-added",settlingClass:"htmx-settling",swappingClass:"htmx-swapping",allowEval:!0,allowScriptTags:!0,inlineScriptNonce:"",attributesToSettle:["class","style","width","height"],withCredentials:!1,timeout:0,wsReconnectDelay:"full-jitter",wsBinaryType:"blob",disableSelector:"[hx-disable], [data-hx-disable]",useTemplateFragments:!1,scrollBehavior:"smooth",defaultFocusScroll:!1,getCacheBusterParam:!1,globalViewTransitions:!1,methodsThatUseUrlParams:["get"],selfRequestsOnly:!1,ignoreTitle:!1,scrollIntoViewOnBoost:!0,triggerSpecsCache:null},parseInterval:d,_:t,createEventSource:function(Qr){return new EventSource(Qr,{withCredentials:!0})},createWebSocket:function(Qr){var Jr=new WebSocket(Qr,[]);return Jr.binaryType=Q.config.wsBinaryType,Jr},version:"1.9.12"},r={addTriggerHandler:Lt,bodyContains:se,canAccessLocalStorage:U,findThisElement:xe,filterValues:yr,hasAttribute:o,getAttributeValue:te,getClosestAttributeValue:ne,getClosestMatch:c,getExpressionVars:Hr,getHeaders:xr,getInputValues:dr,getInternalData:ae,getSwapSpecification:wr,getTriggerSpecs:it,getTarget:ye,makeFragment:l,mergeObjects:le,makeSettleInfo:T,oobSwap:Ee,querySelectorExt:ue,selectAndSwap:je,settleImmediately:nr,shouldCancel:ut,triggerEvent:ce,triggerErrorEvent:fe,withExtensions:R},w=["get","post","put","delete","patch"],i=w.map(function(Qr){return"[hx-"+Qr+"], [data-hx-"+Qr+"]"}).join(", "),S=e("head"),q=e("title"),H=e("svg",!0);function e(Qr,Jr){return new RegExp("<"+Qr+"(\\s[^>]*>|>)([\\s\\S]*?)<\\/"+Qr+">",Jr?"gim":"im")}function d(Qr){if(Qr==null)return;let Jr=NaN;if(Qr.slice(-2)=="ms")Jr=parseFloat(Qr.slice(0,-2));else if(Qr.slice(-1)=="s")Jr=parseFloat(Qr.slice(0,-1))*1000;else if(Qr.slice(-1)=="m")Jr=parseFloat(Qr.slice(0,-1))*1000*60;else Jr=parseFloat(Qr);return isNaN(Jr)?void 0:Jr}function ee(Qr,Jr){return Qr.getAttribute&&Qr.getAttribute(Jr)}function o(Qr,Jr){return Qr.hasAttribute&&(Qr.hasAttribute(Jr)||Qr.hasAttribute("data-"+Jr))}function te(Qr,Jr){return ee(Qr,Jr)||ee(Qr,"data-"+Jr)}function u(Qr){return Qr.parentElement}function re(){return document}function c(Qr,Jr){while(Qr&&!Jr(Qr))Qr=u(Qr);return Qr?Qr:null}function L(Qr,Jr,Zr){var Wr=te(Jr,Zr),Gr=te(Jr,"hx-disinherit");if(Qr!==Jr&&Gr&&(Gr==="*"||Gr.split(" ").indexOf(Zr)>=0))return"unset";else return Wr}function ne(Qr,Jr){var Zr=null;if(c(Qr,function(Wr){return Zr=L(Qr,Wr,Jr)}),Zr!=="unset")return Zr}function h(Qr,Jr){var Zr=Qr.matches||Qr.matchesSelector||Qr.msMatchesSelector||Qr.mozMatchesSelector||Qr.webkitMatchesSelector||Qr.oMatchesSelector;return Zr&&Zr.call(Qr,Jr)}function A(Qr){var Jr=/<([a-z][^\/\0>\x20\t\r\n\f]*)/i,Zr=Jr.exec(Qr);if(Zr)return Zr[1].toLowerCase();else return""}function s(Qr,Jr){var Zr=new DOMParser,Wr=Zr.parseFromString(Qr,"text/html"),Gr=Wr.body;while(Jr>0)Jr--,Gr=Gr.firstChild;if(Gr==null)Gr=re().createDocumentFragment();return Gr}function N(Qr){return/<body/.test(Qr)}function l(Qr){var Jr=!N(Qr),Zr=A(Qr),Wr=Qr;if(Zr==="head")Wr=Wr.replace(S,"");if(Q.config.useTemplateFragments&&Jr){var Gr=s("<body><template>"+Wr+"</template></body>",0),Yr=Gr.querySelector("template").content;if(Q.config.allowScriptTags)oe(Yr.querySelectorAll("script"),function(Kr){if(Q.config.inlineScriptNonce)Kr.nonce=Q.config.inlineScriptNonce;Kr.htmxExecuted=navigator.userAgent.indexOf("Firefox")===-1});else oe(Yr.querySelectorAll("script"),function(Kr){_(Kr)});return Yr}switch(Zr){case"thead":case"tbody":case"tfoot":case"colgroup":case"caption":return s("<table>"+Wr+"</table>",1);case"col":return s("<table><colgroup>"+Wr+"</colgroup></table>",2);case"tr":return s("<table><tbody>"+Wr+"</tbody></table>",2);case"td":case"th":return s("<table><tbody><tr>"+Wr+"</tr></tbody></table>",3);case"script":case"style":return s("<div>"+Wr+"</div>",1);default:return s(Wr,0)}}function ie(Qr){if(Qr)Qr()}function I(Qr,Jr){return Object.prototype.toString.call(Qr)==="[object "+Jr+"]"}function k(Qr){return I(Qr,"Function")}function P(Qr){return I(Qr,"Object")}function ae(Qr){var Jr="htmx-internal-data",Zr=Qr[Jr];if(!Zr)Zr=Qr[Jr]={};return Zr}function M(Qr){var Jr=[];if(Qr)for(var Zr=0;Zr<Qr.length;Zr++)Jr.push(Qr[Zr]);return Jr}function oe(Qr,Jr){if(Qr)for(var Zr=0;Zr<Qr.length;Zr++)Jr(Qr[Zr])}function X(Qr){var Jr=Qr.getBoundingClientRect(),Zr=Jr.top,Wr=Jr.bottom;return Zr<window.innerHeight&&Wr>=0}function se(Qr){if(Qr.getRootNode&&Qr.getRootNode()instanceof window.ShadowRoot)return re().body.contains(Qr.getRootNode().host);else return re().body.contains(Qr)}function D(Qr){return Qr.trim().split(/\s+/)}function le(Qr,Jr){for(var Zr in Jr)if(Jr.hasOwnProperty(Zr))Qr[Zr]=Jr[Zr];return Qr}function E(Qr){try{return JSON.parse(Qr)}catch(Jr){return b(Jr),null}}function U(){var Qr="htmx:localStorageTest";try{return localStorage.setItem(Qr,Qr),localStorage.removeItem(Qr),!0}catch(Jr){return!1}}function B(Qr){try{var Jr=new URL(Qr);if(Jr)Qr=Jr.pathname+Jr.search;if(!/^\/$/.test(Qr))Qr=Qr.replace(/\/+$/,"");return Qr}catch(Zr){return Qr}}function t(e){return Tr(re().body,function(){return eval(e)})}function F(Qr){var Jr=Q.on("htmx:load",function(Zr){Qr(Zr.detail.elt)});return Jr}function V(){Q.logger=function(Qr,Jr,Zr){if(console)console.log(Jr,Qr,Zr)}}function j(){Q.logger=null}function C(Qr,Jr){if(Jr)return Qr.querySelector(Jr);else return C(re(),Qr)}function f(Qr,Jr){if(Jr)return Qr.querySelectorAll(Jr);else return f(re(),Qr)}function _(Qr,Jr){if(Qr=p(Qr),Jr)setTimeout(function(){_(Qr),Qr=null},Jr);else Qr.parentElement.removeChild(Qr)}function z(Qr,Jr,Zr){if(Qr=p(Qr),Zr)setTimeout(function(){z(Qr,Jr),Qr=null},Zr);else Qr.classList&&Qr.classList.add(Jr)}function n(Qr,Jr,Zr){if(Qr=p(Qr),Zr)setTimeout(function(){n(Qr,Jr),Qr=null},Zr);else if(Qr.classList){if(Qr.classList.remove(Jr),Qr.classList.length===0)Qr.removeAttribute("class")}}function $(Qr,Jr){Qr=p(Qr),Qr.classList.toggle(Jr)}function W(Qr,Jr){Qr=p(Qr),oe(Qr.parentElement.children,function(Zr){n(Zr,Jr)}),z(Qr,Jr)}function v(Qr,Jr){if(Qr=p(Qr),Qr.closest)return Qr.closest(Jr);else{do if(Qr==null||h(Qr,Jr))return Qr;while(Qr=Qr&&u(Qr));return null}}function g(Qr,Jr){return Qr.substring(0,Jr.length)===Jr}function G(Qr,Jr){return Qr.substring(Qr.length-Jr.length)===Jr}function J(Qr){var Jr=Qr.trim();if(g(Jr,"<")&&G(Jr,"/>"))return Jr.substring(1,Jr.length-2);else return Jr}function Z(Qr,Jr){if(Jr.indexOf("closest ")===0)return[v(Qr,J(Jr.substr(8)))];else if(Jr.indexOf("find ")===0)return[C(Qr,J(Jr.substr(5)))];else if(Jr==="next")return[Qr.nextElementSibling];else if(Jr.indexOf("next ")===0)return[K(Qr,J(Jr.substr(5)))];else if(Jr==="previous")return[Qr.previousElementSibling];else if(Jr.indexOf("previous ")===0)return[Y(Qr,J(Jr.substr(9)))];else if(Jr==="document")return[document];else if(Jr==="window")return[window];else if(Jr==="body")return[document.body];else return re().querySelectorAll(J(Jr))}var K=function(Qr,Jr){var Zr=re().querySelectorAll(Jr);for(var Wr=0;Wr<Zr.length;Wr++){var Gr=Zr[Wr];if(Gr.compareDocumentPosition(Qr)===Node.DOCUMENT_POSITION_PRECEDING)return Gr}},Y=function(Qr,Jr){var Zr=re().querySelectorAll(Jr);for(var Wr=Zr.length-1;Wr>=0;Wr--){var Gr=Zr[Wr];if(Gr.compareDocumentPosition(Qr)===Node.DOCUMENT_POSITION_FOLLOWING)return Gr}};function ue(Qr,Jr){if(Jr)return Z(Qr,Jr)[0];else return Z(re().body,Qr)[0]}function p(Qr){if(I(Qr,"String"))return C(Qr);else return Qr}function ve(Qr,Jr,Zr){if(k(Jr))return{target:re().body,event:Qr,listener:Jr};else return{target:p(Qr),event:Jr,listener:Zr}}function de(Qr,Jr,Zr){jr(function(){var Gr=ve(Qr,Jr,Zr);Gr.target.addEventListener(Gr.event,Gr.listener)});var Wr=k(Jr);return Wr?Jr:Zr}function ge(Qr,Jr,Zr){return jr(function(){var Wr=ve(Qr,Jr,Zr);Wr.target.removeEventListener(Wr.event,Wr.listener)}),k(Jr)?Jr:Zr}var pe=re().createElement("output");function me(Qr,Jr){var Zr=ne(Qr,Jr);if(Zr)if(Zr==="this")return[xe(Qr,Jr)];else{var Wr=Z(Qr,Zr);if(Wr.length===0)return b('The selector "'+Zr+'" on '+Jr+" returned no matches!"),[pe];else return Wr}}function xe(Qr,Jr){return c(Qr,function(Zr){return te(Zr,Jr)!=null})}function ye(Qr){var Jr=ne(Qr,"hx-target");if(Jr)if(Jr==="this")return xe(Qr,"hx-target");else return ue(Qr,Jr);else{var Zr=ae(Qr);if(Zr.boosted)return re().body;else return Qr}}function be(Qr){var Jr=Q.config.attributesToSettle;for(var Zr=0;Zr<Jr.length;Zr++)if(Qr===Jr[Zr])return!0;return!1}function we(Qr,Jr){oe(Qr.attributes,function(Zr){if(!Jr.hasAttribute(Zr.name)&&be(Zr.name))Qr.removeAttribute(Zr.name)}),oe(Jr.attributes,function(Zr){if(be(Zr.name))Qr.setAttribute(Zr.name,Zr.value)})}function Se(Qr,Jr){var Zr=Fr(Jr);for(var Wr=0;Wr<Zr.length;Wr++){var Gr=Zr[Wr];try{if(Gr.isInlineSwap(Qr))return!0}catch(Yr){b(Yr)}}return Qr==="outerHTML"}function Ee(Qr,Jr,Zr){var Wr="#"+ee(Jr,"id"),Gr="outerHTML";if(Qr==="true");else if(Qr.indexOf(":")>0)Gr=Qr.substr(0,Qr.indexOf(":")),Wr=Qr.substr(Qr.indexOf(":")+1,Qr.length);else Gr=Qr;var Yr=re().querySelectorAll(Wr);if(Yr)oe(Yr,function(Kr){var en,tn=Jr.cloneNode(!0);if(en=re().createDocumentFragment(),en.appendChild(tn),!Se(Gr,Kr))en=tn;var nn={shouldSwap:!0,target:Kr,fragment:en};if(!ce(Kr,"htmx:oobBeforeSwap",nn))return;if(Kr=nn.target,nn.shouldSwap)Fe(Gr,Kr,Kr,en,Zr);oe(Zr.elts,function(rn){ce(rn,"htmx:oobAfterSwap",nn)})}),Jr.parentNode.removeChild(Jr);else Jr.parentNode.removeChild(Jr),fe(re().body,"htmx:oobErrorNoTarget",{content:Jr});return Qr}function Ce(Qr,Jr,Zr){var Wr=ne(Qr,"hx-select-oob");if(Wr){var Gr=Wr.split(",");for(var Yr=0;Yr<Gr.length;Yr++){var Kr=Gr[Yr].split(":",2),en=Kr[0].trim();if(en.indexOf("#")===0)en=en.substring(1);var tn=Kr[1]||"true",nn=Jr.querySelector("#"+en);if(nn)Ee(tn,nn,Zr)}}oe(f(Jr,"[hx-swap-oob], [data-hx-swap-oob]"),function(rn){var an=te(rn,"hx-swap-oob");if(an!=null)Ee(an,rn,Zr)})}function Re(Qr){oe(f(Qr,"[hx-preserve], [data-hx-preserve]"),function(Jr){var Zr=te(Jr,"id"),Wr=re().getElementById(Zr);if(Wr!=null)Jr.parentNode.replaceChild(Wr,Jr)})}function Te(Qr,Jr,Zr){oe(Jr.querySelectorAll("[id]"),function(Wr){var Gr=ee(Wr,"id");if(Gr&&Gr.length>0){var Yr=Gr.replace("'","\\'"),Kr=Wr.tagName.replace(":","\\:"),en=Qr.querySelector(Kr+"[id='"+Yr+"']");if(en&&en!==Qr){var tn=Wr.cloneNode();we(Wr,en),Zr.tasks.push(function(){we(Wr,tn)})}}})}function Oe(Qr){return function(){n(Qr,Q.config.addedClass),zt(Qr),Nt(Qr),qe(Qr),ce(Qr,"htmx:load")}}function qe(Qr){var Jr="[autofocus]",Zr=h(Qr,Jr)?Qr:Qr.querySelector(Jr);if(Zr!=null)Zr.focus()}function a(Qr,Jr,Zr,Wr){Te(Qr,Zr,Wr);while(Zr.childNodes.length>0){var Gr=Zr.firstChild;if(z(Gr,Q.config.addedClass),Qr.insertBefore(Gr,Jr),Gr.nodeType!==Node.TEXT_NODE&&Gr.nodeType!==Node.COMMENT_NODE)Wr.tasks.push(Oe(Gr))}}function He(Qr,Jr){var Zr=0;while(Zr<Qr.length)Jr=(Jr<<5)-Jr+Qr.charCodeAt(Zr++)|0;return Jr}function Le(Qr){var Jr=0;if(Qr.attributes)for(var Zr=0;Zr<Qr.attributes.length;Zr++){var Wr=Qr.attributes[Zr];if(Wr.value)Jr=He(Wr.name,Jr),Jr=He(Wr.value,Jr)}return Jr}function Ae(Qr){var Jr=ae(Qr);if(Jr.onHandlers){for(var Zr=0;Zr<Jr.onHandlers.length;Zr++){const Wr=Jr.onHandlers[Zr];Qr.removeEventListener(Wr.event,Wr.listener)}delete Jr.onHandlers}}function Ne(Qr){var Jr=ae(Qr);if(Jr.timeout)clearTimeout(Jr.timeout);if(Jr.webSocket)Jr.webSocket.close();if(Jr.sseEventSource)Jr.sseEventSource.close();if(Jr.listenerInfos)oe(Jr.listenerInfos,function(Zr){if(Zr.on)Zr.on.removeEventListener(Zr.trigger,Zr.listener)});Ae(Qr),oe(Object.keys(Jr),function(Zr){delete Jr[Zr]})}function m(Qr){if(ce(Qr,"htmx:beforeCleanupElement"),Ne(Qr),Qr.children)oe(Qr.children,function(Jr){m(Jr)})}function Ie(Qr,Jr,Zr){if(Qr.tagName==="BODY")return Ue(Qr,Jr,Zr);else{var Wr,Gr=Qr.previousSibling;if(a(u(Qr),Qr,Jr,Zr),Gr==null)Wr=u(Qr).firstChild;else Wr=Gr.nextSibling;Zr.elts=Zr.elts.filter(function(Yr){return Yr!=Qr});while(Wr&&Wr!==Qr){if(Wr.nodeType===Node.ELEMENT_NODE)Zr.elts.push(Wr);Wr=Wr.nextElementSibling}m(Qr),u(Qr).removeChild(Qr)}}function ke(Qr,Jr,Zr){return a(Qr,Qr.firstChild,Jr,Zr)}function Pe(Qr,Jr,Zr){return a(u(Qr),Qr,Jr,Zr)}function Me(Qr,Jr,Zr){return a(Qr,null,Jr,Zr)}function Xe(Qr,Jr,Zr){return a(u(Qr),Qr.nextSibling,Jr,Zr)}function De(Qr,Jr,Zr){return m(Qr),u(Qr).removeChild(Qr)}function Ue(Qr,Jr,Zr){var Wr=Qr.firstChild;if(a(Qr,Wr,Jr,Zr),Wr){while(Wr.nextSibling)m(Wr.nextSibling),Qr.removeChild(Wr.nextSibling);m(Wr),Qr.removeChild(Wr)}}function Be(Qr,Jr,Zr){var Wr=Zr||ne(Qr,"hx-select");if(Wr){var Gr=re().createDocumentFragment();oe(Jr.querySelectorAll(Wr),function(Yr){Gr.appendChild(Yr)}),Jr=Gr}return Jr}function Fe(Qr,Jr,Zr,Wr,Gr){switch(Qr){case"none":return;case"outerHTML":Ie(Zr,Wr,Gr);return;case"afterbegin":ke(Zr,Wr,Gr);return;case"beforebegin":Pe(Zr,Wr,Gr);return;case"beforeend":Me(Zr,Wr,Gr);return;case"afterend":Xe(Zr,Wr,Gr);return;case"delete":De(Zr,Wr,Gr);return;default:var Yr=Fr(Jr);for(var Kr=0;Kr<Yr.length;Kr++){var en=Yr[Kr];try{var tn=en.handleSwap(Qr,Zr,Wr,Gr);if(tn){if(typeof tn.length!=="undefined")for(var nn=0;nn<tn.length;nn++){var rn=tn[nn];if(rn.nodeType!==Node.TEXT_NODE&&rn.nodeType!==Node.COMMENT_NODE)Gr.tasks.push(Oe(rn))}return}}catch(an){b(an)}}if(Qr==="innerHTML")Ue(Zr,Wr,Gr);else Fe(Q.config.defaultSwapStyle,Jr,Zr,Wr,Gr)}}function Ve(Qr){if(Qr.indexOf("<title")>-1){var Jr=Qr.replace(H,""),Zr=Jr.match(q);if(Zr)return Zr[2]}}function je(Qr,Jr,Zr,Wr,Gr,Yr){Gr.title=Ve(Wr);var Kr=l(Wr);if(Kr)return Ce(Zr,Kr,Gr),Kr=Be(Zr,Kr,Yr),Re(Kr),Fe(Qr,Zr,Jr,Kr,Gr)}function _e(Qr,Jr,Zr){var Wr=Qr.getResponseHeader(Jr);if(Wr.indexOf("{")===0){var Gr=E(Wr);for(var Yr in Gr)if(Gr.hasOwnProperty(Yr)){var Kr=Gr[Yr];if(!P(Kr))Kr={value:Kr};ce(Zr,Yr,Kr)}}else{var en=Wr.split(",");for(var tn=0;tn<en.length;tn++)ce(Zr,en[tn].trim(),[])}}var ze=/\s/,x=/[\s,]/,$e=/[_$a-zA-Z]/,We=/[_$a-zA-Z0-9]/,Ge=['"',"'","/"],Je=/[^\s]/,Ze=/[{(]/,Ke=/[})]/;function Ye(Qr){var Jr=[],Zr=0;while(Zr<Qr.length){if($e.exec(Qr.charAt(Zr))){var Wr=Zr;while(We.exec(Qr.charAt(Zr+1)))Zr++;Jr.push(Qr.substr(Wr,Zr-Wr+1))}else if(Ge.indexOf(Qr.charAt(Zr))!==-1){var Gr=Qr.charAt(Zr),Wr=Zr;Zr++;while(Zr<Qr.length&&Qr.charAt(Zr)!==Gr){if(Qr.charAt(Zr)==="\\")Zr++;Zr++}Jr.push(Qr.substr(Wr,Zr-Wr+1))}else{var Yr=Qr.charAt(Zr);Jr.push(Yr)}Zr++}return Jr}function Qe(Qr,Jr,Zr){return $e.exec(Qr.charAt(0))&&Qr!=="true"&&Qr!=="false"&&Qr!=="this"&&Qr!==Zr&&Jr!=="."}function et(Qr,Jr,Zr){if(Jr[0]==="["){Jr.shift();var Wr=1,Gr=" return (function("+Zr+"){ return (",Yr=null;while(Jr.length>0){var Kr=Jr[0];if(Kr==="]"){if(Wr--,Wr===0){if(Yr===null)Gr=Gr+"true";Jr.shift(),Gr+=")})";try{var en=Tr(Qr,function(){return Function(Gr)()},function(){return!0});return en.source=Gr,en}catch(tn){return fe(re().body,"htmx:syntax:error",{error:tn,source:Gr}),null}}}else if(Kr==="[")Wr++;if(Qe(Kr,Yr,Zr))Gr+="(("+Zr+"."+Kr+") ? ("+Zr+"."+Kr+") : (window."+Kr+"))";else Gr=Gr+Kr;Yr=Jr.shift()}}}function y(Qr,Jr){var Zr="";while(Qr.length>0&&!Jr.test(Qr[0]))Zr+=Qr.shift();return Zr}function tt(Qr){var Jr;if(Qr.length>0&&Ze.test(Qr[0]))Qr.shift(),Jr=y(Qr,Ke).trim(),Qr.shift();else Jr=y(Qr,x);return Jr}var rt="input, textarea, select";function nt(Qr,Jr,Zr){var Wr=[],Gr=Ye(Jr);do{y(Gr,Je);var Yr=Gr.length,Kr=y(Gr,/[,\[\s]/);if(Kr!=="")if(Kr==="every"){var en={trigger:"every"};y(Gr,Je),en.pollInterval=d(y(Gr,/[,\[\s]/)),y(Gr,Je);var tn=et(Qr,Gr,"event");if(tn)en.eventFilter=tn;Wr.push(en)}else if(Kr.indexOf("sse:")===0)Wr.push({trigger:"sse",sseEvent:Kr.substr(4)});else{var nn={trigger:Kr},tn=et(Qr,Gr,"event");if(tn)nn.eventFilter=tn;while(Gr.length>0&&Gr[0]!==","){y(Gr,Je);var rn=Gr.shift();if(rn==="changed")nn.changed=!0;else if(rn==="once")nn.once=!0;else if(rn==="consume")nn.consume=!0;else if(rn==="delay"&&Gr[0]===":")Gr.shift(),nn.delay=d(y(Gr,x));else if(rn==="from"&&Gr[0]===":"){if(Gr.shift(),Ze.test(Gr[0]))var an=tt(Gr);else{var an=y(Gr,x);if(an==="closest"||an==="find"||an==="next"||an==="previous"){Gr.shift();var on=tt(Gr);if(on.length>0)an+=" "+on}}nn.from=an}else if(rn==="target"&&Gr[0]===":")Gr.shift(),nn.target=tt(Gr);else if(rn==="throttle"&&Gr[0]===":")Gr.shift(),nn.throttle=d(y(Gr,x));else if(rn==="queue"&&Gr[0]===":")Gr.shift(),nn.queue=y(Gr,x);else if(rn==="root"&&Gr[0]===":")Gr.shift(),nn[rn]=tt(Gr);else if(rn==="threshold"&&Gr[0]===":")Gr.shift(),nn[rn]=y(Gr,x);else fe(Qr,"htmx:syntax:error",{token:Gr.shift()})}Wr.push(nn)}if(Gr.length===Yr)fe(Qr,"htmx:syntax:error",{token:Gr.shift()});y(Gr,Je)}while(Gr[0]===","&&Gr.shift());if(Zr)Zr[Jr]=Wr;return Wr}function it(Qr){var Jr=te(Qr,"hx-trigger"),Zr=[];if(Jr){var Wr=Q.config.triggerSpecsCache;Zr=Wr&&Wr[Jr]||nt(Qr,Jr,Wr)}if(Zr.length>0)return Zr;else if(h(Qr,"form"))return[{trigger:"submit"}];else if(h(Qr,'input[type="button"], input[type="submit"]'))return[{trigger:"click"}];else if(h(Qr,rt))return[{trigger:"change"}];else return[{trigger:"click"}]}function at(Qr){ae(Qr).cancelled=!0}function ot(Qr,Jr,Zr){var Wr=ae(Qr);Wr.timeout=setTimeout(function(){if(se(Qr)&&Wr.cancelled!==!0){if(!ct(Zr,Qr,Wt("hx:poll:trigger",{triggerSpec:Zr,target:Qr})))Jr(Qr);ot(Qr,Jr,Zr)}},Zr.pollInterval)}function st(Qr){return location.hostname===Qr.hostname&&ee(Qr,"href")&&ee(Qr,"href").indexOf("#")!==0}function lt(Qr,Jr,Zr){if(Qr.tagName==="A"&&st(Qr)&&(Qr.target===""||Qr.target==="_self")||Qr.tagName==="FORM"){Jr.boosted=!0;var Wr,Gr;if(Qr.tagName==="A")Wr="get",Gr=ee(Qr,"href");else{var Yr=ee(Qr,"method");Wr=Yr?Yr.toLowerCase():"get",Gr=ee(Qr,"action")}Zr.forEach(function(Kr){ht(Qr,function(en,tn){if(v(en,Q.config.disableSelector)){m(en);return}he(Wr,Gr,en,tn)},Jr,Kr,!0)})}}function ut(Qr,Jr){if(Qr.type==="submit"||Qr.type==="click"){if(Jr.tagName==="FORM")return!0;if(h(Jr,'input[type="submit"], button')&&v(Jr,"form")!==null)return!0;if(Jr.tagName==="A"&&Jr.href&&(Jr.getAttribute("href")==="#"||Jr.getAttribute("href").indexOf("#")!==0))return!0}return!1}function ft(Qr,Jr){return ae(Qr).boosted&&Qr.tagName==="A"&&Jr.type==="click"&&(Jr.ctrlKey||Jr.metaKey)}function ct(Qr,Jr,Zr){var Wr=Qr.eventFilter;if(Wr)try{return Wr.call(Jr,Zr)!==!0}catch(Gr){return fe(re().body,"htmx:eventFilter:error",{error:Gr,source:Wr.source}),!0}return!1}function ht(Qr,Jr,Zr,Wr,Gr){var Yr=ae(Qr),Kr;if(Wr.from)Kr=Z(Qr,Wr.from);else Kr=[Qr];if(Wr.changed)Kr.forEach(function(en){var tn=ae(en);tn.lastValue=en.value});oe(Kr,function(en){var tn=function(nn){if(!se(Qr)){en.removeEventListener(Wr.trigger,tn);return}if(ft(Qr,nn))return;if(Gr||ut(nn,Qr))nn.preventDefault();if(ct(Wr,Qr,nn))return;var rn=ae(nn);if(rn.triggerSpec=Wr,rn.handledFor==null)rn.handledFor=[];if(rn.handledFor.indexOf(Qr)<0){if(rn.handledFor.push(Qr),Wr.consume)nn.stopPropagation();if(Wr.target&&nn.target){if(!h(nn.target,Wr.target))return}if(Wr.once)if(Yr.triggeredOnce)return;else Yr.triggeredOnce=!0;if(Wr.changed){var an=ae(en);if(an.lastValue===en.value)return;an.lastValue=en.value}if(Yr.delayed)clearTimeout(Yr.delayed);if(Yr.throttle)return;if(Wr.throttle>0){if(!Yr.throttle)Jr(Qr,nn),Yr.throttle=setTimeout(function(){Yr.throttle=null},Wr.throttle)}else if(Wr.delay>0)Yr.delayed=setTimeout(function(){Jr(Qr,nn)},Wr.delay);else ce(Qr,"htmx:trigger"),Jr(Qr,nn)}};if(Zr.listenerInfos==null)Zr.listenerInfos=[];Zr.listenerInfos.push({trigger:Wr.trigger,listener:tn,on:en}),en.addEventListener(Wr.trigger,tn)})}var vt=!1,dt=null;function gt(){if(!dt)dt=function(){vt=!0},window.addEventListener("scroll",dt),setInterval(function(){if(vt)vt=!1,oe(re().querySelectorAll("[hx-trigger='revealed'],[data-hx-trigger='revealed']"),function(Qr){pt(Qr)})},200)}function pt(Qr){if(!o(Qr,"data-hx-revealed")&&X(Qr)){Qr.setAttribute("data-hx-revealed","true");var Jr=ae(Qr);if(Jr.initHash)ce(Qr,"revealed");else Qr.addEventListener("htmx:afterProcessNode",function(Zr){ce(Qr,"revealed")},{once:!0})}}function mt(Qr,Jr,Zr){var Wr=D(Zr);for(var Gr=0;Gr<Wr.length;Gr++){var Yr=Wr[Gr].split(/:(.+)/);if(Yr[0]==="connect")xt(Qr,Yr[1],0);if(Yr[0]==="send")bt(Qr)}}function xt(Qr,Jr,Zr){if(!se(Qr))return;if(Jr.indexOf("/")==0){var Wr=location.hostname+(location.port?":"+location.port:"");if(location.protocol=="https:")Jr="wss://"+Wr+Jr;else if(location.protocol=="http:")Jr="ws://"+Wr+Jr}var Gr=Q.createWebSocket(Jr);Gr.onerror=function(Yr){fe(Qr,"htmx:wsError",{error:Yr,socket:Gr}),yt(Qr)},Gr.onclose=function(Yr){if([1006,1012,1013].indexOf(Yr.code)>=0){var Kr=wt(Zr);setTimeout(function(){xt(Qr,Jr,Zr+1)},Kr)}},Gr.onopen=function(Yr){Zr=0},ae(Qr).webSocket=Gr,Gr.addEventListener("message",function(Yr){if(yt(Qr))return;var Kr=Yr.data;R(Qr,function(on){Kr=on.transformResponse(Kr,null,Qr)});var en=T(Qr),tn=l(Kr),nn=M(tn.children);for(var rn=0;rn<nn.length;rn++){var an=nn[rn];Ee(te(an,"hx-swap-oob")||"true",an,en)}nr(en.tasks)})}function yt(Qr){if(!se(Qr))return ae(Qr).webSocket.close(),!0}function bt(Qr){var Jr=c(Qr,function(Zr){return ae(Zr).webSocket!=null});if(Jr)Qr.addEventListener(it(Qr)[0].trigger,function(Zr){var Wr=ae(Jr).webSocket,Gr=xr(Qr,Jr),Yr=dr(Qr,"post"),Kr=Yr.errors,en=Yr.values,tn=Hr(Qr),nn=le(en,tn),rn=yr(nn,Qr);if(rn.HEADERS=Gr,Kr&&Kr.length>0){ce(Qr,"htmx:validation:halted",Kr);return}if(Wr.send(JSON.stringify(rn)),ut(Zr,Qr))Zr.preventDefault()});else fe(Qr,"htmx:noWebSocketSourceError")}function wt(Qr){var Jr=Q.config.wsReconnectDelay;if(typeof Jr==="function")return Jr(Qr);if(Jr==="full-jitter"){var Zr=Math.min(Qr,6),Wr=1000*Math.pow(2,Zr);return Wr*Math.random()}b('htmx.config.wsReconnectDelay must either be a function or the string "full-jitter"')}function St(Qr,Jr,Zr){var Wr=D(Zr);for(var Gr=0;Gr<Wr.length;Gr++){var Yr=Wr[Gr].split(/:(.+)/);if(Yr[0]==="connect")Et(Qr,Yr[1]);if(Yr[0]==="swap")Ct(Qr,Yr[1])}}function Et(Qr,Jr){var Zr=Q.createEventSource(Jr);Zr.onerror=function(Wr){fe(Qr,"htmx:sseError",{error:Wr,source:Zr}),Tt(Qr)},ae(Qr).sseEventSource=Zr}function Ct(Qr,Jr){var Zr=c(Qr,Ot);if(Zr){var Wr=ae(Zr).sseEventSource,Gr=function(Yr){if(Tt(Zr))return;if(!se(Qr)){Wr.removeEventListener(Jr,Gr);return}var Kr=Yr.data;R(Qr,function(rn){Kr=rn.transformResponse(Kr,null,Qr)});var en=wr(Qr),tn=ye(Qr),nn=T(Qr);je(en.swapStyle,tn,Qr,Kr,nn),nr(nn.tasks),ce(Qr,"htmx:sseMessage",Yr)};ae(Qr).sseListener=Gr,Wr.addEventListener(Jr,Gr)}else fe(Qr,"htmx:noSSESourceError")}function Rt(Qr,Jr,Zr){var Wr=c(Qr,Ot);if(Wr){var Gr=ae(Wr).sseEventSource,Yr=function(){if(!Tt(Wr))if(se(Qr))Jr(Qr);else Gr.removeEventListener(Zr,Yr)};ae(Qr).sseListener=Yr,Gr.addEventListener(Zr,Yr)}else fe(Qr,"htmx:noSSESourceError")}function Tt(Qr){if(!se(Qr))return ae(Qr).sseEventSource.close(),!0}function Ot(Qr){return ae(Qr).sseEventSource!=null}function qt(Qr,Jr,Zr,Wr){var Gr=function(){if(!Zr.loaded)Zr.loaded=!0,Jr(Qr)};if(Wr>0)setTimeout(Gr,Wr);else Gr()}function Ht(Qr,Jr,Zr){var Wr=!1;return oe(w,function(Gr){if(o(Qr,"hx-"+Gr)){var Yr=te(Qr,"hx-"+Gr);Wr=!0,Jr.path=Yr,Jr.verb=Gr,Zr.forEach(function(Kr){Lt(Qr,Kr,Jr,function(en,tn){if(v(en,Q.config.disableSelector)){m(en);return}he(Gr,Yr,en,tn)})})}}),Wr}function Lt(Qr,Jr,Zr,Wr){if(Jr.sseEvent)Rt(Qr,Wr,Jr.sseEvent);else if(Jr.trigger==="revealed")gt(),ht(Qr,Wr,Zr,Jr),pt(Qr);else if(Jr.trigger==="intersect"){var Gr={};if(Jr.root)Gr.root=ue(Qr,Jr.root);if(Jr.threshold)Gr.threshold=parseFloat(Jr.threshold);var Yr=new IntersectionObserver(function(Kr){for(var en=0;en<Kr.length;en++){var tn=Kr[en];if(tn.isIntersecting){ce(Qr,"intersect");break}}},Gr);Yr.observe(Qr),ht(Qr,Wr,Zr,Jr)}else if(Jr.trigger==="load"){if(!ct(Jr,Qr,Wt("load",{elt:Qr})))qt(Qr,Wr,Zr,Jr.delay)}else if(Jr.pollInterval>0)Zr.polling=!0,ot(Qr,Wr,Jr);else ht(Qr,Wr,Zr,Jr)}function At(Qr){if(!Qr.htmxExecuted&&Q.config.allowScriptTags&&(Qr.type==="text/javascript"||Qr.type==="module"||Qr.type==="")){var Jr=re().createElement("script");if(oe(Qr.attributes,function(Wr){Jr.setAttribute(Wr.name,Wr.value)}),Jr.textContent=Qr.textContent,Jr.async=!1,Q.config.inlineScriptNonce)Jr.nonce=Q.config.inlineScriptNonce;var Zr=Qr.parentElement;try{Zr.insertBefore(Jr,Qr)}catch(Wr){b(Wr)}finally{if(Qr.parentElement)Qr.parentElement.removeChild(Qr)}}}function Nt(Qr){if(h(Qr,"script"))At(Qr);oe(f(Qr,"script"),function(Jr){At(Jr)})}function It(Qr){var Jr=Qr.attributes;if(!Jr)return!1;for(var Zr=0;Zr<Jr.length;Zr++){var Wr=Jr[Zr].name;if(g(Wr,"hx-on:")||g(Wr,"data-hx-on:")||g(Wr,"hx-on-")||g(Wr,"data-hx-on-"))return!0}return!1}function kt(Qr){var Jr=null,Zr=[];if(It(Qr))Zr.push(Qr);if(document.evaluate){var Wr=document.evaluate('.//*[@*[ starts-with(name(), "hx-on:") or starts-with(name(), "data-hx-on:") or starts-with(name(), "hx-on-") or starts-with(name(), "data-hx-on-") ]]',Qr);while(Jr=Wr.iterateNext())Zr.push(Jr)}else if(typeof Qr.getElementsByTagName==="function"){var Gr=Qr.getElementsByTagName("*");for(var Yr=0;Yr<Gr.length;Yr++)if(It(Gr[Yr]))Zr.push(Gr[Yr])}return Zr}function Pt(Qr){if(Qr.querySelectorAll){var Jr=", [hx-boost] a, [data-hx-boost] a, a[hx-boost], a[data-hx-boost]",Zr=Qr.querySelectorAll(i+Jr+", form, [type='submit'], [hx-sse], [data-hx-sse], [hx-ws], [data-hx-ws], [hx-ext], [data-hx-ext], [hx-trigger], [data-hx-trigger], [hx-on], [data-hx-on]");return Zr}else return[]}function Mt(Qr){var Jr=v(Qr.target,"button, input[type='submit']"),Zr=Dt(Qr);if(Zr)Zr.lastButtonClicked=Jr}function Xt(Qr){var Jr=Dt(Qr);if(Jr)Jr.lastButtonClicked=null}function Dt(Qr){var Jr=v(Qr.target,"button, input[type='submit']");if(!Jr)return;var Zr=p("#"+ee(Jr,"form"))||v(Jr,"form");if(!Zr)return;return ae(Zr)}function Ut(Qr){Qr.addEventListener("click",Mt),Qr.addEventListener("focusin",Mt),Qr.addEventListener("focusout",Xt)}function Bt(Qr){var Jr=Ye(Qr),Zr=0;for(var Wr=0;Wr<Jr.length;Wr++){const Gr=Jr[Wr];if(Gr==="{")Zr++;else if(Gr==="}")Zr--}return Zr}function Ft(Qr,Jr,Zr){var Wr=ae(Qr);if(!Array.isArray(Wr.onHandlers))Wr.onHandlers=[];var Gr,Yr=function(Kr){return Tr(Qr,function(){if(!Gr)Gr=new Function("event",Zr);Gr.call(Qr,Kr)})};Qr.addEventListener(Jr,Yr),Wr.onHandlers.push({event:Jr,listener:Yr})}function Vt(Qr){var Jr=te(Qr,"hx-on");if(Jr){var Zr={},Wr=Jr.split("\n"),Gr=null,Yr=0;while(Wr.length>0){var Kr=Wr.shift(),en=Kr.match(/^\s*([a-zA-Z:\-\.]+:)(.*)/);if(Yr===0&&en)Kr.split(":"),Gr=en[1].slice(0,-1),Zr[Gr]=en[2];else Zr[Gr]+=Kr;Yr+=Bt(Kr)}for(var tn in Zr)Ft(Qr,tn,Zr[tn])}}function jt(Qr){Ae(Qr);for(var Jr=0;Jr<Qr.attributes.length;Jr++){var Zr=Qr.attributes[Jr].name,Wr=Qr.attributes[Jr].value;if(g(Zr,"hx-on")||g(Zr,"data-hx-on")){var Gr=Zr.indexOf("-on")+3,Yr=Zr.slice(Gr,Gr+1);if(Yr==="-"||Yr===":"){var Kr=Zr.slice(Gr+1);if(g(Kr,":"))Kr="htmx"+Kr;else if(g(Kr,"-"))Kr="htmx:"+Kr.slice(1);else if(g(Kr,"htmx-"))Kr="htmx:"+Kr.slice(5);Ft(Qr,Kr,Wr)}}}}function _t(Qr){if(v(Qr,Q.config.disableSelector)){m(Qr);return}var Jr=ae(Qr);if(Jr.initHash!==Le(Qr)){if(Ne(Qr),Jr.initHash=Le(Qr),Vt(Qr),ce(Qr,"htmx:beforeProcessNode"),Qr.value)Jr.lastValue=Qr.value;var Zr=it(Qr),Wr=Ht(Qr,Jr,Zr);if(!Wr){if(ne(Qr,"hx-boost")==="true")lt(Qr,Jr,Zr);else if(o(Qr,"hx-trigger"))Zr.forEach(function(Kr){Lt(Qr,Kr,Jr,function(){})})}if(Qr.tagName==="FORM"||ee(Qr,"type")==="submit"&&o(Qr,"form"))Ut(Qr);var Gr=te(Qr,"hx-sse");if(Gr)St(Qr,Jr,Gr);var Yr=te(Qr,"hx-ws");if(Yr)mt(Qr,Jr,Yr);ce(Qr,"htmx:afterProcessNode")}}function zt(Qr){if(Qr=p(Qr),v(Qr,Q.config.disableSelector)){m(Qr);return}_t(Qr),oe(Pt(Qr),function(Jr){_t(Jr)}),oe(kt(Qr),jt)}function $t(Qr){return Qr.replace(/([a-z0-9])([A-Z])/g,"$1-$2").toLowerCase()}function Wt(Qr,Jr){var Zr;if(window.CustomEvent&&typeof window.CustomEvent==="function")Zr=new CustomEvent(Qr,{bubbles:!0,cancelable:!0,detail:Jr});else Zr=re().createEvent("CustomEvent"),Zr.initCustomEvent(Qr,!0,!0,Jr);return Zr}function fe(Qr,Jr,Zr){ce(Qr,Jr,le({error:Jr},Zr))}function Gt(Qr){return Qr==="htmx:afterProcessNode"}function R(Qr,Jr){oe(Fr(Qr),function(Zr){try{Jr(Zr)}catch(Wr){b(Wr)}})}function b(Qr){if(console.error)console.error(Qr);else if(console.log)console.log("ERROR: ",Qr)}function ce(Qr,Jr,Zr){if(Qr=p(Qr),Zr==null)Zr={};Zr.elt=Qr;var Wr=Wt(Jr,Zr);if(Q.logger&&!Gt(Jr))Q.logger(Qr,Jr,Zr);if(Zr.error)b(Zr.error),ce(Qr,"htmx:error",{errorInfo:Zr});var Gr=Qr.dispatchEvent(Wr),Yr=$t(Jr);if(Gr&&Yr!==Jr){var Kr=Wt(Yr,Wr.detail);Gr=Gr&&Qr.dispatchEvent(Kr)}return R(Qr,function(en){Gr=Gr&&(en.onEvent(Jr,Wr)!==!1&&!Wr.defaultPrevented)}),Gr}var Jt=location.pathname+location.search;function Zt(){var Qr=re().querySelector("[hx-history-elt],[data-hx-history-elt]");return Qr||re().body}function Kt(Qr,Jr,Zr,Wr){if(!U())return;if(Q.config.historyCacheSize<=0){localStorage.removeItem("htmx-history-cache");return}Qr=B(Qr);var Gr=E(localStorage.getItem("htmx-history-cache"))||[];for(var Yr=0;Yr<Gr.length;Yr++)if(Gr[Yr].url===Qr){Gr.splice(Yr,1);break}var Kr={url:Qr,content:Jr,title:Zr,scroll:Wr};ce(re().body,"htmx:historyItemCreated",{item:Kr,cache:Gr}),Gr.push(Kr);while(Gr.length>Q.config.historyCacheSize)Gr.shift();while(Gr.length>0)try{localStorage.setItem("htmx-history-cache",JSON.stringify(Gr));break}catch(en){fe(re().body,"htmx:historyCacheError",{cause:en,cache:Gr}),Gr.shift()}}function Yt(Qr){if(!U())return null;Qr=B(Qr);var Jr=E(localStorage.getItem("htmx-history-cache"))||[];for(var Zr=0;Zr<Jr.length;Zr++)if(Jr[Zr].url===Qr)return Jr[Zr];return null}function Qt(Qr){var Jr=Q.config.requestClass,Zr=Qr.cloneNode(!0);return oe(f(Zr,"."+Jr),function(Wr){n(Wr,Jr)}),Zr.innerHTML}function er(){var Qr=Zt(),Jr=Jt||location.pathname+location.search,Zr;try{Zr=re().querySelector('[hx-history="false" i],[data-hx-history="false" i]')}catch(Wr){Zr=re().querySelector('[hx-history="false"],[data-hx-history="false"]')}if(!Zr)ce(re().body,"htmx:beforeHistorySave",{path:Jr,historyElt:Qr}),Kt(Jr,Qt(Qr),re().title,window.scrollY);if(Q.config.historyEnabled)history.replaceState({htmx:!0},re().title,window.location.href)}function tr(Qr){if(Q.config.getCacheBusterParam){if(Qr=Qr.replace(/org\.htmx\.cache-buster=[^&]*&?/,""),G(Qr,"&")||G(Qr,"?"))Qr=Qr.slice(0,-1)}if(Q.config.historyEnabled)history.pushState({htmx:!0},"",Qr);Jt=Qr}function rr(Qr){if(Q.config.historyEnabled)history.replaceState({htmx:!0},"",Qr);Jt=Qr}function nr(Qr){oe(Qr,function(Jr){Jr.call()})}function ir(Qr){var Jr=new XMLHttpRequest,Zr={path:Qr,xhr:Jr};ce(re().body,"htmx:historyCacheMiss",Zr),Jr.open("GET",Qr,!0),Jr.setRequestHeader("HX-Request","true"),Jr.setRequestHeader("HX-History-Restore-Request","true"),Jr.setRequestHeader("HX-Current-URL",re().location.href),Jr.onload=function(){if(this.status>=200&&this.status<400){ce(re().body,"htmx:historyCacheMissLoad",Zr);var Wr=l(this.response);Wr=Wr.querySelector("[hx-history-elt],[data-hx-history-elt]")||Wr;var Gr=Zt(),Yr=T(Gr),Kr=Ve(this.response);if(Kr){var en=C("title");if(en)en.innerHTML=Kr;else window.document.title=Kr}Ue(Gr,Wr,Yr),nr(Yr.tasks),Jt=Qr,ce(re().body,"htmx:historyRestore",{path:Qr,cacheMiss:!0,serverResponse:this.response})}else fe(re().body,"htmx:historyCacheMissLoadError",Zr)},Jr.send()}function ar(Qr){er(),Qr=Qr||location.pathname+location.search;var Jr=Yt(Qr);if(Jr){var Zr=l(Jr.content),Wr=Zt(),Gr=T(Wr);Ue(Wr,Zr,Gr),nr(Gr.tasks),document.title=Jr.title,setTimeout(function(){window.scrollTo(0,Jr.scroll)},0),Jt=Qr,ce(re().body,"htmx:historyRestore",{path:Qr,item:Jr})}else if(Q.config.refreshOnHistoryMiss)window.location.reload(!0);else ir(Qr)}function or(Qr){var Jr=me(Qr,"hx-indicator");if(Jr==null)Jr=[Qr];return oe(Jr,function(Zr){var Wr=ae(Zr);Wr.requestCount=(Wr.requestCount||0)+1,Zr.classList.add.call(Zr.classList,Q.config.requestClass)}),Jr}function sr(Qr){var Jr=me(Qr,"hx-disabled-elt");if(Jr==null)Jr=[];return oe(Jr,function(Zr){var Wr=ae(Zr);Wr.requestCount=(Wr.requestCount||0)+1,Zr.setAttribute("disabled","")}),Jr}function lr(Qr,Jr){oe(Qr,function(Zr){var Wr=ae(Zr);if(Wr.requestCount=(Wr.requestCount||0)-1,Wr.requestCount===0)Zr.classList.remove.call(Zr.classList,Q.config.requestClass)}),oe(Jr,function(Zr){var Wr=ae(Zr);if(Wr.requestCount=(Wr.requestCount||0)-1,Wr.requestCount===0)Zr.removeAttribute("disabled")})}function ur(Qr,Jr){for(var Zr=0;Zr<Qr.length;Zr++){var Wr=Qr[Zr];if(Wr.isSameNode(Jr))return!0}return!1}function fr(Qr){if(Qr.name===""||Qr.name==null||Qr.disabled||v(Qr,"fieldset[disabled]"))return!1;if(Qr.type==="button"||Qr.type==="submit"||Qr.tagName==="image"||Qr.tagName==="reset"||Qr.tagName==="file")return!1;if(Qr.type==="checkbox"||Qr.type==="radio")return Qr.checked;return!0}function cr(Qr,Jr,Zr){if(Qr!=null&&Jr!=null){var Wr=Zr[Qr];if(Wr===void 0)Zr[Qr]=Jr;else if(Array.isArray(Wr))if(Array.isArray(Jr))Zr[Qr]=Wr.concat(Jr);else Wr.push(Jr);else if(Array.isArray(Jr))Zr[Qr]=[Wr].concat(Jr);else Zr[Qr]=[Wr,Jr]}}function hr(Qr,Jr,Zr,Wr,Gr){if(Wr==null||ur(Qr,Wr))return;else Qr.push(Wr);if(fr(Wr)){var Yr=ee(Wr,"name"),Kr=Wr.value;if(Wr.multiple&&Wr.tagName==="SELECT")Kr=M(Wr.querySelectorAll("option:checked")).map(function(tn){return tn.value});if(Wr.files)Kr=M(Wr.files);if(cr(Yr,Kr,Jr),Gr)vr(Wr,Zr)}if(h(Wr,"form")){var en=Wr.elements;oe(en,function(tn){hr(Qr,Jr,Zr,tn,Gr)})}}function vr(Qr,Jr){if(Qr.willValidate){if(ce(Qr,"htmx:validation:validate"),!Qr.checkValidity())Jr.push({elt:Qr,message:Qr.validationMessage,validity:Qr.validity}),ce(Qr,"htmx:validation:failed",{message:Qr.validationMessage,validity:Qr.validity})}}function dr(Qr,Jr){var Zr=[],Wr={},Gr={},Yr=[],Kr=ae(Qr);if(Kr.lastButtonClicked&&!se(Kr.lastButtonClicked))Kr.lastButtonClicked=null;var en=h(Qr,"form")&&Qr.noValidate!==!0||te(Qr,"hx-validate")==="true";if(Kr.lastButtonClicked)en=en&&Kr.lastButtonClicked.formNoValidate!==!0;if(Jr!=="get")hr(Zr,Gr,Yr,v(Qr,"form"),en);if(hr(Zr,Wr,Yr,Qr,en),Kr.lastButtonClicked||Qr.tagName==="BUTTON"||Qr.tagName==="INPUT"&&ee(Qr,"type")==="submit"){var tn=Kr.lastButtonClicked||Qr,nn=ee(tn,"name");cr(nn,tn.value,Gr)}var rn=me(Qr,"hx-include");return oe(rn,function(an){if(hr(Zr,Wr,Yr,an,en),!h(an,"form"))oe(an.querySelectorAll(rt),function(on){hr(Zr,Wr,Yr,on,en)})}),Wr=le(Wr,Gr),{errors:Yr,values:Wr}}function gr(Qr,Jr,Zr){if(Qr!=="")Qr+="&";if(String(Zr)==="[object Object]")Zr=JSON.stringify(Zr);var Wr=encodeURIComponent(Zr);return Qr+=encodeURIComponent(Jr)+"="+Wr,Qr}function pr(Qr){var Jr="";for(var Zr in Qr)if(Qr.hasOwnProperty(Zr)){var Wr=Qr[Zr];if(Array.isArray(Wr))oe(Wr,function(Gr){Jr=gr(Jr,Zr,Gr)});else Jr=gr(Jr,Zr,Wr)}return Jr}function mr(Qr){var Jr=new FormData;for(var Zr in Qr)if(Qr.hasOwnProperty(Zr)){var Wr=Qr[Zr];if(Array.isArray(Wr))oe(Wr,function(Gr){Jr.append(Zr,Gr)});else Jr.append(Zr,Wr)}return Jr}function xr(Qr,Jr,Zr){var Wr={"HX-Request":"true","HX-Trigger":ee(Qr,"id"),"HX-Trigger-Name":ee(Qr,"name"),"HX-Target":te(Jr,"id"),"HX-Current-URL":re().location.href};if(Rr(Qr,"hx-headers",!1,Wr),Zr!==void 0)Wr["HX-Prompt"]=Zr;if(ae(Qr).boosted)Wr["HX-Boosted"]="true";return Wr}function yr(Qr,Jr){var Zr=ne(Jr,"hx-params");if(Zr)if(Zr==="none")return{};else if(Zr==="*")return Qr;else if(Zr.indexOf("not ")===0)return oe(Zr.substr(4).split(","),function(Gr){Gr=Gr.trim(),delete Qr[Gr]}),Qr;else{var Wr={};return oe(Zr.split(","),function(Gr){Gr=Gr.trim(),Wr[Gr]=Qr[Gr]}),Wr}else return Qr}function br(Qr){return ee(Qr,"href")&&ee(Qr,"href").indexOf("#")>=0}function wr(Qr,Jr){var Zr=Jr?Jr:ne(Qr,"hx-swap"),Wr={swapStyle:ae(Qr).boosted?"innerHTML":Q.config.defaultSwapStyle,swapDelay:Q.config.defaultSwapDelay,settleDelay:Q.config.defaultSettleDelay};if(Q.config.scrollIntoViewOnBoost&&ae(Qr).boosted&&!br(Qr))Wr.show="top";if(Zr){var Gr=D(Zr);if(Gr.length>0)for(var Yr=0;Yr<Gr.length;Yr++){var Kr=Gr[Yr];if(Kr.indexOf("swap:")===0)Wr.swapDelay=d(Kr.substr(5));else if(Kr.indexOf("settle:")===0)Wr.settleDelay=d(Kr.substr(7));else if(Kr.indexOf("transition:")===0)Wr.transition=Kr.substr(11)==="true";else if(Kr.indexOf("ignoreTitle:")===0)Wr.ignoreTitle=Kr.substr(12)==="true";else if(Kr.indexOf("scroll:")===0){var en=Kr.substr(7),tn=en.split(":"),nn=tn.pop(),rn=tn.length>0?tn.join(":"):null;Wr.scroll=nn,Wr.scrollTarget=rn}else if(Kr.indexOf("show:")===0){var an=Kr.substr(5),tn=an.split(":"),on=tn.pop(),rn=tn.length>0?tn.join(":"):null;Wr.show=on,Wr.showTarget=rn}else if(Kr.indexOf("focus-scroll:")===0){var dn=Kr.substr("focus-scroll:".length);Wr.focusScroll=dn=="true"}else if(Yr==0)Wr.swapStyle=Kr;else b("Unknown modifier in hx-swap: "+Kr)}}return Wr}function Sr(Qr){return ne(Qr,"hx-encoding")==="multipart/form-data"||h(Qr,"form")&&ee(Qr,"enctype")==="multipart/form-data"}function Er(Qr,Jr,Zr){var Wr=null;if(R(Jr,function(Gr){if(Wr==null)Wr=Gr.encodeParameters(Qr,Zr,Jr)}),Wr!=null)return Wr;else if(Sr(Jr))return mr(Zr);else return pr(Zr)}function T(Qr){return{tasks:[],elts:[Qr]}}function Cr(Qr,Jr){var Zr=Qr[0],Wr=Qr[Qr.length-1];if(Jr.scroll){var Gr=null;if(Jr.scrollTarget)Gr=ue(Zr,Jr.scrollTarget);if(Jr.scroll==="top"&&(Zr||Gr))Gr=Gr||Zr,Gr.scrollTop=0;if(Jr.scroll==="bottom"&&(Wr||Gr))Gr=Gr||Wr,Gr.scrollTop=Gr.scrollHeight}if(Jr.show){var Gr=null;if(Jr.showTarget){var Yr=Jr.showTarget;if(Jr.showTarget==="window")Yr="body";Gr=ue(Zr,Yr)}if(Jr.show==="top"&&(Zr||Gr))Gr=Gr||Zr,Gr.scrollIntoView({block:"start",behavior:Q.config.scrollBehavior});if(Jr.show==="bottom"&&(Wr||Gr))Gr=Gr||Wr,Gr.scrollIntoView({block:"end",behavior:Q.config.scrollBehavior})}}function Rr(Qr,Jr,Zr,Wr){if(Wr==null)Wr={};if(Qr==null)return Wr;var Gr=te(Qr,Jr);if(Gr){var Yr=Gr.trim(),Kr=Zr;if(Yr==="unset")return null;if(Yr.indexOf("javascript:")===0)Yr=Yr.substr(11),Kr=!0;else if(Yr.indexOf("js:")===0)Yr=Yr.substr(3),Kr=!0;if(Yr.indexOf("{")!==0)Yr="{"+Yr+"}";var en;if(Kr)en=Tr(Qr,function(){return Function("return ("+Yr+")")()},{});else en=E(Yr);for(var tn in en)if(en.hasOwnProperty(tn)){if(Wr[tn]==null)Wr[tn]=en[tn]}}return Rr(u(Qr),Jr,Zr,Wr)}function Tr(Qr,Jr,Zr){if(Q.config.allowEval)return Jr();else return fe(Qr,"htmx:evalDisallowedError"),Zr}function Or(Qr,Jr){return Rr(Qr,"hx-vars",!0,Jr)}function qr(Qr,Jr){return Rr(Qr,"hx-vals",!1,Jr)}function Hr(Qr){return le(Or(Qr),qr(Qr))}function Lr(Qr,Jr,Zr){if(Zr!==null)try{Qr.setRequestHeader(Jr,Zr)}catch(Wr){Qr.setRequestHeader(Jr,encodeURIComponent(Zr)),Qr.setRequestHeader(Jr+"-URI-AutoEncoded","true")}}function Ar(Qr){if(Qr.responseURL&&typeof URL!=="undefined")try{var Jr=new URL(Qr.responseURL);return Jr.pathname+Jr.search}catch(Zr){fe(re().body,"htmx:badResponseUrl",{url:Qr.responseURL})}}function O(Qr,Jr){return Jr.test(Qr.getAllResponseHeaders())}function Nr(Qr,Jr,Zr){if(Qr=Qr.toLowerCase(),Zr)if(Zr instanceof Element||I(Zr,"String"))return he(Qr,Jr,null,null,{targetOverride:p(Zr),returnPromise:!0});else return he(Qr,Jr,p(Zr.source),Zr.event,{handler:Zr.handler,headers:Zr.headers,values:Zr.values,targetOverride:p(Zr.target),swapOverride:Zr.swap,select:Zr.select,returnPromise:!0});else return he(Qr,Jr,null,null,{returnPromise:!0})}function Ir(Qr){var Jr=[];while(Qr)Jr.push(Qr),Qr=Qr.parentElement;return Jr}function kr(Qr,Jr,Zr){var Wr,Gr;if(typeof URL==="function"){Gr=new URL(Jr,document.location.href);var Yr=document.location.origin;Wr=Yr===Gr.origin}else Gr=Jr,Wr=g(Jr,document.location.origin);if(Q.config.selfRequestsOnly){if(!Wr)return!1}return ce(Qr,"htmx:validateUrl",le({url:Gr,sameHost:Wr},Zr))}function he(Qr,Jr,Zr,Wr,Gr,Yr){var Kr=null,en=null;if(Gr=Gr!=null?Gr:{},Gr.returnPromise&&typeof Promise!=="undefined")var tn=new Promise(function(mn,Sn){Kr=mn,en=Sn});if(Zr==null)Zr=re().body;var nn=Gr.handler||Mr,rn=Gr.select||null;if(!se(Zr))return ie(Kr),tn;var an=Gr.targetOverride||ye(Zr);if(an==null||an==pe)return fe(Zr,"htmx:targetError",{target:te(Zr,"hx-target")}),ie(en),tn;var on=ae(Zr),dn=on.lastButtonClicked;if(dn){var Cn=ee(dn,"formaction");if(Cn!=null)Jr=Cn;var xn=ee(dn,"formmethod");if(xn!=null){if(xn.toLowerCase()!=="dialog")Qr=xn}}var On=ne(Zr,"hx-confirm");if(Yr===void 0){var In=function(mn){return he(Qr,Jr,Zr,Wr,Gr,!!mn)},Qn={target:an,elt:Zr,path:Jr,verb:Qr,triggeringEvent:Wr,etc:Gr,issueRequest:In,question:On};if(ce(Zr,"htmx:confirm",Qn)===!1)return ie(Kr),tn}var yn=Zr,gn=ne(Zr,"hx-sync"),bn=null,kn=!1;if(gn){var Vn=gn.split(":"),hn=Vn[0].trim();if(hn==="this")yn=xe(Zr,"hx-sync");else yn=ue(Zr,hn);if(gn=(Vn[1]||"drop").trim(),on=ae(yn),gn==="drop"&&on.xhr&&on.abortable!==!0)return ie(Kr),tn;else if(gn==="abort")if(on.xhr)return ie(Kr),tn;else kn=!0;else if(gn==="replace")ce(yn,"htmx:abort");else if(gn.indexOf("queue")===0){var vn=gn.split(" ");bn=(vn[1]||"last").trim()}}if(on.xhr)if(on.abortable)ce(yn,"htmx:abort");else{if(bn==null){if(Wr){var En=ae(Wr);if(En&&En.triggerSpec&&En.triggerSpec.queue)bn=En.triggerSpec.queue}if(bn==null)bn="last"}if(on.queuedRequests==null)on.queuedRequests=[];if(bn==="first"&&on.queuedRequests.length===0)on.queuedRequests.push(function(){he(Qr,Jr,Zr,Wr,Gr)});else if(bn==="all")on.queuedRequests.push(function(){he(Qr,Jr,Zr,Wr,Gr)});else if(bn==="last")on.queuedRequests=[],on.queuedRequests.push(function(){he(Qr,Jr,Zr,Wr,Gr)});return ie(Kr),tn}var sn=new XMLHttpRequest;on.xhr=sn,on.abortable=kn;var un=function(){if(on.xhr=null,on.abortable=!1,on.queuedRequests!=null&&on.queuedRequests.length>0){var mn=on.queuedRequests.shift();mn()}},Pn=ne(Zr,"hx-prompt");if(Pn){var qn=prompt(Pn);if(qn===null||!ce(Zr,"htmx:prompt",{prompt:qn,target:an}))return ie(Kr),un(),tn}if(On&&!Yr){if(!confirm(On))return ie(Kr),un(),tn}var pn=xr(Zr,an,qn);if(Qr!=="get"&&!Sr(Zr))pn["Content-Type"]="application/x-www-form-urlencoded";if(Gr.headers)pn=le(pn,Gr.headers);var fn=dr(Zr,Qr),Rn=fn.errors,Hn=fn.values;if(Gr.values)Hn=le(Hn,Gr.values);var Tn=Hr(Zr),_n=le(Hn,Tn),Ln=yr(_n,Zr);if(Q.config.getCacheBusterParam&&Qr==="get")Ln["org.htmx.cache-buster"]=ee(an,"id")||"true";if(Jr==null||Jr==="")Jr=re().location.href;var Un=Rr(Zr,"hx-request"),Jn=ae(Zr).boosted,Mn=Q.config.methodsThatUseUrlParams.indexOf(Qr)>=0,cn={boosted:Jn,useUrlParams:Mn,parameters:Ln,unfilteredParameters:_n,headers:pn,target:an,verb:Qr,errors:Rn,withCredentials:Gr.credentials||Un.credentials||Q.config.withCredentials,timeout:Gr.timeout||Un.timeout||Q.config.timeout,path:Jr,triggeringEvent:Wr};if(!ce(Zr,"htmx:configRequest",cn))return ie(Kr),un(),tn;if(Jr=cn.path,Qr=cn.verb,pn=cn.headers,Ln=cn.parameters,Rn=cn.errors,Mn=cn.useUrlParams,Rn&&Rn.length>0)return ce(Zr,"htmx:validation:halted",cn),ie(Kr),un(),tn;var zn=Jr.split("#"),Gn=zn[0],Fn=zn[1],wn=Jr;if(Mn){wn=Gn;var Yn=Object.keys(Ln).length!==0;if(Yn){if(wn.indexOf("?")<0)wn+="?";else wn+="&";if(wn+=pr(Ln),Fn)wn+="#"+Fn}}if(!kr(Zr,wn,cn))return fe(Zr,"htmx:invalidPath",cn),ie(en),tn;if(sn.open(Qr.toUpperCase(),wn,!0),sn.overrideMimeType("text/html"),sn.withCredentials=cn.withCredentials,sn.timeout=cn.timeout,Un.noHeaders);else for(var Bn in pn)if(pn.hasOwnProperty(Bn)){var Kn=pn[Bn];Lr(sn,Bn,Kn)}var ln={xhr:sn,target:an,requestConfig:cn,etc:Gr,boosted:Jn,select:rn,pathInfo:{requestPath:Jr,finalRequestPath:wn,anchor:Fn}};if(sn.onload=function(){try{var mn=Ir(Zr);if(ln.pathInfo.responsePath=Ar(sn),nn(Zr,ln),lr(Xn,Dn),ce(Zr,"htmx:afterRequest",ln),ce(Zr,"htmx:afterOnLoad",ln),!se(Zr)){var Sn=null;while(mn.length>0&&Sn==null){var An=mn.shift();if(se(An))Sn=An}if(Sn)ce(Sn,"htmx:afterRequest",ln),ce(Sn,"htmx:afterOnLoad",ln)}ie(Kr),un()}catch(Zn){throw fe(Zr,"htmx:onLoadError",le({error:Zn},ln)),Zn}},sn.onerror=function(){lr(Xn,Dn),fe(Zr,"htmx:afterRequest",ln),fe(Zr,"htmx:sendError",ln),ie(en),un()},sn.onabort=function(){lr(Xn,Dn),fe(Zr,"htmx:afterRequest",ln),fe(Zr,"htmx:sendAbort",ln),ie(en),un()},sn.ontimeout=function(){lr(Xn,Dn),fe(Zr,"htmx:afterRequest",ln),fe(Zr,"htmx:timeout",ln),ie(en),un()},!ce(Zr,"htmx:beforeRequest",ln))return ie(Kr),un(),tn;var Xn=or(Zr),Dn=sr(Zr);oe(["loadstart","loadend","progress","abort"],function(mn){oe([sn,sn.upload],function(Sn){Sn.addEventListener(mn,function(An){ce(Zr,"htmx:xhr:"+mn,{lengthComputable:An.lengthComputable,loaded:An.loaded,total:An.total})})})}),ce(Zr,"htmx:beforeSend",ln);var ei=Mn?null:Er(sn,Zr,Ln);return sn.send(ei),tn}function Pr(Qr,Jr){var Zr=Jr.xhr,Wr=null,Gr=null;if(O(Zr,/HX-Push:/i))Wr=Zr.getResponseHeader("HX-Push"),Gr="push";else if(O(Zr,/HX-Push-Url:/i))Wr=Zr.getResponseHeader("HX-Push-Url"),Gr="push";else if(O(Zr,/HX-Replace-Url:/i))Wr=Zr.getResponseHeader("HX-Replace-Url"),Gr="replace";if(Wr)if(Wr==="false")return{};else return{type:Gr,path:Wr};var Yr=Jr.pathInfo.finalRequestPath,Kr=Jr.pathInfo.responsePath,en=ne(Qr,"hx-push-url"),tn=ne(Qr,"hx-replace-url"),nn=ae(Qr).boosted,rn=null,an=null;if(en)rn="push",an=en;else if(tn)rn="replace",an=tn;else if(nn)rn="push",an=Kr||Yr;if(an){if(an==="false")return{};if(an==="true")an=Kr||Yr;if(Jr.pathInfo.anchor&&an.indexOf("#")===-1)an=an+"#"+Jr.pathInfo.anchor;return{type:rn,path:an}}else return{}}function Mr(Qr,Jr){var{xhr:Zr,target:Wr,etc:Gr,requestConfig:Yr,select:Kr}=Jr;if(!ce(Qr,"htmx:beforeOnLoad",Jr))return;if(O(Zr,/HX-Trigger:/i))_e(Zr,"HX-Trigger",Qr);if(O(Zr,/HX-Location:/i)){er();var en=Zr.getResponseHeader("HX-Location"),tn;if(en.indexOf("{")===0)tn=E(en),en=tn.path,delete tn.path;Nr("GET",en,tn).then(function(){tr(en)});return}var nn=O(Zr,/HX-Refresh:/i)&&Zr.getResponseHeader("HX-Refresh")==="true";if(O(Zr,/HX-Redirect:/i)){location.href=Zr.getResponseHeader("HX-Redirect"),nn&&location.reload();return}if(nn){location.reload();return}if(O(Zr,/HX-Retarget:/i))if(Zr.getResponseHeader("HX-Retarget")==="this")Jr.target=Qr;else Jr.target=ue(Qr,Zr.getResponseHeader("HX-Retarget"));var rn=Pr(Qr,Jr),an=Zr.status>=200&&Zr.status<400&&Zr.status!==204,on=Zr.response,dn=Zr.status>=400,Cn=Q.config.ignoreTitle,xn=le({shouldSwap:an,serverResponse:on,isError:dn,ignoreTitle:Cn},Jr);if(!ce(Wr,"htmx:beforeSwap",xn))return;if(Wr=xn.target,on=xn.serverResponse,dn=xn.isError,Cn=xn.ignoreTitle,Jr.target=Wr,Jr.failed=dn,Jr.successful=!dn,xn.shouldSwap){if(Zr.status===286)at(Qr);if(R(Qr,function(hn){on=hn.transformResponse(on,Zr,Qr)}),rn.type)er();var On=Gr.swapOverride;if(O(Zr,/HX-Reswap:/i))On=Zr.getResponseHeader("HX-Reswap");var tn=wr(Qr,On);if(tn.hasOwnProperty("ignoreTitle"))Cn=tn.ignoreTitle;Wr.classList.add(Q.config.swappingClass);var In=null,Qn=null,yn=function(){try{var hn=document.activeElement,vn={};try{vn={elt:hn,start:hn?hn.selectionStart:null,end:hn?hn.selectionEnd:null}}catch(fn){}var En;if(Kr)En=Kr;if(O(Zr,/HX-Reselect:/i))En=Zr.getResponseHeader("HX-Reselect");if(rn.type)if(ce(re().body,"htmx:beforeHistoryUpdate",le({history:rn},Jr)),rn.type==="push")tr(rn.path),ce(re().body,"htmx:pushedIntoHistory",{path:rn.path});else rr(rn.path),ce(re().body,"htmx:replacedInHistory",{path:rn.path});var sn=T(Wr);if(je(tn.swapStyle,Wr,Qr,on,sn,En),vn.elt&&!se(vn.elt)&&ee(vn.elt,"id")){var un=document.getElementById(ee(vn.elt,"id")),Pn={preventScroll:tn.focusScroll!==void 0?!tn.focusScroll:!Q.config.defaultFocusScroll};if(un){if(vn.start&&un.setSelectionRange)try{un.setSelectionRange(vn.start,vn.end)}catch(fn){}un.focus(Pn)}}if(Wr.classList.remove(Q.config.swappingClass),oe(sn.elts,function(fn){if(fn.classList)fn.classList.add(Q.config.settlingClass);ce(fn,"htmx:afterSwap",Jr)}),O(Zr,/HX-Trigger-After-Swap:/i)){var qn=Qr;if(!se(Qr))qn=re().body;_e(Zr,"HX-Trigger-After-Swap",qn)}var pn=function(){if(oe(sn.tasks,function(Tn){Tn.call()}),oe(sn.elts,function(Tn){if(Tn.classList)Tn.classList.remove(Q.config.settlingClass);ce(Tn,"htmx:afterSettle",Jr)}),Jr.pathInfo.anchor){var fn=re().getElementById(Jr.pathInfo.anchor);if(fn)fn.scrollIntoView({block:"start",behavior:"auto"})}if(sn.title&&!Cn){var Rn=C("title");if(Rn)Rn.innerHTML=sn.title;else window.document.title=sn.title}if(Cr(sn.elts,tn),O(Zr,/HX-Trigger-After-Settle:/i)){var Hn=Qr;if(!se(Qr))Hn=re().body;_e(Zr,"HX-Trigger-After-Settle",Hn)}ie(In)};if(tn.settleDelay>0)setTimeout(pn,tn.settleDelay);else pn()}catch(fn){throw fe(Qr,"htmx:swapError",Jr),ie(Qn),fn}},gn=Q.config.globalViewTransitions;if(tn.hasOwnProperty("transition"))gn=tn.transition;if(gn&&ce(Qr,"htmx:beforeTransition",Jr)&&typeof Promise!=="undefined"&&document.startViewTransition){var bn=new Promise(function(hn,vn){In=hn,Qn=vn}),kn=yn;yn=function(){document.startViewTransition(function(){return kn(),bn})}}if(tn.swapDelay>0)setTimeout(yn,tn.swapDelay);else yn()}if(dn)fe(Qr,"htmx:responseError",le({error:"Response Status Error Code "+Zr.status+" from "+Jr.pathInfo.requestPath},Jr))}var Xr={};function Dr(){return{init:function(Qr){return null},onEvent:function(Qr,Jr){return!0},transformResponse:function(Qr,Jr,Zr){return Qr},isInlineSwap:function(Qr){return!1},handleSwap:function(Qr,Jr,Zr,Wr){return!1},encodeParameters:function(Qr,Jr,Zr){return null}}}function Ur(Qr,Jr){if(Jr.init)Jr.init(r);Xr[Qr]=le(Dr(),Jr)}function Br(Qr){delete Xr[Qr]}function Fr(Qr,Jr,Zr){if(Qr==null)return Jr;if(Jr==null)Jr=[];if(Zr==null)Zr=[];var Wr=te(Qr,"hx-ext");if(Wr)oe(Wr.split(","),function(Gr){if(Gr=Gr.replace(/ /g,""),Gr.slice(0,7)=="ignore:"){Zr.push(Gr.slice(7));return}if(Zr.indexOf(Gr)<0){var Yr=Xr[Gr];if(Yr&&Jr.indexOf(Yr)<0)Jr.push(Yr)}});return Fr(u(Qr),Jr,Zr)}var Vr=!1;re().addEventListener("DOMContentLoaded",function(){Vr=!0});function jr(Qr){if(Vr||re().readyState==="complete")Qr();else re().addEventListener("DOMContentLoaded",Qr)}function _r(){if(Q.config.includeIndicatorStyles!==!1)re().head.insertAdjacentHTML("beforeend","<style>                      ."+Q.config.indicatorClass+"{opacity:0}                      ."+Q.config.requestClass+" ."+Q.config.indicatorClass+"{opacity:1; transition: opacity 200ms ease-in;}                      ."+Q.config.requestClass+"."+Q.config.indicatorClass+"{opacity:1; transition: opacity 200ms ease-in;}                    </style>")}function zr(){var Qr=re().querySelector('meta[name="htmx-config"]');if(Qr)return E(Qr.content);else return null}function $r(){var Qr=zr();if(Qr)Q.config=le(Q.config,Qr)}return jr(function(){$r(),_r();var Qr=re().body;zt(Qr);var Jr=re().querySelectorAll("[hx-trigger='restored'],[data-hx-trigger='restored']");Qr.addEventListener("htmx:abort",function(Wr){var Gr=Wr.target,Yr=ae(Gr);if(Yr&&Yr.xhr)Yr.xhr.abort()});const Zr=window.onpopstate?window.onpopstate.bind(window):null;window.onpopstate=function(Wr){if(Wr.state&&Wr.state.htmx)ar(),oe(Jr,function(Gr){ce(Gr,"htmx:restored",{document:re(),triggerEvent:ce})});else if(Zr)Zr(Wr)},setTimeout(function(){ce(Qr,"htmx:load",{}),Qr=null},0)}),Q}()})});var li=ai(Wn(),1);console.log("SCRIPTS");
+// modules are defined as an array
+// [ module function, map of requires ]
+//
+// map of requires is short require name -> numeric require
+//
+// anything defined in a previous bundle is accessed via the
+// orig method which is the require for previous bundles
+
+(function (modules, entry, mainEntry, parcelRequireName, globalName) {
+  /* eslint-disable no-undef */
+  var globalObject =
+    typeof globalThis !== 'undefined'
+      ? globalThis
+      : typeof self !== 'undefined'
+      ? self
+      : typeof window !== 'undefined'
+      ? window
+      : typeof global !== 'undefined'
+      ? global
+      : {};
+  /* eslint-enable no-undef */
+
+  // Save the require from previous bundle to this closure if any
+  var previousRequire =
+    typeof globalObject[parcelRequireName] === 'function' &&
+    globalObject[parcelRequireName];
+
+  var cache = previousRequire.cache || {};
+  // Do not use `require` to prevent Webpack from trying to bundle this call
+  var nodeRequire =
+    typeof module !== 'undefined' &&
+    typeof module.require === 'function' &&
+    module.require.bind(module);
+
+  function newRequire(name, jumped) {
+    if (!cache[name]) {
+      if (!modules[name]) {
+        // if we cannot find the module within our internal map or
+        // cache jump to the current global require ie. the last bundle
+        // that was added to the page.
+        var currentRequire =
+          typeof globalObject[parcelRequireName] === 'function' &&
+          globalObject[parcelRequireName];
+        if (!jumped && currentRequire) {
+          return currentRequire(name, true);
+        }
+
+        // If there are other bundles on this page the require from the
+        // previous one is saved to 'previousRequire'. Repeat this as
+        // many times as there are bundles until the module is found or
+        // we exhaust the require chain.
+        if (previousRequire) {
+          return previousRequire(name, true);
+        }
+
+        // Try the node require function if it exists.
+        if (nodeRequire && typeof name === 'string') {
+          return nodeRequire(name);
+        }
+
+        var err = new Error("Cannot find module '" + name + "'");
+        err.code = 'MODULE_NOT_FOUND';
+        throw err;
+      }
+
+      localRequire.resolve = resolve;
+      localRequire.cache = {};
+
+      var module = (cache[name] = new newRequire.Module(name));
+
+      modules[name][0].call(
+        module.exports,
+        localRequire,
+        module,
+        module.exports,
+        this
+      );
+    }
+
+    return cache[name].exports;
+
+    function localRequire(x) {
+      var res = localRequire.resolve(x);
+      return res === false ? {} : newRequire(res);
+    }
+
+    function resolve(x) {
+      var id = modules[name][1][x];
+      return id != null ? id : x;
+    }
+  }
+
+  function Module(moduleName) {
+    this.id = moduleName;
+    this.bundle = newRequire;
+    this.exports = {};
+  }
+
+  newRequire.isParcelRequire = true;
+  newRequire.Module = Module;
+  newRequire.modules = modules;
+  newRequire.cache = cache;
+  newRequire.parent = previousRequire;
+  newRequire.register = function (id, exports) {
+    modules[id] = [
+      function (require, module) {
+        module.exports = exports;
+      },
+      {},
+    ];
+  };
+
+  Object.defineProperty(newRequire, 'root', {
+    get: function () {
+      return globalObject[parcelRequireName];
+    },
+  });
+
+  globalObject[parcelRequireName] = newRequire;
+
+  for (var i = 0; i < entry.length; i++) {
+    newRequire(entry[i]);
+  }
+
+  if (mainEntry) {
+    // Expose entry point to Node, AMD or browser globals
+    // Based on https://github.com/ForbesLindesay/umd/blob/master/template.js
+    var mainExports = newRequire(mainEntry);
+
+    // CommonJS
+    if (typeof exports === 'object' && typeof module !== 'undefined') {
+      module.exports = mainExports;
+
+      // RequireJS
+    } else if (typeof define === 'function' && define.amd) {
+      define(function () {
+        return mainExports;
+      });
+
+      // <script>
+    } else if (globalName) {
+      this[globalName] = mainExports;
+    }
+  }
+})({"4qzDo":[function(require,module,exports) {
+var global = arguments[3];
+var HMR_HOST = null;
+var HMR_PORT = 1234;
+var HMR_SECURE = false;
+var HMR_ENV_HASH = "916932b22e4085ab";
+var HMR_USE_SSE = false;
+module.bundle.HMR_BUNDLE_ID = "f41c3d042a3ef284";
+"use strict";
+/* global HMR_HOST, HMR_PORT, HMR_ENV_HASH, HMR_SECURE, HMR_USE_SSE, chrome, browser, __parcel__import__, __parcel__importScripts__, ServiceWorkerGlobalScope */ /*::
+import type {
+  HMRAsset,
+  HMRMessage,
+} from '@parcel/reporter-dev-server/src/HMRServer.js';
+interface ParcelRequire {
+  (string): mixed;
+  cache: {|[string]: ParcelModule|};
+  hotData: {|[string]: mixed|};
+  Module: any;
+  parent: ?ParcelRequire;
+  isParcelRequire: true;
+  modules: {|[string]: [Function, {|[string]: string|}]|};
+  HMR_BUNDLE_ID: string;
+  root: ParcelRequire;
+}
+interface ParcelModule {
+  hot: {|
+    data: mixed,
+    accept(cb: (Function) => void): void,
+    dispose(cb: (mixed) => void): void,
+    // accept(deps: Array<string> | string, cb: (Function) => void): void,
+    // decline(): void,
+    _acceptCallbacks: Array<(Function) => void>,
+    _disposeCallbacks: Array<(mixed) => void>,
+  |};
+}
+interface ExtensionContext {
+  runtime: {|
+    reload(): void,
+    getURL(url: string): string;
+    getManifest(): {manifest_version: number, ...};
+  |};
+}
+declare var module: {bundle: ParcelRequire, ...};
+declare var HMR_HOST: string;
+declare var HMR_PORT: string;
+declare var HMR_ENV_HASH: string;
+declare var HMR_SECURE: boolean;
+declare var HMR_USE_SSE: boolean;
+declare var chrome: ExtensionContext;
+declare var browser: ExtensionContext;
+declare var __parcel__import__: (string) => Promise<void>;
+declare var __parcel__importScripts__: (string) => Promise<void>;
+declare var globalThis: typeof self;
+declare var ServiceWorkerGlobalScope: Object;
+*/ var OVERLAY_ID = "__parcel__error__overlay__";
+var OldModule = module.bundle.Module;
+function Module(moduleName) {
+    OldModule.call(this, moduleName);
+    this.hot = {
+        data: module.bundle.hotData[moduleName],
+        _acceptCallbacks: [],
+        _disposeCallbacks: [],
+        accept: function(fn) {
+            this._acceptCallbacks.push(fn || function() {});
+        },
+        dispose: function(fn) {
+            this._disposeCallbacks.push(fn);
+        }
+    };
+    module.bundle.hotData[moduleName] = undefined;
+}
+module.bundle.Module = Module;
+module.bundle.hotData = {};
+var checkedAssets /*: {|[string]: boolean|} */ , assetsToDispose /*: Array<[ParcelRequire, string]> */ , assetsToAccept /*: Array<[ParcelRequire, string]> */ ;
+function getHostname() {
+    return HMR_HOST || (location.protocol.indexOf("http") === 0 ? location.hostname : "localhost");
+}
+function getPort() {
+    return HMR_PORT || location.port;
+}
+// eslint-disable-next-line no-redeclare
+var parent = module.bundle.parent;
+if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== "undefined") {
+    var hostname = getHostname();
+    var port = getPort();
+    var protocol = HMR_SECURE || location.protocol == "https:" && ![
+        "localhost",
+        "127.0.0.1",
+        "0.0.0.0"
+    ].includes(hostname) ? "wss" : "ws";
+    var ws;
+    if (HMR_USE_SSE) ws = new EventSource("/__parcel_hmr");
+    else try {
+        ws = new WebSocket(protocol + "://" + hostname + (port ? ":" + port : "") + "/");
+    } catch (err) {
+        if (err.message) console.error(err.message);
+        ws = {};
+    }
+    // Web extension context
+    var extCtx = typeof browser === "undefined" ? typeof chrome === "undefined" ? null : chrome : browser;
+    // Safari doesn't support sourceURL in error stacks.
+    // eval may also be disabled via CSP, so do a quick check.
+    var supportsSourceURL = false;
+    try {
+        (0, eval)('throw new Error("test"); //# sourceURL=test.js');
+    } catch (err) {
+        supportsSourceURL = err.stack.includes("test.js");
+    }
+    // $FlowFixMe
+    ws.onmessage = async function(event /*: {data: string, ...} */ ) {
+        checkedAssets = {} /*: {|[string]: boolean|} */ ;
+        assetsToAccept = [];
+        assetsToDispose = [];
+        var data /*: HMRMessage */  = JSON.parse(event.data);
+        if (data.type === "update") {
+            // Remove error overlay if there is one
+            if (typeof document !== "undefined") removeErrorOverlay();
+            let assets = data.assets.filter((asset)=>asset.envHash === HMR_ENV_HASH);
+            // Handle HMR Update
+            let handled = assets.every((asset)=>{
+                return asset.type === "css" || asset.type === "js" && hmrAcceptCheck(module.bundle.root, asset.id, asset.depsByBundle);
+            });
+            if (handled) {
+                console.clear();
+                // Dispatch custom event so other runtimes (e.g React Refresh) are aware.
+                if (typeof window !== "undefined" && typeof CustomEvent !== "undefined") window.dispatchEvent(new CustomEvent("parcelhmraccept"));
+                await hmrApplyUpdates(assets);
+                // Dispose all old assets.
+                let processedAssets = {} /*: {|[string]: boolean|} */ ;
+                for(let i = 0; i < assetsToDispose.length; i++){
+                    let id = assetsToDispose[i][1];
+                    if (!processedAssets[id]) {
+                        hmrDispose(assetsToDispose[i][0], id);
+                        processedAssets[id] = true;
+                    }
+                }
+                // Run accept callbacks. This will also re-execute other disposed assets in topological order.
+                processedAssets = {};
+                for(let i = 0; i < assetsToAccept.length; i++){
+                    let id = assetsToAccept[i][1];
+                    if (!processedAssets[id]) {
+                        hmrAccept(assetsToAccept[i][0], id);
+                        processedAssets[id] = true;
+                    }
+                }
+            } else fullReload();
+        }
+        if (data.type === "error") {
+            // Log parcel errors to console
+            for (let ansiDiagnostic of data.diagnostics.ansi){
+                let stack = ansiDiagnostic.codeframe ? ansiDiagnostic.codeframe : ansiDiagnostic.stack;
+                console.error("\uD83D\uDEA8 [parcel]: " + ansiDiagnostic.message + "\n" + stack + "\n\n" + ansiDiagnostic.hints.join("\n"));
+            }
+            if (typeof document !== "undefined") {
+                // Render the fancy html overlay
+                removeErrorOverlay();
+                var overlay = createErrorOverlay(data.diagnostics.html);
+                // $FlowFixMe
+                document.body.appendChild(overlay);
+            }
+        }
+    };
+    if (ws instanceof WebSocket) {
+        ws.onerror = function(e) {
+            if (e.message) console.error(e.message);
+        };
+        ws.onclose = function() {
+            console.warn("[parcel] \uD83D\uDEA8 Connection to the HMR server was lost");
+        };
+    }
+}
+function removeErrorOverlay() {
+    var overlay = document.getElementById(OVERLAY_ID);
+    if (overlay) {
+        overlay.remove();
+        console.log("[parcel] \u2728 Error resolved");
+    }
+}
+function createErrorOverlay(diagnostics) {
+    var overlay = document.createElement("div");
+    overlay.id = OVERLAY_ID;
+    let errorHTML = '<div style="background: black; opacity: 0.85; font-size: 16px; color: white; position: fixed; height: 100%; width: 100%; top: 0px; left: 0px; padding: 30px; font-family: Menlo, Consolas, monospace; z-index: 9999;">';
+    for (let diagnostic of diagnostics){
+        let stack = diagnostic.frames.length ? diagnostic.frames.reduce((p, frame)=>{
+            return `${p}
+<a href="/__parcel_launch_editor?file=${encodeURIComponent(frame.location)}" style="text-decoration: underline; color: #888" onclick="fetch(this.href); return false">${frame.location}</a>
+${frame.code}`;
+        }, "") : diagnostic.stack;
+        errorHTML += `
+      <div>
+        <div style="font-size: 18px; font-weight: bold; margin-top: 20px;">
+          \u{1F6A8} ${diagnostic.message}
+        </div>
+        <pre>${stack}</pre>
+        <div>
+          ${diagnostic.hints.map((hint)=>"<div>\uD83D\uDCA1 " + hint + "</div>").join("")}
+        </div>
+        ${diagnostic.documentation ? `<div>\u{1F4DD} <a style="color: violet" href="${diagnostic.documentation}" target="_blank">Learn more</a></div>` : ""}
+      </div>
+    `;
+    }
+    errorHTML += "</div>";
+    overlay.innerHTML = errorHTML;
+    return overlay;
+}
+function fullReload() {
+    if ("reload" in location) location.reload();
+    else if (extCtx && extCtx.runtime && extCtx.runtime.reload) extCtx.runtime.reload();
+}
+function getParents(bundle, id) /*: Array<[ParcelRequire, string]> */ {
+    var modules = bundle.modules;
+    if (!modules) return [];
+    var parents = [];
+    var k, d, dep;
+    for(k in modules)for(d in modules[k][1]){
+        dep = modules[k][1][d];
+        if (dep === id || Array.isArray(dep) && dep[dep.length - 1] === id) parents.push([
+            bundle,
+            k
+        ]);
+    }
+    if (bundle.parent) parents = parents.concat(getParents(bundle.parent, id));
+    return parents;
+}
+function updateLink(link) {
+    var href = link.getAttribute("href");
+    if (!href) return;
+    var newLink = link.cloneNode();
+    newLink.onload = function() {
+        if (link.parentNode !== null) // $FlowFixMe
+        link.parentNode.removeChild(link);
+    };
+    newLink.setAttribute("href", // $FlowFixMe
+    href.split("?")[0] + "?" + Date.now());
+    // $FlowFixMe
+    link.parentNode.insertBefore(newLink, link.nextSibling);
+}
+var cssTimeout = null;
+function reloadCSS() {
+    if (cssTimeout) return;
+    cssTimeout = setTimeout(function() {
+        var links = document.querySelectorAll('link[rel="stylesheet"]');
+        for(var i = 0; i < links.length; i++){
+            // $FlowFixMe[incompatible-type]
+            var href /*: string */  = links[i].getAttribute("href");
+            var hostname = getHostname();
+            var servedFromHMRServer = hostname === "localhost" ? new RegExp("^(https?:\\/\\/(0.0.0.0|127.0.0.1)|localhost):" + getPort()).test(href) : href.indexOf(hostname + ":" + getPort());
+            var absolute = /^https?:\/\//i.test(href) && href.indexOf(location.origin) !== 0 && !servedFromHMRServer;
+            if (!absolute) updateLink(links[i]);
+        }
+        cssTimeout = null;
+    }, 50);
+}
+function hmrDownload(asset) {
+    if (asset.type === "js") {
+        if (typeof document !== "undefined") {
+            let script = document.createElement("script");
+            script.src = asset.url + "?t=" + Date.now();
+            if (asset.outputFormat === "esmodule") script.type = "module";
+            return new Promise((resolve, reject)=>{
+                var _document$head;
+                script.onload = ()=>resolve(script);
+                script.onerror = reject;
+                (_document$head = document.head) === null || _document$head === void 0 || _document$head.appendChild(script);
+            });
+        } else if (typeof importScripts === "function") {
+            // Worker scripts
+            if (asset.outputFormat === "esmodule") return import(asset.url + "?t=" + Date.now());
+            else return new Promise((resolve, reject)=>{
+                try {
+                    importScripts(asset.url + "?t=" + Date.now());
+                    resolve();
+                } catch (err) {
+                    reject(err);
+                }
+            });
+        }
+    }
+}
+async function hmrApplyUpdates(assets) {
+    global.parcelHotUpdate = Object.create(null);
+    let scriptsToRemove;
+    try {
+        // If sourceURL comments aren't supported in eval, we need to load
+        // the update from the dev server over HTTP so that stack traces
+        // are correct in errors/logs. This is much slower than eval, so
+        // we only do it if needed (currently just Safari).
+        // https://bugs.webkit.org/show_bug.cgi?id=137297
+        // This path is also taken if a CSP disallows eval.
+        if (!supportsSourceURL) {
+            let promises = assets.map((asset)=>{
+                var _hmrDownload;
+                return (_hmrDownload = hmrDownload(asset)) === null || _hmrDownload === void 0 ? void 0 : _hmrDownload.catch((err)=>{
+                    // Web extension fix
+                    if (extCtx && extCtx.runtime && extCtx.runtime.getManifest().manifest_version == 3 && typeof ServiceWorkerGlobalScope != "undefined" && global instanceof ServiceWorkerGlobalScope) {
+                        extCtx.runtime.reload();
+                        return;
+                    }
+                    throw err;
+                });
+            });
+            scriptsToRemove = await Promise.all(promises);
+        }
+        assets.forEach(function(asset) {
+            hmrApply(module.bundle.root, asset);
+        });
+    } finally{
+        delete global.parcelHotUpdate;
+        if (scriptsToRemove) scriptsToRemove.forEach((script)=>{
+            if (script) {
+                var _document$head2;
+                (_document$head2 = document.head) === null || _document$head2 === void 0 || _document$head2.removeChild(script);
+            }
+        });
+    }
+}
+function hmrApply(bundle /*: ParcelRequire */ , asset /*:  HMRAsset */ ) {
+    var modules = bundle.modules;
+    if (!modules) return;
+    if (asset.type === "css") reloadCSS();
+    else if (asset.type === "js") {
+        let deps = asset.depsByBundle[bundle.HMR_BUNDLE_ID];
+        if (deps) {
+            if (modules[asset.id]) {
+                // Remove dependencies that are removed and will become orphaned.
+                // This is necessary so that if the asset is added back again, the cache is gone, and we prevent a full page reload.
+                let oldDeps = modules[asset.id][1];
+                for(let dep in oldDeps)if (!deps[dep] || deps[dep] !== oldDeps[dep]) {
+                    let id = oldDeps[dep];
+                    let parents = getParents(module.bundle.root, id);
+                    if (parents.length === 1) hmrDelete(module.bundle.root, id);
+                }
+            }
+            if (supportsSourceURL) // Global eval. We would use `new Function` here but browser
+            // support for source maps is better with eval.
+            (0, eval)(asset.output);
+            // $FlowFixMe
+            let fn = global.parcelHotUpdate[asset.id];
+            modules[asset.id] = [
+                fn,
+                deps
+            ];
+        } else if (bundle.parent) hmrApply(bundle.parent, asset);
+    }
+}
+function hmrDelete(bundle, id) {
+    let modules = bundle.modules;
+    if (!modules) return;
+    if (modules[id]) {
+        // Collect dependencies that will become orphaned when this module is deleted.
+        let deps = modules[id][1];
+        let orphans = [];
+        for(let dep in deps){
+            let parents = getParents(module.bundle.root, deps[dep]);
+            if (parents.length === 1) orphans.push(deps[dep]);
+        }
+        // Delete the module. This must be done before deleting dependencies in case of circular dependencies.
+        delete modules[id];
+        delete bundle.cache[id];
+        // Now delete the orphans.
+        orphans.forEach((id)=>{
+            hmrDelete(module.bundle.root, id);
+        });
+    } else if (bundle.parent) hmrDelete(bundle.parent, id);
+}
+function hmrAcceptCheck(bundle /*: ParcelRequire */ , id /*: string */ , depsByBundle /*: ?{ [string]: { [string]: string } }*/ ) {
+    if (hmrAcceptCheckOne(bundle, id, depsByBundle)) return true;
+    // Traverse parents breadth first. All possible ancestries must accept the HMR update, or we'll reload.
+    let parents = getParents(module.bundle.root, id);
+    let accepted = false;
+    while(parents.length > 0){
+        let v = parents.shift();
+        let a = hmrAcceptCheckOne(v[0], v[1], null);
+        if (a) // If this parent accepts, stop traversing upward, but still consider siblings.
+        accepted = true;
+        else {
+            // Otherwise, queue the parents in the next level upward.
+            let p = getParents(module.bundle.root, v[1]);
+            if (p.length === 0) {
+                // If there are no parents, then we've reached an entry without accepting. Reload.
+                accepted = false;
+                break;
+            }
+            parents.push(...p);
+        }
+    }
+    return accepted;
+}
+function hmrAcceptCheckOne(bundle /*: ParcelRequire */ , id /*: string */ , depsByBundle /*: ?{ [string]: { [string]: string } }*/ ) {
+    var modules = bundle.modules;
+    if (!modules) return;
+    if (depsByBundle && !depsByBundle[bundle.HMR_BUNDLE_ID]) {
+        // If we reached the root bundle without finding where the asset should go,
+        // there's nothing to do. Mark as "accepted" so we don't reload the page.
+        if (!bundle.parent) return true;
+        return hmrAcceptCheck(bundle.parent, id, depsByBundle);
+    }
+    if (checkedAssets[id]) return true;
+    checkedAssets[id] = true;
+    var cached = bundle.cache[id];
+    assetsToDispose.push([
+        bundle,
+        id
+    ]);
+    if (!cached || cached.hot && cached.hot._acceptCallbacks.length) {
+        assetsToAccept.push([
+            bundle,
+            id
+        ]);
+        return true;
+    }
+}
+function hmrDispose(bundle /*: ParcelRequire */ , id /*: string */ ) {
+    var cached = bundle.cache[id];
+    bundle.hotData[id] = {};
+    if (cached && cached.hot) cached.hot.data = bundle.hotData[id];
+    if (cached && cached.hot && cached.hot._disposeCallbacks.length) cached.hot._disposeCallbacks.forEach(function(cb) {
+        cb(bundle.hotData[id]);
+    });
+    delete bundle.cache[id];
+}
+function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
+    // Execute the module.
+    bundle(id);
+    // Run the accept callbacks in the new version of the module.
+    var cached = bundle.cache[id];
+    if (cached && cached.hot && cached.hot._acceptCallbacks.length) cached.hot._acceptCallbacks.forEach(function(cb) {
+        var assetsToAlsoAccept = cb(function() {
+            return getParents(module.bundle.root, id);
+        });
+        if (assetsToAlsoAccept && assetsToAccept.length) {
+            assetsToAlsoAccept.forEach(function(a) {
+                hmrDispose(a[0], a[1]);
+            });
+            // $FlowFixMe[method-unbinding]
+            assetsToAccept.push.apply(assetsToAccept, assetsToAlsoAccept);
+        }
+    });
+}
+
+},{}],"3Nkdn":[function(require,module,exports) {
+var _htmxOrg = require("htmx.org");
+console.log("SCRIPTS");
+
+},{"htmx.org":"bBBih"}],"bBBih":[function(require,module,exports) {
+(function(e, t) {
+    if (typeof define === "function" && define.amd) define([], t);
+    else if (0, module.exports) module.exports = t();
+    else e.htmx = e.htmx || t();
+})(typeof self !== "undefined" ? self : this, function() {
+    return function() {
+        "use strict";
+        var Q = {
+            onLoad: F,
+            process: zt,
+            on: de,
+            off: ge,
+            trigger: ce,
+            ajax: Nr,
+            find: C,
+            findAll: f,
+            closest: v,
+            values: function(e, t) {
+                var r = dr(e, t || "post");
+                return r.values;
+            },
+            remove: _,
+            addClass: z,
+            removeClass: n,
+            toggleClass: $,
+            takeClass: W,
+            defineExtension: Ur,
+            removeExtension: Br,
+            logAll: V,
+            logNone: j,
+            logger: null,
+            config: {
+                historyEnabled: true,
+                historyCacheSize: 10,
+                refreshOnHistoryMiss: false,
+                defaultSwapStyle: "innerHTML",
+                defaultSwapDelay: 0,
+                defaultSettleDelay: 20,
+                includeIndicatorStyles: true,
+                indicatorClass: "htmx-indicator",
+                requestClass: "htmx-request",
+                addedClass: "htmx-added",
+                settlingClass: "htmx-settling",
+                swappingClass: "htmx-swapping",
+                allowEval: true,
+                allowScriptTags: true,
+                inlineScriptNonce: "",
+                attributesToSettle: [
+                    "class",
+                    "style",
+                    "width",
+                    "height"
+                ],
+                withCredentials: false,
+                timeout: 0,
+                wsReconnectDelay: "full-jitter",
+                wsBinaryType: "blob",
+                disableSelector: "[hx-disable], [data-hx-disable]",
+                useTemplateFragments: false,
+                scrollBehavior: "smooth",
+                defaultFocusScroll: false,
+                getCacheBusterParam: false,
+                globalViewTransitions: false,
+                methodsThatUseUrlParams: [
+                    "get"
+                ],
+                selfRequestsOnly: false,
+                ignoreTitle: false,
+                scrollIntoViewOnBoost: true,
+                triggerSpecsCache: null
+            },
+            parseInterval: d,
+            _: t,
+            createEventSource: function(e) {
+                return new EventSource(e, {
+                    withCredentials: true
+                });
+            },
+            createWebSocket: function(e) {
+                var t = new WebSocket(e, []);
+                t.binaryType = Q.config.wsBinaryType;
+                return t;
+            },
+            version: "1.9.12"
+        };
+        var r = {
+            addTriggerHandler: Lt,
+            bodyContains: se,
+            canAccessLocalStorage: U,
+            findThisElement: xe,
+            filterValues: yr,
+            hasAttribute: o,
+            getAttributeValue: te,
+            getClosestAttributeValue: ne,
+            getClosestMatch: c,
+            getExpressionVars: Hr,
+            getHeaders: xr,
+            getInputValues: dr,
+            getInternalData: ae,
+            getSwapSpecification: wr,
+            getTriggerSpecs: it,
+            getTarget: ye,
+            makeFragment: l,
+            mergeObjects: le,
+            makeSettleInfo: T,
+            oobSwap: Ee,
+            querySelectorExt: ue,
+            selectAndSwap: je,
+            settleImmediately: nr,
+            shouldCancel: ut,
+            triggerEvent: ce,
+            triggerErrorEvent: fe,
+            withExtensions: R
+        };
+        var w = [
+            "get",
+            "post",
+            "put",
+            "delete",
+            "patch"
+        ];
+        var i = w.map(function(e) {
+            return "[hx-" + e + "], [data-hx-" + e + "]";
+        }).join(", ");
+        var S = e("head"), q = e("title"), H = e("svg", true);
+        function e(e, t) {
+            return new RegExp("<" + e + "(\\s[^>]*>|>)([\\s\\S]*?)<\\/" + e + ">", !!t ? "gim" : "im");
+        }
+        function d(e) {
+            if (e == undefined) return undefined;
+            let t = NaN;
+            if (e.slice(-2) == "ms") t = parseFloat(e.slice(0, -2));
+            else if (e.slice(-1) == "s") t = parseFloat(e.slice(0, -1)) * 1e3;
+            else if (e.slice(-1) == "m") t = parseFloat(e.slice(0, -1)) * 60000;
+            else t = parseFloat(e);
+            return isNaN(t) ? undefined : t;
+        }
+        function ee(e, t) {
+            return e.getAttribute && e.getAttribute(t);
+        }
+        function o(e, t) {
+            return e.hasAttribute && (e.hasAttribute(t) || e.hasAttribute("data-" + t));
+        }
+        function te(e, t) {
+            return ee(e, t) || ee(e, "data-" + t);
+        }
+        function u(e) {
+            return e.parentElement;
+        }
+        function re() {
+            return document;
+        }
+        function c(e, t) {
+            while(e && !t(e))e = u(e);
+            return e ? e : null;
+        }
+        function L(e, t, r) {
+            var n = te(t, r);
+            var i = te(t, "hx-disinherit");
+            if (e !== t && i && (i === "*" || i.split(" ").indexOf(r) >= 0)) return "unset";
+            else return n;
+        }
+        function ne(t, r) {
+            var n = null;
+            c(t, function(e) {
+                return n = L(t, e, r);
+            });
+            if (n !== "unset") return n;
+        }
+        function h(e, t) {
+            var r = e.matches || e.matchesSelector || e.msMatchesSelector || e.mozMatchesSelector || e.webkitMatchesSelector || e.oMatchesSelector;
+            return r && r.call(e, t);
+        }
+        function A(e) {
+            var t = /<([a-z][^\/\0>\x20\t\r\n\f]*)/i;
+            var r = t.exec(e);
+            if (r) return r[1].toLowerCase();
+            else return "";
+        }
+        function s(e, t) {
+            var r = new DOMParser;
+            var n = r.parseFromString(e, "text/html");
+            var i = n.body;
+            while(t > 0){
+                t--;
+                i = i.firstChild;
+            }
+            if (i == null) i = re().createDocumentFragment();
+            return i;
+        }
+        function N(e) {
+            return /<body/.test(e);
+        }
+        function l(e) {
+            var t = !N(e);
+            var r = A(e);
+            var n = e;
+            if (r === "head") n = n.replace(S, "");
+            if (Q.config.useTemplateFragments && t) {
+                var i = s("<body><template>" + n + "</template></body>", 0);
+                var a = i.querySelector("template").content;
+                if (Q.config.allowScriptTags) oe(a.querySelectorAll("script"), function(e) {
+                    if (Q.config.inlineScriptNonce) e.nonce = Q.config.inlineScriptNonce;
+                    e.htmxExecuted = navigator.userAgent.indexOf("Firefox") === -1;
+                });
+                else oe(a.querySelectorAll("script"), function(e) {
+                    _(e);
+                });
+                return a;
+            }
+            switch(r){
+                case "thead":
+                case "tbody":
+                case "tfoot":
+                case "colgroup":
+                case "caption":
+                    return s("<table>" + n + "</table>", 1);
+                case "col":
+                    return s("<table><colgroup>" + n + "</colgroup></table>", 2);
+                case "tr":
+                    return s("<table><tbody>" + n + "</tbody></table>", 2);
+                case "td":
+                case "th":
+                    return s("<table><tbody><tr>" + n + "</tr></tbody></table>", 3);
+                case "script":
+                case "style":
+                    return s("<div>" + n + "</div>", 1);
+                default:
+                    return s(n, 0);
+            }
+        }
+        function ie(e) {
+            if (e) e();
+        }
+        function I(e, t) {
+            return Object.prototype.toString.call(e) === "[object " + t + "]";
+        }
+        function k(e) {
+            return I(e, "Function");
+        }
+        function P(e) {
+            return I(e, "Object");
+        }
+        function ae(e) {
+            var t = "htmx-internal-data";
+            var r = e[t];
+            if (!r) r = e[t] = {};
+            return r;
+        }
+        function M(e) {
+            var t = [];
+            if (e) for(var r = 0; r < e.length; r++)t.push(e[r]);
+            return t;
+        }
+        function oe(e, t) {
+            if (e) for(var r = 0; r < e.length; r++)t(e[r]);
+        }
+        function X(e) {
+            var t = e.getBoundingClientRect();
+            var r = t.top;
+            var n = t.bottom;
+            return r < window.innerHeight && n >= 0;
+        }
+        function se(e) {
+            if (e.getRootNode && e.getRootNode() instanceof window.ShadowRoot) return re().body.contains(e.getRootNode().host);
+            else return re().body.contains(e);
+        }
+        function D(e) {
+            return e.trim().split(/\s+/);
+        }
+        function le(e, t) {
+            for(var r in t)if (t.hasOwnProperty(r)) e[r] = t[r];
+            return e;
+        }
+        function E(e) {
+            try {
+                return JSON.parse(e);
+            } catch (e) {
+                b(e);
+                return null;
+            }
+        }
+        function U() {
+            var e = "htmx:localStorageTest";
+            try {
+                localStorage.setItem(e, e);
+                localStorage.removeItem(e);
+                return true;
+            } catch (e) {
+                return false;
+            }
+        }
+        function B(t) {
+            try {
+                var e = new URL(t);
+                if (e) t = e.pathname + e.search;
+                if (!/^\/$/.test(t)) t = t.replace(/\/+$/, "");
+                return t;
+            } catch (e) {
+                return t;
+            }
+        }
+        function t(e) {
+            return Tr(re().body, function() {
+                return eval(e);
+            });
+        }
+        function F(t) {
+            var e = Q.on("htmx:load", function(e) {
+                t(e.detail.elt);
+            });
+            return e;
+        }
+        function V() {
+            Q.logger = function(e, t, r) {
+                if (console) console.log(t, e, r);
+            };
+        }
+        function j() {
+            Q.logger = null;
+        }
+        function C(e, t) {
+            if (t) return e.querySelector(t);
+            else return C(re(), e);
+        }
+        function f(e, t) {
+            if (t) return e.querySelectorAll(t);
+            else return f(re(), e);
+        }
+        function _(e, t) {
+            e = p(e);
+            if (t) setTimeout(function() {
+                _(e);
+                e = null;
+            }, t);
+            else e.parentElement.removeChild(e);
+        }
+        function z(e, t, r) {
+            e = p(e);
+            if (r) setTimeout(function() {
+                z(e, t);
+                e = null;
+            }, r);
+            else e.classList && e.classList.add(t);
+        }
+        function n(e, t, r) {
+            e = p(e);
+            if (r) setTimeout(function() {
+                n(e, t);
+                e = null;
+            }, r);
+            else if (e.classList) {
+                e.classList.remove(t);
+                if (e.classList.length === 0) e.removeAttribute("class");
+            }
+        }
+        function $(e, t) {
+            e = p(e);
+            e.classList.toggle(t);
+        }
+        function W(e, t) {
+            e = p(e);
+            oe(e.parentElement.children, function(e) {
+                n(e, t);
+            });
+            z(e, t);
+        }
+        function v(e, t) {
+            e = p(e);
+            if (e.closest) return e.closest(t);
+            else {
+                do {
+                    if (e == null || h(e, t)) return e;
+                }while (e = e && u(e));
+                return null;
+            }
+        }
+        function g(e, t) {
+            return e.substring(0, t.length) === t;
+        }
+        function G(e, t) {
+            return e.substring(e.length - t.length) === t;
+        }
+        function J(e) {
+            var t = e.trim();
+            if (g(t, "<") && G(t, "/>")) return t.substring(1, t.length - 2);
+            else return t;
+        }
+        function Z(e, t) {
+            if (t.indexOf("closest ") === 0) return [
+                v(e, J(t.substr(8)))
+            ];
+            else if (t.indexOf("find ") === 0) return [
+                C(e, J(t.substr(5)))
+            ];
+            else if (t === "next") return [
+                e.nextElementSibling
+            ];
+            else if (t.indexOf("next ") === 0) return [
+                K(e, J(t.substr(5)))
+            ];
+            else if (t === "previous") return [
+                e.previousElementSibling
+            ];
+            else if (t.indexOf("previous ") === 0) return [
+                Y(e, J(t.substr(9)))
+            ];
+            else if (t === "document") return [
+                document
+            ];
+            else if (t === "window") return [
+                window
+            ];
+            else if (t === "body") return [
+                document.body
+            ];
+            else return re().querySelectorAll(J(t));
+        }
+        var K = function(e, t) {
+            var r = re().querySelectorAll(t);
+            for(var n = 0; n < r.length; n++){
+                var i = r[n];
+                if (i.compareDocumentPosition(e) === Node.DOCUMENT_POSITION_PRECEDING) return i;
+            }
+        };
+        var Y = function(e, t) {
+            var r = re().querySelectorAll(t);
+            for(var n = r.length - 1; n >= 0; n--){
+                var i = r[n];
+                if (i.compareDocumentPosition(e) === Node.DOCUMENT_POSITION_FOLLOWING) return i;
+            }
+        };
+        function ue(e, t) {
+            if (t) return Z(e, t)[0];
+            else return Z(re().body, e)[0];
+        }
+        function p(e) {
+            if (I(e, "String")) return C(e);
+            else return e;
+        }
+        function ve(e, t, r) {
+            if (k(t)) return {
+                target: re().body,
+                event: e,
+                listener: t
+            };
+            else return {
+                target: p(e),
+                event: t,
+                listener: r
+            };
+        }
+        function de(t, r, n) {
+            jr(function() {
+                var e = ve(t, r, n);
+                e.target.addEventListener(e.event, e.listener);
+            });
+            var e = k(r);
+            return e ? r : n;
+        }
+        function ge(t, r, n) {
+            jr(function() {
+                var e = ve(t, r, n);
+                e.target.removeEventListener(e.event, e.listener);
+            });
+            return k(r) ? r : n;
+        }
+        var pe = re().createElement("output");
+        function me(e, t) {
+            var r = ne(e, t);
+            if (r) {
+                if (r === "this") return [
+                    xe(e, t)
+                ];
+                else {
+                    var n = Z(e, r);
+                    if (n.length === 0) {
+                        b('The selector "' + r + '" on ' + t + " returned no matches!");
+                        return [
+                            pe
+                        ];
+                    } else return n;
+                }
+            }
+        }
+        function xe(e, t) {
+            return c(e, function(e) {
+                return te(e, t) != null;
+            });
+        }
+        function ye(e) {
+            var t = ne(e, "hx-target");
+            if (t) {
+                if (t === "this") return xe(e, "hx-target");
+                else return ue(e, t);
+            } else {
+                var r = ae(e);
+                if (r.boosted) return re().body;
+                else return e;
+            }
+        }
+        function be(e) {
+            var t = Q.config.attributesToSettle;
+            for(var r = 0; r < t.length; r++){
+                if (e === t[r]) return true;
+            }
+            return false;
+        }
+        function we(t, r) {
+            oe(t.attributes, function(e) {
+                if (!r.hasAttribute(e.name) && be(e.name)) t.removeAttribute(e.name);
+            });
+            oe(r.attributes, function(e) {
+                if (be(e.name)) t.setAttribute(e.name, e.value);
+            });
+        }
+        function Se(e, t) {
+            var r = Fr(t);
+            for(var n = 0; n < r.length; n++){
+                var i = r[n];
+                try {
+                    if (i.isInlineSwap(e)) return true;
+                } catch (e) {
+                    b(e);
+                }
+            }
+            return e === "outerHTML";
+        }
+        function Ee(e, i, a) {
+            var t = "#" + ee(i, "id");
+            var o = "outerHTML";
+            if (e === "true") ;
+            else if (e.indexOf(":") > 0) {
+                o = e.substr(0, e.indexOf(":"));
+                t = e.substr(e.indexOf(":") + 1, e.length);
+            } else o = e;
+            var r = re().querySelectorAll(t);
+            if (r) {
+                oe(r, function(e) {
+                    var t;
+                    var r = i.cloneNode(true);
+                    t = re().createDocumentFragment();
+                    t.appendChild(r);
+                    if (!Se(o, e)) t = r;
+                    var n = {
+                        shouldSwap: true,
+                        target: e,
+                        fragment: t
+                    };
+                    if (!ce(e, "htmx:oobBeforeSwap", n)) return;
+                    e = n.target;
+                    if (n["shouldSwap"]) Fe(o, e, e, t, a);
+                    oe(a.elts, function(e) {
+                        ce(e, "htmx:oobAfterSwap", n);
+                    });
+                });
+                i.parentNode.removeChild(i);
+            } else {
+                i.parentNode.removeChild(i);
+                fe(re().body, "htmx:oobErrorNoTarget", {
+                    content: i
+                });
+            }
+            return e;
+        }
+        function Ce(e, t, r) {
+            var n = ne(e, "hx-select-oob");
+            if (n) {
+                var i = n.split(",");
+                for(var a = 0; a < i.length; a++){
+                    var o = i[a].split(":", 2);
+                    var s = o[0].trim();
+                    if (s.indexOf("#") === 0) s = s.substring(1);
+                    var l = o[1] || "true";
+                    var u = t.querySelector("#" + s);
+                    if (u) Ee(l, u, r);
+                }
+            }
+            oe(f(t, "[hx-swap-oob], [data-hx-swap-oob]"), function(e) {
+                var t = te(e, "hx-swap-oob");
+                if (t != null) Ee(t, e, r);
+            });
+        }
+        function Re(e) {
+            oe(f(e, "[hx-preserve], [data-hx-preserve]"), function(e) {
+                var t = te(e, "id");
+                var r = re().getElementById(t);
+                if (r != null) e.parentNode.replaceChild(r, e);
+            });
+        }
+        function Te(o, e, s) {
+            oe(e.querySelectorAll("[id]"), function(e) {
+                var t = ee(e, "id");
+                if (t && t.length > 0) {
+                    var r = t.replace("'", "\\'");
+                    var n = e.tagName.replace(":", "\\:");
+                    var i = o.querySelector(n + "[id='" + r + "']");
+                    if (i && i !== o) {
+                        var a = e.cloneNode();
+                        we(e, i);
+                        s.tasks.push(function() {
+                            we(e, a);
+                        });
+                    }
+                }
+            });
+        }
+        function Oe(e) {
+            return function() {
+                n(e, Q.config.addedClass);
+                zt(e);
+                Nt(e);
+                qe(e);
+                ce(e, "htmx:load");
+            };
+        }
+        function qe(e) {
+            var t = "[autofocus]";
+            var r = h(e, t) ? e : e.querySelector(t);
+            if (r != null) r.focus();
+        }
+        function a(e, t, r, n) {
+            Te(e, r, n);
+            while(r.childNodes.length > 0){
+                var i = r.firstChild;
+                z(i, Q.config.addedClass);
+                e.insertBefore(i, t);
+                if (i.nodeType !== Node.TEXT_NODE && i.nodeType !== Node.COMMENT_NODE) n.tasks.push(Oe(i));
+            }
+        }
+        function He(e, t) {
+            var r = 0;
+            while(r < e.length)t = (t << 5) - t + e.charCodeAt(r++) | 0;
+            return t;
+        }
+        function Le(e) {
+            var t = 0;
+            if (e.attributes) for(var r = 0; r < e.attributes.length; r++){
+                var n = e.attributes[r];
+                if (n.value) {
+                    t = He(n.name, t);
+                    t = He(n.value, t);
+                }
+            }
+            return t;
+        }
+        function Ae(e) {
+            var t = ae(e);
+            if (t.onHandlers) {
+                for(var r = 0; r < t.onHandlers.length; r++){
+                    const n = t.onHandlers[r];
+                    e.removeEventListener(n.event, n.listener);
+                }
+                delete t.onHandlers;
+            }
+        }
+        function Ne(e) {
+            var t = ae(e);
+            if (t.timeout) clearTimeout(t.timeout);
+            if (t.webSocket) t.webSocket.close();
+            if (t.sseEventSource) t.sseEventSource.close();
+            if (t.listenerInfos) oe(t.listenerInfos, function(e) {
+                if (e.on) e.on.removeEventListener(e.trigger, e.listener);
+            });
+            Ae(e);
+            oe(Object.keys(t), function(e) {
+                delete t[e];
+            });
+        }
+        function m(e) {
+            ce(e, "htmx:beforeCleanupElement");
+            Ne(e);
+            if (e.children) oe(e.children, function(e) {
+                m(e);
+            });
+        }
+        function Ie(t, e, r) {
+            if (t.tagName === "BODY") return Ue(t, e, r);
+            else {
+                var n;
+                var i = t.previousSibling;
+                a(u(t), t, e, r);
+                if (i == null) n = u(t).firstChild;
+                else n = i.nextSibling;
+                r.elts = r.elts.filter(function(e) {
+                    return e != t;
+                });
+                while(n && n !== t){
+                    if (n.nodeType === Node.ELEMENT_NODE) r.elts.push(n);
+                    n = n.nextElementSibling;
+                }
+                m(t);
+                u(t).removeChild(t);
+            }
+        }
+        function ke(e, t, r) {
+            return a(e, e.firstChild, t, r);
+        }
+        function Pe(e, t, r) {
+            return a(u(e), e, t, r);
+        }
+        function Me(e, t, r) {
+            return a(e, null, t, r);
+        }
+        function Xe(e, t, r) {
+            return a(u(e), e.nextSibling, t, r);
+        }
+        function De(e, t, r) {
+            m(e);
+            return u(e).removeChild(e);
+        }
+        function Ue(e, t, r) {
+            var n = e.firstChild;
+            a(e, n, t, r);
+            if (n) {
+                while(n.nextSibling){
+                    m(n.nextSibling);
+                    e.removeChild(n.nextSibling);
+                }
+                m(n);
+                e.removeChild(n);
+            }
+        }
+        function Be(e, t, r) {
+            var n = r || ne(e, "hx-select");
+            if (n) {
+                var i = re().createDocumentFragment();
+                oe(t.querySelectorAll(n), function(e) {
+                    i.appendChild(e);
+                });
+                t = i;
+            }
+            return t;
+        }
+        function Fe(e, t, r, n, i) {
+            switch(e){
+                case "none":
+                    return;
+                case "outerHTML":
+                    Ie(r, n, i);
+                    return;
+                case "afterbegin":
+                    ke(r, n, i);
+                    return;
+                case "beforebegin":
+                    Pe(r, n, i);
+                    return;
+                case "beforeend":
+                    Me(r, n, i);
+                    return;
+                case "afterend":
+                    Xe(r, n, i);
+                    return;
+                case "delete":
+                    De(r, n, i);
+                    return;
+                default:
+                    var a = Fr(t);
+                    for(var o = 0; o < a.length; o++){
+                        var s = a[o];
+                        try {
+                            var l = s.handleSwap(e, r, n, i);
+                            if (l) {
+                                if (typeof l.length !== "undefined") for(var u = 0; u < l.length; u++){
+                                    var f = l[u];
+                                    if (f.nodeType !== Node.TEXT_NODE && f.nodeType !== Node.COMMENT_NODE) i.tasks.push(Oe(f));
+                                }
+                                return;
+                            }
+                        } catch (e) {
+                            b(e);
+                        }
+                    }
+                    if (e === "innerHTML") Ue(r, n, i);
+                    else Fe(Q.config.defaultSwapStyle, t, r, n, i);
+            }
+        }
+        function Ve(e) {
+            if (e.indexOf("<title") > -1) {
+                var t = e.replace(H, "");
+                var r = t.match(q);
+                if (r) return r[2];
+            }
+        }
+        function je(e, t, r, n, i, a) {
+            i.title = Ve(n);
+            var o = l(n);
+            if (o) {
+                Ce(r, o, i);
+                o = Be(r, o, a);
+                Re(o);
+                return Fe(e, r, t, o, i);
+            }
+        }
+        function _e(e, t, r) {
+            var n = e.getResponseHeader(t);
+            if (n.indexOf("{") === 0) {
+                var i = E(n);
+                for(var a in i)if (i.hasOwnProperty(a)) {
+                    var o = i[a];
+                    if (!P(o)) o = {
+                        value: o
+                    };
+                    ce(r, a, o);
+                }
+            } else {
+                var s = n.split(",");
+                for(var l = 0; l < s.length; l++)ce(r, s[l].trim(), []);
+            }
+        }
+        var ze = /\s/;
+        var x = /[\s,]/;
+        var $e = /[_$a-zA-Z]/;
+        var We = /[_$a-zA-Z0-9]/;
+        var Ge = [
+            '"',
+            "'",
+            "/"
+        ];
+        var Je = /[^\s]/;
+        var Ze = /[{(]/;
+        var Ke = /[})]/;
+        function Ye(e) {
+            var t = [];
+            var r = 0;
+            while(r < e.length){
+                if ($e.exec(e.charAt(r))) {
+                    var n = r;
+                    while(We.exec(e.charAt(r + 1)))r++;
+                    t.push(e.substr(n, r - n + 1));
+                } else if (Ge.indexOf(e.charAt(r)) !== -1) {
+                    var i = e.charAt(r);
+                    var n = r;
+                    r++;
+                    while(r < e.length && e.charAt(r) !== i){
+                        if (e.charAt(r) === "\\") r++;
+                        r++;
+                    }
+                    t.push(e.substr(n, r - n + 1));
+                } else {
+                    var a = e.charAt(r);
+                    t.push(a);
+                }
+                r++;
+            }
+            return t;
+        }
+        function Qe(e, t, r) {
+            return $e.exec(e.charAt(0)) && e !== "true" && e !== "false" && e !== "this" && e !== r && t !== ".";
+        }
+        function et(e, t, r) {
+            if (t[0] === "[") {
+                t.shift();
+                var n = 1;
+                var i = " return (function(" + r + "){ return (";
+                var a = null;
+                while(t.length > 0){
+                    var o = t[0];
+                    if (o === "]") {
+                        n--;
+                        if (n === 0) {
+                            if (a === null) i = i + "true";
+                            t.shift();
+                            i += ")})";
+                            try {
+                                var s = Tr(e, function() {
+                                    return Function(i)();
+                                }, function() {
+                                    return true;
+                                });
+                                s.source = i;
+                                return s;
+                            } catch (e) {
+                                fe(re().body, "htmx:syntax:error", {
+                                    error: e,
+                                    source: i
+                                });
+                                return null;
+                            }
+                        }
+                    } else if (o === "[") n++;
+                    if (Qe(o, a, r)) i += "((" + r + "." + o + ") ? (" + r + "." + o + ") : (window." + o + "))";
+                    else i = i + o;
+                    a = t.shift();
+                }
+            }
+        }
+        function y(e, t) {
+            var r = "";
+            while(e.length > 0 && !t.test(e[0]))r += e.shift();
+            return r;
+        }
+        function tt(e) {
+            var t;
+            if (e.length > 0 && Ze.test(e[0])) {
+                e.shift();
+                t = y(e, Ke).trim();
+                e.shift();
+            } else t = y(e, x);
+            return t;
+        }
+        var rt = "input, textarea, select";
+        function nt(e, t, r) {
+            var n = [];
+            var i = Ye(t);
+            do {
+                y(i, Je);
+                var a = i.length;
+                var o = y(i, /[,\[\s]/);
+                if (o !== "") {
+                    if (o === "every") {
+                        var s = {
+                            trigger: "every"
+                        };
+                        y(i, Je);
+                        s.pollInterval = d(y(i, /[,\[\s]/));
+                        y(i, Je);
+                        var l = et(e, i, "event");
+                        if (l) s.eventFilter = l;
+                        n.push(s);
+                    } else if (o.indexOf("sse:") === 0) n.push({
+                        trigger: "sse",
+                        sseEvent: o.substr(4)
+                    });
+                    else {
+                        var u = {
+                            trigger: o
+                        };
+                        var l = et(e, i, "event");
+                        if (l) u.eventFilter = l;
+                        while(i.length > 0 && i[0] !== ","){
+                            y(i, Je);
+                            var f = i.shift();
+                            if (f === "changed") u.changed = true;
+                            else if (f === "once") u.once = true;
+                            else if (f === "consume") u.consume = true;
+                            else if (f === "delay" && i[0] === ":") {
+                                i.shift();
+                                u.delay = d(y(i, x));
+                            } else if (f === "from" && i[0] === ":") {
+                                i.shift();
+                                if (Ze.test(i[0])) var c = tt(i);
+                                else {
+                                    var c = y(i, x);
+                                    if (c === "closest" || c === "find" || c === "next" || c === "previous") {
+                                        i.shift();
+                                        var h = tt(i);
+                                        if (h.length > 0) c += " " + h;
+                                    }
+                                }
+                                u.from = c;
+                            } else if (f === "target" && i[0] === ":") {
+                                i.shift();
+                                u.target = tt(i);
+                            } else if (f === "throttle" && i[0] === ":") {
+                                i.shift();
+                                u.throttle = d(y(i, x));
+                            } else if (f === "queue" && i[0] === ":") {
+                                i.shift();
+                                u.queue = y(i, x);
+                            } else if (f === "root" && i[0] === ":") {
+                                i.shift();
+                                u[f] = tt(i);
+                            } else if (f === "threshold" && i[0] === ":") {
+                                i.shift();
+                                u[f] = y(i, x);
+                            } else fe(e, "htmx:syntax:error", {
+                                token: i.shift()
+                            });
+                        }
+                        n.push(u);
+                    }
+                }
+                if (i.length === a) fe(e, "htmx:syntax:error", {
+                    token: i.shift()
+                });
+                y(i, Je);
+            }while (i[0] === "," && i.shift());
+            if (r) r[t] = n;
+            return n;
+        }
+        function it(e) {
+            var t = te(e, "hx-trigger");
+            var r = [];
+            if (t) {
+                var n = Q.config.triggerSpecsCache;
+                r = n && n[t] || nt(e, t, n);
+            }
+            if (r.length > 0) return r;
+            else if (h(e, "form")) return [
+                {
+                    trigger: "submit"
+                }
+            ];
+            else if (h(e, 'input[type="button"], input[type="submit"]')) return [
+                {
+                    trigger: "click"
+                }
+            ];
+            else if (h(e, rt)) return [
+                {
+                    trigger: "change"
+                }
+            ];
+            else return [
+                {
+                    trigger: "click"
+                }
+            ];
+        }
+        function at(e) {
+            ae(e).cancelled = true;
+        }
+        function ot(e, t, r) {
+            var n = ae(e);
+            n.timeout = setTimeout(function() {
+                if (se(e) && n.cancelled !== true) {
+                    if (!ct(r, e, Wt("hx:poll:trigger", {
+                        triggerSpec: r,
+                        target: e
+                    }))) t(e);
+                    ot(e, t, r);
+                }
+            }, r.pollInterval);
+        }
+        function st(e) {
+            return location.hostname === e.hostname && ee(e, "href") && ee(e, "href").indexOf("#") !== 0;
+        }
+        function lt(t, r, e) {
+            if (t.tagName === "A" && st(t) && (t.target === "" || t.target === "_self") || t.tagName === "FORM") {
+                r.boosted = true;
+                var n, i;
+                if (t.tagName === "A") {
+                    n = "get";
+                    i = ee(t, "href");
+                } else {
+                    var a = ee(t, "method");
+                    n = a ? a.toLowerCase() : "get";
+                    n;
+                    i = ee(t, "action");
+                }
+                e.forEach(function(e) {
+                    ht(t, function(e, t) {
+                        if (v(e, Q.config.disableSelector)) {
+                            m(e);
+                            return;
+                        }
+                        he(n, i, e, t);
+                    }, r, e, true);
+                });
+            }
+        }
+        function ut(e, t) {
+            if (e.type === "submit" || e.type === "click") {
+                if (t.tagName === "FORM") return true;
+                if (h(t, 'input[type="submit"], button') && v(t, "form") !== null) return true;
+                if (t.tagName === "A" && t.href && (t.getAttribute("href") === "#" || t.getAttribute("href").indexOf("#") !== 0)) return true;
+            }
+            return false;
+        }
+        function ft(e, t) {
+            return ae(e).boosted && e.tagName === "A" && t.type === "click" && (t.ctrlKey || t.metaKey);
+        }
+        function ct(e, t, r) {
+            var n = e.eventFilter;
+            if (n) try {
+                return n.call(t, r) !== true;
+            } catch (e) {
+                fe(re().body, "htmx:eventFilter:error", {
+                    error: e,
+                    source: n.source
+                });
+                return true;
+            }
+            return false;
+        }
+        function ht(a, o, e, s, l) {
+            var u = ae(a);
+            var t;
+            if (s.from) t = Z(a, s.from);
+            else t = [
+                a
+            ];
+            if (s.changed) t.forEach(function(e) {
+                var t = ae(e);
+                t.lastValue = e.value;
+            });
+            oe(t, function(n) {
+                var i = function(e) {
+                    if (!se(a)) {
+                        n.removeEventListener(s.trigger, i);
+                        return;
+                    }
+                    if (ft(a, e)) return;
+                    if (l || ut(e, a)) e.preventDefault();
+                    if (ct(s, a, e)) return;
+                    var t = ae(e);
+                    t.triggerSpec = s;
+                    if (t.handledFor == null) t.handledFor = [];
+                    if (t.handledFor.indexOf(a) < 0) {
+                        t.handledFor.push(a);
+                        if (s.consume) e.stopPropagation();
+                        if (s.target && e.target) {
+                            if (!h(e.target, s.target)) return;
+                        }
+                        if (s.once) {
+                            if (u.triggeredOnce) return;
+                            else u.triggeredOnce = true;
+                        }
+                        if (s.changed) {
+                            var r = ae(n);
+                            if (r.lastValue === n.value) return;
+                            r.lastValue = n.value;
+                        }
+                        if (u.delayed) clearTimeout(u.delayed);
+                        if (u.throttle) return;
+                        if (s.throttle > 0) {
+                            if (!u.throttle) {
+                                o(a, e);
+                                u.throttle = setTimeout(function() {
+                                    u.throttle = null;
+                                }, s.throttle);
+                            }
+                        } else if (s.delay > 0) u.delayed = setTimeout(function() {
+                            o(a, e);
+                        }, s.delay);
+                        else {
+                            ce(a, "htmx:trigger");
+                            o(a, e);
+                        }
+                    }
+                };
+                if (e.listenerInfos == null) e.listenerInfos = [];
+                e.listenerInfos.push({
+                    trigger: s.trigger,
+                    listener: i,
+                    on: n
+                });
+                n.addEventListener(s.trigger, i);
+            });
+        }
+        var vt = false;
+        var dt = null;
+        function gt() {
+            if (!dt) {
+                dt = function() {
+                    vt = true;
+                };
+                window.addEventListener("scroll", dt);
+                setInterval(function() {
+                    if (vt) {
+                        vt = false;
+                        oe(re().querySelectorAll("[hx-trigger='revealed'],[data-hx-trigger='revealed']"), function(e) {
+                            pt(e);
+                        });
+                    }
+                }, 200);
+            }
+        }
+        function pt(t) {
+            if (!o(t, "data-hx-revealed") && X(t)) {
+                t.setAttribute("data-hx-revealed", "true");
+                var e = ae(t);
+                if (e.initHash) ce(t, "revealed");
+                else t.addEventListener("htmx:afterProcessNode", function(e) {
+                    ce(t, "revealed");
+                }, {
+                    once: true
+                });
+            }
+        }
+        function mt(e, t, r) {
+            var n = D(r);
+            for(var i = 0; i < n.length; i++){
+                var a = n[i].split(/:(.+)/);
+                if (a[0] === "connect") xt(e, a[1], 0);
+                if (a[0] === "send") bt(e);
+            }
+        }
+        function xt(s, r, n) {
+            if (!se(s)) return;
+            if (r.indexOf("/") == 0) {
+                var e = location.hostname + (location.port ? ":" + location.port : "");
+                if (location.protocol == "https:") r = "wss://" + e + r;
+                else if (location.protocol == "http:") r = "ws://" + e + r;
+            }
+            var t = Q.createWebSocket(r);
+            t.onerror = function(e) {
+                fe(s, "htmx:wsError", {
+                    error: e,
+                    socket: t
+                });
+                yt(s);
+            };
+            t.onclose = function(e) {
+                if ([
+                    1006,
+                    1012,
+                    1013
+                ].indexOf(e.code) >= 0) {
+                    var t = wt(n);
+                    setTimeout(function() {
+                        xt(s, r, n + 1);
+                    }, t);
+                }
+            };
+            t.onopen = function(e) {
+                n = 0;
+            };
+            ae(s).webSocket = t;
+            t.addEventListener("message", function(e) {
+                if (yt(s)) return;
+                var t = e.data;
+                R(s, function(e) {
+                    t = e.transformResponse(t, null, s);
+                });
+                var r = T(s);
+                var n = l(t);
+                var i = M(n.children);
+                for(var a = 0; a < i.length; a++){
+                    var o = i[a];
+                    Ee(te(o, "hx-swap-oob") || "true", o, r);
+                }
+                nr(r.tasks);
+            });
+        }
+        function yt(e) {
+            if (!se(e)) {
+                ae(e).webSocket.close();
+                return true;
+            }
+        }
+        function bt(u) {
+            var f = c(u, function(e) {
+                return ae(e).webSocket != null;
+            });
+            if (f) u.addEventListener(it(u)[0].trigger, function(e) {
+                var t = ae(f).webSocket;
+                var r = xr(u, f);
+                var n = dr(u, "post");
+                var i = n.errors;
+                var a = n.values;
+                var o = Hr(u);
+                var s = le(a, o);
+                var l = yr(s, u);
+                l["HEADERS"] = r;
+                if (i && i.length > 0) {
+                    ce(u, "htmx:validation:halted", i);
+                    return;
+                }
+                t.send(JSON.stringify(l));
+                if (ut(e, u)) e.preventDefault();
+            });
+            else fe(u, "htmx:noWebSocketSourceError");
+        }
+        function wt(e) {
+            var t = Q.config.wsReconnectDelay;
+            if (typeof t === "function") return t(e);
+            if (t === "full-jitter") {
+                var r = Math.min(e, 6);
+                var n = 1e3 * Math.pow(2, r);
+                return n * Math.random();
+            }
+            b('htmx.config.wsReconnectDelay must either be a function or the string "full-jitter"');
+        }
+        function St(e, t, r) {
+            var n = D(r);
+            for(var i = 0; i < n.length; i++){
+                var a = n[i].split(/:(.+)/);
+                if (a[0] === "connect") Et(e, a[1]);
+                if (a[0] === "swap") Ct(e, a[1]);
+            }
+        }
+        function Et(t, e) {
+            var r = Q.createEventSource(e);
+            r.onerror = function(e) {
+                fe(t, "htmx:sseError", {
+                    error: e,
+                    source: r
+                });
+                Tt(t);
+            };
+            ae(t).sseEventSource = r;
+        }
+        function Ct(a, o) {
+            var s = c(a, Ot);
+            if (s) {
+                var l = ae(s).sseEventSource;
+                var u = function(e) {
+                    if (Tt(s)) return;
+                    if (!se(a)) {
+                        l.removeEventListener(o, u);
+                        return;
+                    }
+                    var t = e.data;
+                    R(a, function(e) {
+                        t = e.transformResponse(t, null, a);
+                    });
+                    var r = wr(a);
+                    var n = ye(a);
+                    var i = T(a);
+                    je(r.swapStyle, n, a, t, i);
+                    nr(i.tasks);
+                    ce(a, "htmx:sseMessage", e);
+                };
+                ae(a).sseListener = u;
+                l.addEventListener(o, u);
+            } else fe(a, "htmx:noSSESourceError");
+        }
+        function Rt(e, t, r) {
+            var n = c(e, Ot);
+            if (n) {
+                var i = ae(n).sseEventSource;
+                var a = function() {
+                    if (!Tt(n)) {
+                        if (se(e)) t(e);
+                        else i.removeEventListener(r, a);
+                    }
+                };
+                ae(e).sseListener = a;
+                i.addEventListener(r, a);
+            } else fe(e, "htmx:noSSESourceError");
+        }
+        function Tt(e) {
+            if (!se(e)) {
+                ae(e).sseEventSource.close();
+                return true;
+            }
+        }
+        function Ot(e) {
+            return ae(e).sseEventSource != null;
+        }
+        function qt(e, t, r, n) {
+            var i = function() {
+                if (!r.loaded) {
+                    r.loaded = true;
+                    t(e);
+                }
+            };
+            if (n > 0) setTimeout(i, n);
+            else i();
+        }
+        function Ht(t, i, e) {
+            var a = false;
+            oe(w, function(r) {
+                if (o(t, "hx-" + r)) {
+                    var n = te(t, "hx-" + r);
+                    a = true;
+                    i.path = n;
+                    i.verb = r;
+                    e.forEach(function(e) {
+                        Lt(t, e, i, function(e, t) {
+                            if (v(e, Q.config.disableSelector)) {
+                                m(e);
+                                return;
+                            }
+                            he(r, n, e, t);
+                        });
+                    });
+                }
+            });
+            return a;
+        }
+        function Lt(n, e, t, r) {
+            if (e.sseEvent) Rt(n, r, e.sseEvent);
+            else if (e.trigger === "revealed") {
+                gt();
+                ht(n, r, t, e);
+                pt(n);
+            } else if (e.trigger === "intersect") {
+                var i = {};
+                if (e.root) i.root = ue(n, e.root);
+                if (e.threshold) i.threshold = parseFloat(e.threshold);
+                var a = new IntersectionObserver(function(e) {
+                    for(var t = 0; t < e.length; t++){
+                        var r = e[t];
+                        if (r.isIntersecting) {
+                            ce(n, "intersect");
+                            break;
+                        }
+                    }
+                }, i);
+                a.observe(n);
+                ht(n, r, t, e);
+            } else if (e.trigger === "load") {
+                if (!ct(e, n, Wt("load", {
+                    elt: n
+                }))) qt(n, r, t, e.delay);
+            } else if (e.pollInterval > 0) {
+                t.polling = true;
+                ot(n, r, e);
+            } else ht(n, r, t, e);
+        }
+        function At(e) {
+            if (!e.htmxExecuted && Q.config.allowScriptTags && (e.type === "text/javascript" || e.type === "module" || e.type === "")) {
+                var t = re().createElement("script");
+                oe(e.attributes, function(e) {
+                    t.setAttribute(e.name, e.value);
+                });
+                t.textContent = e.textContent;
+                t.async = false;
+                if (Q.config.inlineScriptNonce) t.nonce = Q.config.inlineScriptNonce;
+                var r = e.parentElement;
+                try {
+                    r.insertBefore(t, e);
+                } catch (e) {
+                    b(e);
+                } finally{
+                    if (e.parentElement) e.parentElement.removeChild(e);
+                }
+            }
+        }
+        function Nt(e) {
+            if (h(e, "script")) At(e);
+            oe(f(e, "script"), function(e) {
+                At(e);
+            });
+        }
+        function It(e) {
+            var t = e.attributes;
+            if (!t) return false;
+            for(var r = 0; r < t.length; r++){
+                var n = t[r].name;
+                if (g(n, "hx-on:") || g(n, "data-hx-on:") || g(n, "hx-on-") || g(n, "data-hx-on-")) return true;
+            }
+            return false;
+        }
+        function kt(e) {
+            var t = null;
+            var r = [];
+            if (It(e)) r.push(e);
+            if (document.evaluate) {
+                var n = document.evaluate('.//*[@*[ starts-with(name(), "hx-on:") or starts-with(name(), "data-hx-on:") or starts-with(name(), "hx-on-") or starts-with(name(), "data-hx-on-") ]]', e);
+                while(t = n.iterateNext())r.push(t);
+            } else if (typeof e.getElementsByTagName === "function") {
+                var i = e.getElementsByTagName("*");
+                for(var a = 0; a < i.length; a++)if (It(i[a])) r.push(i[a]);
+            }
+            return r;
+        }
+        function Pt(e) {
+            if (e.querySelectorAll) {
+                var t = ", [hx-boost] a, [data-hx-boost] a, a[hx-boost], a[data-hx-boost]";
+                var r = e.querySelectorAll(i + t + ", form, [type='submit'], [hx-sse], [data-hx-sse], [hx-ws]," + " [data-hx-ws], [hx-ext], [data-hx-ext], [hx-trigger], [data-hx-trigger], [hx-on], [data-hx-on]");
+                return r;
+            } else return [];
+        }
+        function Mt(e) {
+            var t = v(e.target, "button, input[type='submit']");
+            var r = Dt(e);
+            if (r) r.lastButtonClicked = t;
+        }
+        function Xt(e) {
+            var t = Dt(e);
+            if (t) t.lastButtonClicked = null;
+        }
+        function Dt(e) {
+            var t = v(e.target, "button, input[type='submit']");
+            if (!t) return;
+            var r = p("#" + ee(t, "form")) || v(t, "form");
+            if (!r) return;
+            return ae(r);
+        }
+        function Ut(e) {
+            e.addEventListener("click", Mt);
+            e.addEventListener("focusin", Mt);
+            e.addEventListener("focusout", Xt);
+        }
+        function Bt(e) {
+            var t = Ye(e);
+            var r = 0;
+            for(var n = 0; n < t.length; n++){
+                const i = t[n];
+                if (i === "{") r++;
+                else if (i === "}") r--;
+            }
+            return r;
+        }
+        function Ft(t, e, r) {
+            var n = ae(t);
+            if (!Array.isArray(n.onHandlers)) n.onHandlers = [];
+            var i;
+            var a = function(e) {
+                return Tr(t, function() {
+                    if (!i) i = new Function("event", r);
+                    i.call(t, e);
+                });
+            };
+            t.addEventListener(e, a);
+            n.onHandlers.push({
+                event: e,
+                listener: a
+            });
+        }
+        function Vt(e) {
+            var t = te(e, "hx-on");
+            if (t) {
+                var r = {};
+                var n = t.split("\n");
+                var i = null;
+                var a = 0;
+                while(n.length > 0){
+                    var o = n.shift();
+                    var s = o.match(/^\s*([a-zA-Z:\-\.]+:)(.*)/);
+                    if (a === 0 && s) {
+                        o.split(":");
+                        i = s[1].slice(0, -1);
+                        r[i] = s[2];
+                    } else r[i] += o;
+                    a += Bt(o);
+                }
+                for(var l in r)Ft(e, l, r[l]);
+            }
+        }
+        function jt(e) {
+            Ae(e);
+            for(var t = 0; t < e.attributes.length; t++){
+                var r = e.attributes[t].name;
+                var n = e.attributes[t].value;
+                if (g(r, "hx-on") || g(r, "data-hx-on")) {
+                    var i = r.indexOf("-on") + 3;
+                    var a = r.slice(i, i + 1);
+                    if (a === "-" || a === ":") {
+                        var o = r.slice(i + 1);
+                        if (g(o, ":")) o = "htmx" + o;
+                        else if (g(o, "-")) o = "htmx:" + o.slice(1);
+                        else if (g(o, "htmx-")) o = "htmx:" + o.slice(5);
+                        Ft(e, o, n);
+                    }
+                }
+            }
+        }
+        function _t(t) {
+            if (v(t, Q.config.disableSelector)) {
+                m(t);
+                return;
+            }
+            var r = ae(t);
+            if (r.initHash !== Le(t)) {
+                Ne(t);
+                r.initHash = Le(t);
+                Vt(t);
+                ce(t, "htmx:beforeProcessNode");
+                if (t.value) r.lastValue = t.value;
+                var e = it(t);
+                var n = Ht(t, r, e);
+                if (!n) {
+                    if (ne(t, "hx-boost") === "true") lt(t, r, e);
+                    else if (o(t, "hx-trigger")) e.forEach(function(e) {
+                        Lt(t, e, r, function() {});
+                    });
+                }
+                if (t.tagName === "FORM" || ee(t, "type") === "submit" && o(t, "form")) Ut(t);
+                var i = te(t, "hx-sse");
+                if (i) St(t, r, i);
+                var a = te(t, "hx-ws");
+                if (a) mt(t, r, a);
+                ce(t, "htmx:afterProcessNode");
+            }
+        }
+        function zt(e) {
+            e = p(e);
+            if (v(e, Q.config.disableSelector)) {
+                m(e);
+                return;
+            }
+            _t(e);
+            oe(Pt(e), function(e) {
+                _t(e);
+            });
+            oe(kt(e), jt);
+        }
+        function $t(e) {
+            return e.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase();
+        }
+        function Wt(e, t) {
+            var r;
+            if (window.CustomEvent && typeof window.CustomEvent === "function") r = new CustomEvent(e, {
+                bubbles: true,
+                cancelable: true,
+                detail: t
+            });
+            else {
+                r = re().createEvent("CustomEvent");
+                r.initCustomEvent(e, true, true, t);
+            }
+            return r;
+        }
+        function fe(e, t, r) {
+            ce(e, t, le({
+                error: t
+            }, r));
+        }
+        function Gt(e) {
+            return e === "htmx:afterProcessNode";
+        }
+        function R(e, t) {
+            oe(Fr(e), function(e) {
+                try {
+                    t(e);
+                } catch (e) {
+                    b(e);
+                }
+            });
+        }
+        function b(e) {
+            if (console.error) console.error(e);
+            else if (console.log) console.log("ERROR: ", e);
+        }
+        function ce(e, t, r) {
+            e = p(e);
+            if (r == null) r = {};
+            r["elt"] = e;
+            var n = Wt(t, r);
+            if (Q.logger && !Gt(t)) Q.logger(e, t, r);
+            if (r.error) {
+                b(r.error);
+                ce(e, "htmx:error", {
+                    errorInfo: r
+                });
+            }
+            var i = e.dispatchEvent(n);
+            var a = $t(t);
+            if (i && a !== t) {
+                var o = Wt(a, n.detail);
+                i = i && e.dispatchEvent(o);
+            }
+            R(e, function(e) {
+                i = i && e.onEvent(t, n) !== false && !n.defaultPrevented;
+            });
+            return i;
+        }
+        var Jt = location.pathname + location.search;
+        function Zt() {
+            var e = re().querySelector("[hx-history-elt],[data-hx-history-elt]");
+            return e || re().body;
+        }
+        function Kt(e, t, r, n) {
+            if (!U()) return;
+            if (Q.config.historyCacheSize <= 0) {
+                localStorage.removeItem("htmx-history-cache");
+                return;
+            }
+            e = B(e);
+            var i = E(localStorage.getItem("htmx-history-cache")) || [];
+            for(var a = 0; a < i.length; a++)if (i[a].url === e) {
+                i.splice(a, 1);
+                break;
+            }
+            var o = {
+                url: e,
+                content: t,
+                title: r,
+                scroll: n
+            };
+            ce(re().body, "htmx:historyItemCreated", {
+                item: o,
+                cache: i
+            });
+            i.push(o);
+            while(i.length > Q.config.historyCacheSize)i.shift();
+            while(i.length > 0)try {
+                localStorage.setItem("htmx-history-cache", JSON.stringify(i));
+                break;
+            } catch (e) {
+                fe(re().body, "htmx:historyCacheError", {
+                    cause: e,
+                    cache: i
+                });
+                i.shift();
+            }
+        }
+        function Yt(e) {
+            if (!U()) return null;
+            e = B(e);
+            var t = E(localStorage.getItem("htmx-history-cache")) || [];
+            for(var r = 0; r < t.length; r++){
+                if (t[r].url === e) return t[r];
+            }
+            return null;
+        }
+        function Qt(e) {
+            var t = Q.config.requestClass;
+            var r = e.cloneNode(true);
+            oe(f(r, "." + t), function(e) {
+                n(e, t);
+            });
+            return r.innerHTML;
+        }
+        function er() {
+            var e = Zt();
+            var t = Jt || location.pathname + location.search;
+            var r;
+            try {
+                r = re().querySelector('[hx-history="false" i],[data-hx-history="false" i]');
+            } catch (e) {
+                r = re().querySelector('[hx-history="false"],[data-hx-history="false"]');
+            }
+            if (!r) {
+                ce(re().body, "htmx:beforeHistorySave", {
+                    path: t,
+                    historyElt: e
+                });
+                Kt(t, Qt(e), re().title, window.scrollY);
+            }
+            if (Q.config.historyEnabled) history.replaceState({
+                htmx: true
+            }, re().title, window.location.href);
+        }
+        function tr(e) {
+            if (Q.config.getCacheBusterParam) {
+                e = e.replace(/org\.htmx\.cache-buster=[^&]*&?/, "");
+                if (G(e, "&") || G(e, "?")) e = e.slice(0, -1);
+            }
+            if (Q.config.historyEnabled) history.pushState({
+                htmx: true
+            }, "", e);
+            Jt = e;
+        }
+        function rr(e) {
+            if (Q.config.historyEnabled) history.replaceState({
+                htmx: true
+            }, "", e);
+            Jt = e;
+        }
+        function nr(e) {
+            oe(e, function(e) {
+                e.call();
+            });
+        }
+        function ir(a) {
+            var e = new XMLHttpRequest;
+            var o = {
+                path: a,
+                xhr: e
+            };
+            ce(re().body, "htmx:historyCacheMiss", o);
+            e.open("GET", a, true);
+            e.setRequestHeader("HX-Request", "true");
+            e.setRequestHeader("HX-History-Restore-Request", "true");
+            e.setRequestHeader("HX-Current-URL", re().location.href);
+            e.onload = function() {
+                if (this.status >= 200 && this.status < 400) {
+                    ce(re().body, "htmx:historyCacheMissLoad", o);
+                    var e = l(this.response);
+                    e = e.querySelector("[hx-history-elt],[data-hx-history-elt]") || e;
+                    var t = Zt();
+                    var r = T(t);
+                    var n = Ve(this.response);
+                    if (n) {
+                        var i = C("title");
+                        if (i) i.innerHTML = n;
+                        else window.document.title = n;
+                    }
+                    Ue(t, e, r);
+                    nr(r.tasks);
+                    Jt = a;
+                    ce(re().body, "htmx:historyRestore", {
+                        path: a,
+                        cacheMiss: true,
+                        serverResponse: this.response
+                    });
+                } else fe(re().body, "htmx:historyCacheMissLoadError", o);
+            };
+            e.send();
+        }
+        function ar(e) {
+            er();
+            e = e || location.pathname + location.search;
+            var t = Yt(e);
+            if (t) {
+                var r = l(t.content);
+                var n = Zt();
+                var i = T(n);
+                Ue(n, r, i);
+                nr(i.tasks);
+                document.title = t.title;
+                setTimeout(function() {
+                    window.scrollTo(0, t.scroll);
+                }, 0);
+                Jt = e;
+                ce(re().body, "htmx:historyRestore", {
+                    path: e,
+                    item: t
+                });
+            } else if (Q.config.refreshOnHistoryMiss) window.location.reload(true);
+            else ir(e);
+        }
+        function or(e) {
+            var t = me(e, "hx-indicator");
+            if (t == null) t = [
+                e
+            ];
+            oe(t, function(e) {
+                var t = ae(e);
+                t.requestCount = (t.requestCount || 0) + 1;
+                e.classList["add"].call(e.classList, Q.config.requestClass);
+            });
+            return t;
+        }
+        function sr(e) {
+            var t = me(e, "hx-disabled-elt");
+            if (t == null) t = [];
+            oe(t, function(e) {
+                var t = ae(e);
+                t.requestCount = (t.requestCount || 0) + 1;
+                e.setAttribute("disabled", "");
+            });
+            return t;
+        }
+        function lr(e, t) {
+            oe(e, function(e) {
+                var t = ae(e);
+                t.requestCount = (t.requestCount || 0) - 1;
+                if (t.requestCount === 0) e.classList["remove"].call(e.classList, Q.config.requestClass);
+            });
+            oe(t, function(e) {
+                var t = ae(e);
+                t.requestCount = (t.requestCount || 0) - 1;
+                if (t.requestCount === 0) e.removeAttribute("disabled");
+            });
+        }
+        function ur(e, t) {
+            for(var r = 0; r < e.length; r++){
+                var n = e[r];
+                if (n.isSameNode(t)) return true;
+            }
+            return false;
+        }
+        function fr(e) {
+            if (e.name === "" || e.name == null || e.disabled || v(e, "fieldset[disabled]")) return false;
+            if (e.type === "button" || e.type === "submit" || e.tagName === "image" || e.tagName === "reset" || e.tagName === "file") return false;
+            if (e.type === "checkbox" || e.type === "radio") return e.checked;
+            return true;
+        }
+        function cr(e, t, r) {
+            if (e != null && t != null) {
+                var n = r[e];
+                if (n === undefined) r[e] = t;
+                else if (Array.isArray(n)) {
+                    if (Array.isArray(t)) r[e] = n.concat(t);
+                    else n.push(t);
+                } else if (Array.isArray(t)) r[e] = [
+                    n
+                ].concat(t);
+                else r[e] = [
+                    n,
+                    t
+                ];
+            }
+        }
+        function hr(t, r, n, e, i) {
+            if (e == null || ur(t, e)) return;
+            else t.push(e);
+            if (fr(e)) {
+                var a = ee(e, "name");
+                var o = e.value;
+                if (e.multiple && e.tagName === "SELECT") o = M(e.querySelectorAll("option:checked")).map(function(e) {
+                    return e.value;
+                });
+                if (e.files) o = M(e.files);
+                cr(a, o, r);
+                if (i) vr(e, n);
+            }
+            if (h(e, "form")) {
+                var s = e.elements;
+                oe(s, function(e) {
+                    hr(t, r, n, e, i);
+                });
+            }
+        }
+        function vr(e, t) {
+            if (e.willValidate) {
+                ce(e, "htmx:validation:validate");
+                if (!e.checkValidity()) {
+                    t.push({
+                        elt: e,
+                        message: e.validationMessage,
+                        validity: e.validity
+                    });
+                    ce(e, "htmx:validation:failed", {
+                        message: e.validationMessage,
+                        validity: e.validity
+                    });
+                }
+            }
+        }
+        function dr(e, t) {
+            var r = [];
+            var n = {};
+            var i = {};
+            var a = [];
+            var o = ae(e);
+            if (o.lastButtonClicked && !se(o.lastButtonClicked)) o.lastButtonClicked = null;
+            var s = h(e, "form") && e.noValidate !== true || te(e, "hx-validate") === "true";
+            if (o.lastButtonClicked) s = s && o.lastButtonClicked.formNoValidate !== true;
+            if (t !== "get") hr(r, i, a, v(e, "form"), s);
+            hr(r, n, a, e, s);
+            if (o.lastButtonClicked || e.tagName === "BUTTON" || e.tagName === "INPUT" && ee(e, "type") === "submit") {
+                var l = o.lastButtonClicked || e;
+                var u = ee(l, "name");
+                cr(u, l.value, i);
+            }
+            var f = me(e, "hx-include");
+            oe(f, function(e) {
+                hr(r, n, a, e, s);
+                if (!h(e, "form")) oe(e.querySelectorAll(rt), function(e) {
+                    hr(r, n, a, e, s);
+                });
+            });
+            n = le(n, i);
+            return {
+                errors: a,
+                values: n
+            };
+        }
+        function gr(e, t, r) {
+            if (e !== "") e += "&";
+            if (String(r) === "[object Object]") r = JSON.stringify(r);
+            var n = encodeURIComponent(r);
+            e += encodeURIComponent(t) + "=" + n;
+            return e;
+        }
+        function pr(e) {
+            var t = "";
+            for(var r in e)if (e.hasOwnProperty(r)) {
+                var n = e[r];
+                if (Array.isArray(n)) oe(n, function(e) {
+                    t = gr(t, r, e);
+                });
+                else t = gr(t, r, n);
+            }
+            return t;
+        }
+        function mr(e) {
+            var t = new FormData;
+            for(var r in e)if (e.hasOwnProperty(r)) {
+                var n = e[r];
+                if (Array.isArray(n)) oe(n, function(e) {
+                    t.append(r, e);
+                });
+                else t.append(r, n);
+            }
+            return t;
+        }
+        function xr(e, t, r) {
+            var n = {
+                "HX-Request": "true",
+                "HX-Trigger": ee(e, "id"),
+                "HX-Trigger-Name": ee(e, "name"),
+                "HX-Target": te(t, "id"),
+                "HX-Current-URL": re().location.href
+            };
+            Rr(e, "hx-headers", false, n);
+            if (r !== undefined) n["HX-Prompt"] = r;
+            if (ae(e).boosted) n["HX-Boosted"] = "true";
+            return n;
+        }
+        function yr(t, e) {
+            var r = ne(e, "hx-params");
+            if (r) {
+                if (r === "none") return {};
+                else if (r === "*") return t;
+                else if (r.indexOf("not ") === 0) {
+                    oe(r.substr(4).split(","), function(e) {
+                        e = e.trim();
+                        delete t[e];
+                    });
+                    return t;
+                } else {
+                    var n = {};
+                    oe(r.split(","), function(e) {
+                        e = e.trim();
+                        n[e] = t[e];
+                    });
+                    return n;
+                }
+            } else return t;
+        }
+        function br(e) {
+            return ee(e, "href") && ee(e, "href").indexOf("#") >= 0;
+        }
+        function wr(e, t) {
+            var r = t ? t : ne(e, "hx-swap");
+            var n = {
+                swapStyle: ae(e).boosted ? "innerHTML" : Q.config.defaultSwapStyle,
+                swapDelay: Q.config.defaultSwapDelay,
+                settleDelay: Q.config.defaultSettleDelay
+            };
+            if (Q.config.scrollIntoViewOnBoost && ae(e).boosted && !br(e)) n["show"] = "top";
+            if (r) {
+                var i = D(r);
+                if (i.length > 0) for(var a = 0; a < i.length; a++){
+                    var o = i[a];
+                    if (o.indexOf("swap:") === 0) n["swapDelay"] = d(o.substr(5));
+                    else if (o.indexOf("settle:") === 0) n["settleDelay"] = d(o.substr(7));
+                    else if (o.indexOf("transition:") === 0) n["transition"] = o.substr(11) === "true";
+                    else if (o.indexOf("ignoreTitle:") === 0) n["ignoreTitle"] = o.substr(12) === "true";
+                    else if (o.indexOf("scroll:") === 0) {
+                        var s = o.substr(7);
+                        var l = s.split(":");
+                        var u = l.pop();
+                        var f = l.length > 0 ? l.join(":") : null;
+                        n["scroll"] = u;
+                        n["scrollTarget"] = f;
+                    } else if (o.indexOf("show:") === 0) {
+                        var c = o.substr(5);
+                        var l = c.split(":");
+                        var h = l.pop();
+                        var f = l.length > 0 ? l.join(":") : null;
+                        n["show"] = h;
+                        n["showTarget"] = f;
+                    } else if (o.indexOf("focus-scroll:") === 0) {
+                        var v = o.substr(13);
+                        n["focusScroll"] = v == "true";
+                    } else if (a == 0) n["swapStyle"] = o;
+                    else b("Unknown modifier in hx-swap: " + o);
+                }
+            }
+            return n;
+        }
+        function Sr(e) {
+            return ne(e, "hx-encoding") === "multipart/form-data" || h(e, "form") && ee(e, "enctype") === "multipart/form-data";
+        }
+        function Er(t, r, n) {
+            var i = null;
+            R(r, function(e) {
+                if (i == null) i = e.encodeParameters(t, n, r);
+            });
+            if (i != null) return i;
+            else {
+                if (Sr(r)) return mr(n);
+                else return pr(n);
+            }
+        }
+        function T(e) {
+            return {
+                tasks: [],
+                elts: [
+                    e
+                ]
+            };
+        }
+        function Cr(e, t) {
+            var r = e[0];
+            var n = e[e.length - 1];
+            if (t.scroll) {
+                var i = null;
+                if (t.scrollTarget) i = ue(r, t.scrollTarget);
+                if (t.scroll === "top" && (r || i)) {
+                    i = i || r;
+                    i.scrollTop = 0;
+                }
+                if (t.scroll === "bottom" && (n || i)) {
+                    i = i || n;
+                    i.scrollTop = i.scrollHeight;
+                }
+            }
+            if (t.show) {
+                var i = null;
+                if (t.showTarget) {
+                    var a = t.showTarget;
+                    if (t.showTarget === "window") a = "body";
+                    i = ue(r, a);
+                }
+                if (t.show === "top" && (r || i)) {
+                    i = i || r;
+                    i.scrollIntoView({
+                        block: "start",
+                        behavior: Q.config.scrollBehavior
+                    });
+                }
+                if (t.show === "bottom" && (n || i)) {
+                    i = i || n;
+                    i.scrollIntoView({
+                        block: "end",
+                        behavior: Q.config.scrollBehavior
+                    });
+                }
+            }
+        }
+        function Rr(e, t, r, n) {
+            if (n == null) n = {};
+            if (e == null) return n;
+            var i = te(e, t);
+            if (i) {
+                var a = i.trim();
+                var o = r;
+                if (a === "unset") return null;
+                if (a.indexOf("javascript:") === 0) {
+                    a = a.substr(11);
+                    o = true;
+                } else if (a.indexOf("js:") === 0) {
+                    a = a.substr(3);
+                    o = true;
+                }
+                if (a.indexOf("{") !== 0) a = "{" + a + "}";
+                var s;
+                if (o) s = Tr(e, function() {
+                    return Function("return (" + a + ")")();
+                }, {});
+                else s = E(a);
+                for(var l in s){
+                    if (s.hasOwnProperty(l)) {
+                        if (n[l] == null) n[l] = s[l];
+                    }
+                }
+            }
+            return Rr(u(e), t, r, n);
+        }
+        function Tr(e, t, r) {
+            if (Q.config.allowEval) return t();
+            else {
+                fe(e, "htmx:evalDisallowedError");
+                return r;
+            }
+        }
+        function Or(e, t) {
+            return Rr(e, "hx-vars", true, t);
+        }
+        function qr(e, t) {
+            return Rr(e, "hx-vals", false, t);
+        }
+        function Hr(e) {
+            return le(Or(e), qr(e));
+        }
+        function Lr(t, r, n) {
+            if (n !== null) try {
+                t.setRequestHeader(r, n);
+            } catch (e) {
+                t.setRequestHeader(r, encodeURIComponent(n));
+                t.setRequestHeader(r + "-URI-AutoEncoded", "true");
+            }
+        }
+        function Ar(t) {
+            if (t.responseURL && typeof URL !== "undefined") try {
+                var e = new URL(t.responseURL);
+                return e.pathname + e.search;
+            } catch (e) {
+                fe(re().body, "htmx:badResponseUrl", {
+                    url: t.responseURL
+                });
+            }
+        }
+        function O(e, t) {
+            return t.test(e.getAllResponseHeaders());
+        }
+        function Nr(e, t, r) {
+            e = e.toLowerCase();
+            if (r) {
+                if (r instanceof Element || I(r, "String")) return he(e, t, null, null, {
+                    targetOverride: p(r),
+                    returnPromise: true
+                });
+                else return he(e, t, p(r.source), r.event, {
+                    handler: r.handler,
+                    headers: r.headers,
+                    values: r.values,
+                    targetOverride: p(r.target),
+                    swapOverride: r.swap,
+                    select: r.select,
+                    returnPromise: true
+                });
+            } else return he(e, t, null, null, {
+                returnPromise: true
+            });
+        }
+        function Ir(e) {
+            var t = [];
+            while(e){
+                t.push(e);
+                e = e.parentElement;
+            }
+            return t;
+        }
+        function kr(e, t, r) {
+            var n;
+            var i;
+            if (typeof URL === "function") {
+                i = new URL(t, document.location.href);
+                var a = document.location.origin;
+                n = a === i.origin;
+            } else {
+                i = t;
+                n = g(t, document.location.origin);
+            }
+            if (Q.config.selfRequestsOnly) {
+                if (!n) return false;
+            }
+            return ce(e, "htmx:validateUrl", le({
+                url: i,
+                sameHost: n
+            }, r));
+        }
+        function he(t, r, n, i, a, e) {
+            var o = null;
+            var s = null;
+            a = a != null ? a : {};
+            if (a.returnPromise && typeof Promise !== "undefined") var l = new Promise(function(e, t) {
+                o = e;
+                s = t;
+            });
+            if (n == null) n = re().body;
+            var M = a.handler || Mr;
+            var X = a.select || null;
+            if (!se(n)) {
+                ie(o);
+                return l;
+            }
+            var u = a.targetOverride || ye(n);
+            if (u == null || u == pe) {
+                fe(n, "htmx:targetError", {
+                    target: te(n, "hx-target")
+                });
+                ie(s);
+                return l;
+            }
+            var f = ae(n);
+            var c = f.lastButtonClicked;
+            if (c) {
+                var h = ee(c, "formaction");
+                if (h != null) r = h;
+                var v = ee(c, "formmethod");
+                if (v != null) {
+                    if (v.toLowerCase() !== "dialog") t = v;
+                }
+            }
+            var d = ne(n, "hx-confirm");
+            if (e === undefined) {
+                var D = function(e) {
+                    return he(t, r, n, i, a, !!e);
+                };
+                var U = {
+                    target: u,
+                    elt: n,
+                    path: r,
+                    verb: t,
+                    triggeringEvent: i,
+                    etc: a,
+                    issueRequest: D,
+                    question: d
+                };
+                if (ce(n, "htmx:confirm", U) === false) {
+                    ie(o);
+                    return l;
+                }
+            }
+            var g = n;
+            var p = ne(n, "hx-sync");
+            var m = null;
+            var x = false;
+            if (p) {
+                var B = p.split(":");
+                var F = B[0].trim();
+                if (F === "this") g = xe(n, "hx-sync");
+                else g = ue(n, F);
+                p = (B[1] || "drop").trim();
+                f = ae(g);
+                if (p === "drop" && f.xhr && f.abortable !== true) {
+                    ie(o);
+                    return l;
+                } else if (p === "abort") {
+                    if (f.xhr) {
+                        ie(o);
+                        return l;
+                    } else x = true;
+                } else if (p === "replace") ce(g, "htmx:abort");
+                else if (p.indexOf("queue") === 0) {
+                    var V = p.split(" ");
+                    m = (V[1] || "last").trim();
+                }
+            }
+            if (f.xhr) {
+                if (f.abortable) ce(g, "htmx:abort");
+                else {
+                    if (m == null) {
+                        if (i) {
+                            var y = ae(i);
+                            if (y && y.triggerSpec && y.triggerSpec.queue) m = y.triggerSpec.queue;
+                        }
+                        if (m == null) m = "last";
+                    }
+                    if (f.queuedRequests == null) f.queuedRequests = [];
+                    if (m === "first" && f.queuedRequests.length === 0) f.queuedRequests.push(function() {
+                        he(t, r, n, i, a);
+                    });
+                    else if (m === "all") f.queuedRequests.push(function() {
+                        he(t, r, n, i, a);
+                    });
+                    else if (m === "last") {
+                        f.queuedRequests = [];
+                        f.queuedRequests.push(function() {
+                            he(t, r, n, i, a);
+                        });
+                    }
+                    ie(o);
+                    return l;
+                }
+            }
+            var b = new XMLHttpRequest;
+            f.xhr = b;
+            f.abortable = x;
+            var w = function() {
+                f.xhr = null;
+                f.abortable = false;
+                if (f.queuedRequests != null && f.queuedRequests.length > 0) {
+                    var e = f.queuedRequests.shift();
+                    e();
+                }
+            };
+            var j = ne(n, "hx-prompt");
+            if (j) {
+                var S = prompt(j);
+                if (S === null || !ce(n, "htmx:prompt", {
+                    prompt: S,
+                    target: u
+                })) {
+                    ie(o);
+                    w();
+                    return l;
+                }
+            }
+            if (d && !e) {
+                if (!confirm(d)) {
+                    ie(o);
+                    w();
+                    return l;
+                }
+            }
+            var E = xr(n, u, S);
+            if (t !== "get" && !Sr(n)) E["Content-Type"] = "application/x-www-form-urlencoded";
+            if (a.headers) E = le(E, a.headers);
+            var _ = dr(n, t);
+            var C = _.errors;
+            var R = _.values;
+            if (a.values) R = le(R, a.values);
+            var z = Hr(n);
+            var $ = le(R, z);
+            var T = yr($, n);
+            if (Q.config.getCacheBusterParam && t === "get") T["org.htmx.cache-buster"] = ee(u, "id") || "true";
+            if (r == null || r === "") r = re().location.href;
+            var O = Rr(n, "hx-request");
+            var W = ae(n).boosted;
+            var q = Q.config.methodsThatUseUrlParams.indexOf(t) >= 0;
+            var H = {
+                boosted: W,
+                useUrlParams: q,
+                parameters: T,
+                unfilteredParameters: $,
+                headers: E,
+                target: u,
+                verb: t,
+                errors: C,
+                withCredentials: a.credentials || O.credentials || Q.config.withCredentials,
+                timeout: a.timeout || O.timeout || Q.config.timeout,
+                path: r,
+                triggeringEvent: i
+            };
+            if (!ce(n, "htmx:configRequest", H)) {
+                ie(o);
+                w();
+                return l;
+            }
+            r = H.path;
+            t = H.verb;
+            E = H.headers;
+            T = H.parameters;
+            C = H.errors;
+            q = H.useUrlParams;
+            if (C && C.length > 0) {
+                ce(n, "htmx:validation:halted", H);
+                ie(o);
+                w();
+                return l;
+            }
+            var G = r.split("#");
+            var J = G[0];
+            var L = G[1];
+            var A = r;
+            if (q) {
+                A = J;
+                var Z = Object.keys(T).length !== 0;
+                if (Z) {
+                    if (A.indexOf("?") < 0) A += "?";
+                    else A += "&";
+                    A += pr(T);
+                    if (L) A += "#" + L;
+                }
+            }
+            if (!kr(n, A, H)) {
+                fe(n, "htmx:invalidPath", H);
+                ie(s);
+                return l;
+            }
+            b.open(t.toUpperCase(), A, true);
+            b.overrideMimeType("text/html");
+            b.withCredentials = H.withCredentials;
+            b.timeout = H.timeout;
+            if (O.noHeaders) ;
+            else {
+                for(var N in E)if (E.hasOwnProperty(N)) {
+                    var K = E[N];
+                    Lr(b, N, K);
+                }
+            }
+            var I = {
+                xhr: b,
+                target: u,
+                requestConfig: H,
+                etc: a,
+                boosted: W,
+                select: X,
+                pathInfo: {
+                    requestPath: r,
+                    finalRequestPath: A,
+                    anchor: L
+                }
+            };
+            b.onload = function() {
+                try {
+                    var e = Ir(n);
+                    I.pathInfo.responsePath = Ar(b);
+                    M(n, I);
+                    lr(k, P);
+                    ce(n, "htmx:afterRequest", I);
+                    ce(n, "htmx:afterOnLoad", I);
+                    if (!se(n)) {
+                        var t = null;
+                        while(e.length > 0 && t == null){
+                            var r = e.shift();
+                            if (se(r)) t = r;
+                        }
+                        if (t) {
+                            ce(t, "htmx:afterRequest", I);
+                            ce(t, "htmx:afterOnLoad", I);
+                        }
+                    }
+                    ie(o);
+                    w();
+                } catch (e) {
+                    fe(n, "htmx:onLoadError", le({
+                        error: e
+                    }, I));
+                    throw e;
+                }
+            };
+            b.onerror = function() {
+                lr(k, P);
+                fe(n, "htmx:afterRequest", I);
+                fe(n, "htmx:sendError", I);
+                ie(s);
+                w();
+            };
+            b.onabort = function() {
+                lr(k, P);
+                fe(n, "htmx:afterRequest", I);
+                fe(n, "htmx:sendAbort", I);
+                ie(s);
+                w();
+            };
+            b.ontimeout = function() {
+                lr(k, P);
+                fe(n, "htmx:afterRequest", I);
+                fe(n, "htmx:timeout", I);
+                ie(s);
+                w();
+            };
+            if (!ce(n, "htmx:beforeRequest", I)) {
+                ie(o);
+                w();
+                return l;
+            }
+            var k = or(n);
+            var P = sr(n);
+            oe([
+                "loadstart",
+                "loadend",
+                "progress",
+                "abort"
+            ], function(t) {
+                oe([
+                    b,
+                    b.upload
+                ], function(e) {
+                    e.addEventListener(t, function(e) {
+                        ce(n, "htmx:xhr:" + t, {
+                            lengthComputable: e.lengthComputable,
+                            loaded: e.loaded,
+                            total: e.total
+                        });
+                    });
+                });
+            });
+            ce(n, "htmx:beforeSend", I);
+            var Y = q ? null : Er(b, n, T);
+            b.send(Y);
+            return l;
+        }
+        function Pr(e, t) {
+            var r = t.xhr;
+            var n = null;
+            var i = null;
+            if (O(r, /HX-Push:/i)) {
+                n = r.getResponseHeader("HX-Push");
+                i = "push";
+            } else if (O(r, /HX-Push-Url:/i)) {
+                n = r.getResponseHeader("HX-Push-Url");
+                i = "push";
+            } else if (O(r, /HX-Replace-Url:/i)) {
+                n = r.getResponseHeader("HX-Replace-Url");
+                i = "replace";
+            }
+            if (n) {
+                if (n === "false") return {};
+                else return {
+                    type: i,
+                    path: n
+                };
+            }
+            var a = t.pathInfo.finalRequestPath;
+            var o = t.pathInfo.responsePath;
+            var s = ne(e, "hx-push-url");
+            var l = ne(e, "hx-replace-url");
+            var u = ae(e).boosted;
+            var f = null;
+            var c = null;
+            if (s) {
+                f = "push";
+                c = s;
+            } else if (l) {
+                f = "replace";
+                c = l;
+            } else if (u) {
+                f = "push";
+                c = o || a;
+            }
+            if (c) {
+                if (c === "false") return {};
+                if (c === "true") c = o || a;
+                if (t.pathInfo.anchor && c.indexOf("#") === -1) c = c + "#" + t.pathInfo.anchor;
+                return {
+                    type: f,
+                    path: c
+                };
+            } else return {};
+        }
+        function Mr(l, u) {
+            var f = u.xhr;
+            var c = u.target;
+            var e = u.etc;
+            var t = u.requestConfig;
+            var h = u.select;
+            if (!ce(l, "htmx:beforeOnLoad", u)) return;
+            if (O(f, /HX-Trigger:/i)) _e(f, "HX-Trigger", l);
+            if (O(f, /HX-Location:/i)) {
+                er();
+                var r = f.getResponseHeader("HX-Location");
+                var v;
+                if (r.indexOf("{") === 0) {
+                    v = E(r);
+                    r = v["path"];
+                    delete v["path"];
+                }
+                Nr("GET", r, v).then(function() {
+                    tr(r);
+                });
+                return;
+            }
+            var n = O(f, /HX-Refresh:/i) && "true" === f.getResponseHeader("HX-Refresh");
+            if (O(f, /HX-Redirect:/i)) {
+                location.href = f.getResponseHeader("HX-Redirect");
+                n && location.reload();
+                return;
+            }
+            if (n) {
+                location.reload();
+                return;
+            }
+            if (O(f, /HX-Retarget:/i)) {
+                if (f.getResponseHeader("HX-Retarget") === "this") u.target = l;
+                else u.target = ue(l, f.getResponseHeader("HX-Retarget"));
+            }
+            var d = Pr(l, u);
+            var i = f.status >= 200 && f.status < 400 && f.status !== 204;
+            var g = f.response;
+            var a = f.status >= 400;
+            var p = Q.config.ignoreTitle;
+            var o = le({
+                shouldSwap: i,
+                serverResponse: g,
+                isError: a,
+                ignoreTitle: p
+            }, u);
+            if (!ce(c, "htmx:beforeSwap", o)) return;
+            c = o.target;
+            g = o.serverResponse;
+            a = o.isError;
+            p = o.ignoreTitle;
+            u.target = c;
+            u.failed = a;
+            u.successful = !a;
+            if (o.shouldSwap) {
+                if (f.status === 286) at(l);
+                R(l, function(e) {
+                    g = e.transformResponse(g, f, l);
+                });
+                if (d.type) er();
+                var s = e.swapOverride;
+                if (O(f, /HX-Reswap:/i)) s = f.getResponseHeader("HX-Reswap");
+                var v = wr(l, s);
+                if (v.hasOwnProperty("ignoreTitle")) p = v.ignoreTitle;
+                c.classList.add(Q.config.swappingClass);
+                var m = null;
+                var x = null;
+                var y = function() {
+                    try {
+                        var e = document.activeElement;
+                        var t = {};
+                        try {
+                            t = {
+                                elt: e,
+                                start: e ? e.selectionStart : null,
+                                end: e ? e.selectionEnd : null
+                            };
+                        } catch (e) {}
+                        var r;
+                        if (h) r = h;
+                        if (O(f, /HX-Reselect:/i)) r = f.getResponseHeader("HX-Reselect");
+                        if (d.type) {
+                            ce(re().body, "htmx:beforeHistoryUpdate", le({
+                                history: d
+                            }, u));
+                            if (d.type === "push") {
+                                tr(d.path);
+                                ce(re().body, "htmx:pushedIntoHistory", {
+                                    path: d.path
+                                });
+                            } else {
+                                rr(d.path);
+                                ce(re().body, "htmx:replacedInHistory", {
+                                    path: d.path
+                                });
+                            }
+                        }
+                        var n = T(c);
+                        je(v.swapStyle, c, l, g, n, r);
+                        if (t.elt && !se(t.elt) && ee(t.elt, "id")) {
+                            var i = document.getElementById(ee(t.elt, "id"));
+                            var a = {
+                                preventScroll: v.focusScroll !== undefined ? !v.focusScroll : !Q.config.defaultFocusScroll
+                            };
+                            if (i) {
+                                if (t.start && i.setSelectionRange) try {
+                                    i.setSelectionRange(t.start, t.end);
+                                } catch (e) {}
+                                i.focus(a);
+                            }
+                        }
+                        c.classList.remove(Q.config.swappingClass);
+                        oe(n.elts, function(e) {
+                            if (e.classList) e.classList.add(Q.config.settlingClass);
+                            ce(e, "htmx:afterSwap", u);
+                        });
+                        if (O(f, /HX-Trigger-After-Swap:/i)) {
+                            var o = l;
+                            if (!se(l)) o = re().body;
+                            _e(f, "HX-Trigger-After-Swap", o);
+                        }
+                        var s = function() {
+                            oe(n.tasks, function(e) {
+                                e.call();
+                            });
+                            oe(n.elts, function(e) {
+                                if (e.classList) e.classList.remove(Q.config.settlingClass);
+                                ce(e, "htmx:afterSettle", u);
+                            });
+                            if (u.pathInfo.anchor) {
+                                var e = re().getElementById(u.pathInfo.anchor);
+                                if (e) e.scrollIntoView({
+                                    block: "start",
+                                    behavior: "auto"
+                                });
+                            }
+                            if (n.title && !p) {
+                                var t = C("title");
+                                if (t) t.innerHTML = n.title;
+                                else window.document.title = n.title;
+                            }
+                            Cr(n.elts, v);
+                            if (O(f, /HX-Trigger-After-Settle:/i)) {
+                                var r = l;
+                                if (!se(l)) r = re().body;
+                                _e(f, "HX-Trigger-After-Settle", r);
+                            }
+                            ie(m);
+                        };
+                        if (v.settleDelay > 0) setTimeout(s, v.settleDelay);
+                        else s();
+                    } catch (e) {
+                        fe(l, "htmx:swapError", u);
+                        ie(x);
+                        throw e;
+                    }
+                };
+                var b = Q.config.globalViewTransitions;
+                if (v.hasOwnProperty("transition")) b = v.transition;
+                if (b && ce(l, "htmx:beforeTransition", u) && typeof Promise !== "undefined" && document.startViewTransition) {
+                    var w = new Promise(function(e, t) {
+                        m = e;
+                        x = t;
+                    });
+                    var S = y;
+                    y = function() {
+                        document.startViewTransition(function() {
+                            S();
+                            return w;
+                        });
+                    };
+                }
+                if (v.swapDelay > 0) setTimeout(y, v.swapDelay);
+                else y();
+            }
+            if (a) fe(l, "htmx:responseError", le({
+                error: "Response Status Error Code " + f.status + " from " + u.pathInfo.requestPath
+            }, u));
+        }
+        var Xr = {};
+        function Dr() {
+            return {
+                init: function(e) {
+                    return null;
+                },
+                onEvent: function(e, t) {
+                    return true;
+                },
+                transformResponse: function(e, t, r) {
+                    return e;
+                },
+                isInlineSwap: function(e) {
+                    return false;
+                },
+                handleSwap: function(e, t, r, n) {
+                    return false;
+                },
+                encodeParameters: function(e, t, r) {
+                    return null;
+                }
+            };
+        }
+        function Ur(e, t) {
+            if (t.init) t.init(r);
+            Xr[e] = le(Dr(), t);
+        }
+        function Br(e) {
+            delete Xr[e];
+        }
+        function Fr(e, r, n) {
+            if (e == undefined) return r;
+            if (r == undefined) r = [];
+            if (n == undefined) n = [];
+            var t = te(e, "hx-ext");
+            if (t) oe(t.split(","), function(e) {
+                e = e.replace(/ /g, "");
+                if (e.slice(0, 7) == "ignore:") {
+                    n.push(e.slice(7));
+                    return;
+                }
+                if (n.indexOf(e) < 0) {
+                    var t = Xr[e];
+                    if (t && r.indexOf(t) < 0) r.push(t);
+                }
+            });
+            return Fr(u(e), r, n);
+        }
+        var Vr = false;
+        re().addEventListener("DOMContentLoaded", function() {
+            Vr = true;
+        });
+        function jr(e) {
+            if (Vr || re().readyState === "complete") e();
+            else re().addEventListener("DOMContentLoaded", e);
+        }
+        function _r() {
+            if (Q.config.includeIndicatorStyles !== false) re().head.insertAdjacentHTML("beforeend", "<style>                      ." + Q.config.indicatorClass + "{opacity:0}                      ." + Q.config.requestClass + " ." + Q.config.indicatorClass + "{opacity:1; transition: opacity 200ms ease-in;}                      ." + Q.config.requestClass + "." + Q.config.indicatorClass + "{opacity:1; transition: opacity 200ms ease-in;}                    </style>");
+        }
+        function zr() {
+            var e = re().querySelector('meta[name="htmx-config"]');
+            if (e) return E(e.content);
+            else return null;
+        }
+        function $r() {
+            var e = zr();
+            if (e) Q.config = le(Q.config, e);
+        }
+        jr(function() {
+            $r();
+            _r();
+            var e = re().body;
+            zt(e);
+            var t = re().querySelectorAll("[hx-trigger='restored'],[data-hx-trigger='restored']");
+            e.addEventListener("htmx:abort", function(e) {
+                var t = e.target;
+                var r = ae(t);
+                if (r && r.xhr) r.xhr.abort();
+            });
+            const r = window.onpopstate ? window.onpopstate.bind(window) : null;
+            window.onpopstate = function(e) {
+                if (e.state && e.state.htmx) {
+                    ar();
+                    oe(t, function(e) {
+                        ce(e, "htmx:restored", {
+                            document: re(),
+                            triggerEvent: ce
+                        });
+                    });
+                } else if (r) r(e);
+            };
+            setTimeout(function() {
+                ce(e, "htmx:load", {});
+                e = null;
+            }, 0);
+        });
+        return Q;
+    }();
+});
+
+},{}]},["4qzDo","3Nkdn"], "3Nkdn", "parcelRequire94c2")
+
+//# sourceMappingURL=scripts.js.map

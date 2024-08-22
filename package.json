@@ -7,11 +7,11 @@
   "scripts": {
     "fmt": "prettier --write .",
     "build": "PARCEL_WORKER_BACKEND=process parcel build --log-level=verbose ./assets/scripts.js ./assets/styles.scss --dist-dir ./static",
-    "dev": "PARCEL_WORKER_BACKEND=process parcel build --log-level=verbose ./assets/scripts.js ./assets/styles.scss --dist-dir ./static --no-optimize",
-    "watch": "parcel watch ./assets/scripts.js ./assets/styles.scss --dist-dir ./static",
+    "dev": "PARCEL_WORKERS=0 parcel build --log-level=verbose ./assets/scripts.js ./assets/styles.scss --dist-dir ./static --no-optimize",
+    "watch": "PARCEL_WORKERS=0 parcel watch ./assets/scripts.js ./assets/styles.scss --dist-dir ./static",
     "build:bun": "bun build ./assets/scripts.js ./assets/styles.scss --outdir ./tmp --minify",
     "bun:watch": "bun build ./assets/scripts.js ./assets/styles.scss --outdir ./static --minify --watch",
-    "bundev": "bun run ./bun.js --watch"
+    "bundev": "bun run ./ibun.js --watch"
   },
   "dependencies": {
     "@tailwindcss/forms": "latest",

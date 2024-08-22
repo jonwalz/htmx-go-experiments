@@ -5,9 +5,10 @@ root = "."
 tmp_dir = "tmp"
 
 [build]
-# pre_cmd = [
-#     "bun build --watch ./react/components/about_page.tsx ./assets/scripts.js --outdir ./static",
-# ]
+# pre_cmd = ["npm run dev"]
+pre_cmd = [
+    "bun build ./react/components/about_page.tsx ./react/components/ExampleLineChart.tsx ./assets/scripts.js --outdir ./static",
+]
 cmd = "go run github.com/a-h/templ/cmd/templ@latest generate && go build -o ./tmp/gowebly_default ."
 bin = "tmp/gowebly_default"
 include_ext = ["go", "templ", "html", "json", "js", "ts", "css", "scss", "tsx"]
